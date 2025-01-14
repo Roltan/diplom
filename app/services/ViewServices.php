@@ -2,9 +2,6 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\SolvedTestController;
-use App\Http\Controllers\TestController;
-use App\Http\Requests\Test\GenerateTestRequest;
 use App\Http\Resources\Card\SolvedResource;
 use App\Http\Resources\Card\StatisticResource;
 use App\Models\SolvedTest;
@@ -15,26 +12,20 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Builder;
 
 class ViewServices
 {
-    public function __construct(
-        public SolvedTestController $solvedTestController,
-        public TestController $testController
-    ) {}
-
-    private function convertObjectsToArray($data): mixed
+    public static function convertObjectsToArray($data): mixed
     {
         // Если данные - массив, рекурсивно обрабатываем каждый элемент
         if (is_array($data)) {
-            return array_map(fn($item) => $this->convertObjectsToArray($item), $data);
+            return array_map(fn($item) => self::convertObjectsToArray($item), $data);
         }
 
         // Если данные - объект, преобразуем его в массив и рекурсивно обрабатываем
         if (is_object($data)) {
-            return $this->convertObjectsToArray(
+            return self::convertObjectsToArray(
                 json_decode(
                     json_encode($data),
                     true
@@ -151,7 +142,7 @@ class ViewServices
         $tests = $tests->map(function ($solved) {
             return $solved->test->title;
         });
-        return view('profile-solved', $this->convertObjectsToArray([
+        return view('profile-solved', self::convertObjectsToArray([
             'tests' => $tests,
             'cards' => SolvedResource::collection($solvedTest)
         ]));
@@ -191,53 +182,9 @@ class ViewServices
             $request->input('year')
         );
 
-        return view('profile-statistic', $this->convertObjectsToArray([
+        return view('profile-statistic', self::convertObjectsToArray([
             'tests' => $tests->pluck('title'),
             'cards' => StatisticResource::collection($solvedTest)
         ]));
-    }
-
-    public function viewTest(string $alias): RedirectResponse|View
-    {
-        $test = Http::get(env('APP_URL') . "/api/test/solve/" . $alias);
-        if (!$test->successful()) {
-            return redirect('/')->with('error', $test->json('error'));
-        }
-        $test = $test->json();
-
-        return view('test', $this->convertObjectsToArray($test));
-    }
-
-    public function viewSolvedTest(int $solvedId): RedirectResponse|View
-    {
-        $response = $this->solvedTestController->getSolvedTest($solvedId);
-        if ($response->status() != 200) {
-            return redirect('/')->with('error', $response->original['error']);
-        }
-        $response = $response->original;
-
-        return view('solved', $this->convertObjectsToArray($response));
-    }
-
-    public function viewMySolvedTest(int $testId): RedirectResponse|View
-    {
-        $response = $this->solvedTestController->getMySolvedTest($testId);
-        if ($response->status() != 200) {
-            return redirect('/')->with('error', $response->original['error']);
-        }
-        $response = $response->original;
-
-        return view('solved', $this->convertObjectsToArray($response));
-    }
-
-    public function generateTest(GenerateTestRequest $request): RedirectResponse|View
-    {
-        $response = $this->testController->generateTest($request);
-        if ($response->status() != 200) {
-            return redirect('/')->with('error', $response->original['error']);
-        }
-        $response = $response->original;
-
-        return view('edit', $this->convertObjectsToArray($response));
     }
 }
