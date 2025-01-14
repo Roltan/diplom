@@ -1,0 +1,59 @@
+.header {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	> div {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+
+		padding-top: 2px;
+		min-height: 80px;
+		width: 100vw;
+	}
+
+	&--logo {
+		height: 105px;
+
+		> img {
+			height: 100%;
+		}
+		> img:nth-child(2) {
+			display: none;
+		}
+
+		@media (max-width: 768px) {
+			height: 41px;
+		}
+
+		@media (max-width: 480px) {
+			height: 40px; // Уменьшаем размер шрифта на 20% на экранах шириной до 480px
+		}
+	}
+
+	&--buttons {
+		display: flex;
+		flex-direction: row;
+		gap: 1.25rem;
+	}
+
+	&--text {
+		color: $darkBlue;
+		font-size: 2.5rem;
+		text-align: end;
+	}
+
+	&--lk {
+		.header--logo {
+			@media (max-width: 768px) {
+				> img:nth-child(1) {
+					display: none;
+				}
+
+				> img:nth-child(2) {
+					display: block;
+				}
+			}
+		}
+	}
+}

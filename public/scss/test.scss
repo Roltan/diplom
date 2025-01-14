@@ -1,0 +1,116 @@
+@import "_main";
+@import "block/header";
+@import "block/quest";
+
+.test--button {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-bottom: 50px;
+
+    &__max {
+        justify-content: space-between;
+    }
+}
+
+.settings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 30px;
+    column-gap: 2rem;
+
+    width: 100%;
+    padding: 20px 40px;
+    border-radius: 30px;
+    margin-bottom: 30px;
+    background: linear-gradient(120deg, #123a60 65%, #2578c6 80%);
+
+    > h1 {
+        color: #e0eafa;
+        font-size: 2rem;
+        font-weight: bold;
+        width: 100%;
+        text-align: center;
+    }
+    > :nth-child(1),
+    :nth-child(2) {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    > :nth-child(4):not(.input) {
+        justify-self: end;
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: 100%;
+
+        > :nth-child(1),
+        :nth-child(2) {
+            grid-column-start: 1;
+            grid-column-end: 2;
+        }
+    }
+}
+
+.quest__edit {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+    width: 100%;
+    justify-content: space-between;
+
+    > .buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        gap: 10px;
+
+        > button {
+            background: none;
+            border: none;
+        }
+    }
+}
+
+.test--add {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+
+    background: none;
+    border: none;
+
+    color: #123a60;
+    font-size: 2rem;
+    text-align: start;
+
+    > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: #123a60;
+        border-radius: 100%;
+
+        width: 60px;
+        min-width: 60px;
+        height: 60px;
+        min-height: 60px;
+
+        > img {
+            width: 70%;
+            height: 70%;
+        }
+    }
+
+    &__light {
+        color: #e0eafa;
+    }
+}
+
+#testLink {
+    cursor: pointer;
+}

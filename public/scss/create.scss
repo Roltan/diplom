@@ -1,0 +1,79 @@
+@import "_main";
+@import "block/_header";
+@import "block/_navLK";
+
+.main > form {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: end;
+
+	h1 {
+		font-size: 2rem;
+		color: $darkBlue;
+		font-weight: bold;
+	}
+
+	.input {
+		width: 100%;
+
+		&--wrap__img {
+			display: flex;
+			flex-direction: row;
+			gap: 10px;
+
+			img {
+				width: 84px;
+			}
+		}
+	}
+
+	section {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: start;
+		width: 100%;
+		gap: 30px;
+
+		& > div {
+			width: 50%;
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+
+		& .input__img {
+			display: flex;
+			flex-direction: row;
+			justify-content: start;
+			align-items: center;
+			gap: 10px;
+			width: 100%;
+
+			& > img {
+				width: 60px;
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.main > form {
+		section {
+			flex-direction: column-reverse;
+			gap: 15px;
+		}
+		section > div {
+			width: 100%;
+		}
+	}
+
+	body {
+		padding-bottom: 50px;
+	}
+}
