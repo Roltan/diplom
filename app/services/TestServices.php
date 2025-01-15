@@ -89,15 +89,4 @@ class TestServices
             ]);
         }
     }
-
-    public function deleteTest(int $id): Response
-    {
-        $test = Test::find($id);
-        if ($test == null)
-            return response(['status' => false, 'error' => 'Тест не найден'], 404);
-        if ($test->user_id != Auth::user()->id)
-            return response(['status' => false, 'error' => 'У вас нет прав удалять этот тест'], 403);
-        $test->delete();
-        return response(['status' => true]);
-    }
 }
