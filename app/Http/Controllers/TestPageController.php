@@ -12,39 +12,13 @@ use App\Services\TestServices;
 use App\Services\SolvedTestServices;
 use Illuminate\Support\Facades\Auth;
 
-class ViewController extends Controller
+class TestPageController extends Controller
 {
     public  function __construct(
-        public ViewServices $viewServices,
+        public TestServices $testServices,
         public SolvedTestServices $solvedTestServices,
         public GenerateServices $generateServices,
-        public TestServices $testServices
     ) {}
-
-    public function viewIndex(): View
-    {
-        return $this->viewServices->viewIndex();
-    }
-
-    public function viewCreate(): View
-    {
-        return $this->viewServices->viewCreate();
-    }
-
-    public function viewProfile(): RedirectResponse|View
-    {
-        return $this->viewServices->viewProfile();
-    }
-
-    public function viewSolved(Request $request): RedirectResponse|View
-    {
-        return $this->viewServices->viewSolved($request);
-    }
-
-    public function viewStatistic(Request $request): RedirectResponse|View
-    {
-        return $this->viewServices->viewStatistic($request);
-    }
 
     public function viewTest(string $alias): RedirectResponse|View
     {

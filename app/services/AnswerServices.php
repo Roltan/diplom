@@ -8,7 +8,6 @@ use App\Models\FillQuest;
 use App\Models\QuestAnswer;
 use App\Models\QuestsTest;
 use App\Models\RelationQuest;
-use Illuminate\Console\View\Components\Choice;
 
 class AnswerServices
 {
@@ -50,19 +49,15 @@ class AnswerServices
             $questTest = $questModel;
             $answer = '';
         }
+
         $quest = $questTest->quest;
-        switch ($questTest->type_quest) {
-            case 'fill':
-                return $this->checkFillQuest($quest, $answer);
-            case 'choice':
-                return $this->checkChoiceQuest($quest, $answer);
-            case 'blank':
-                return $this->checkBlankQuest($quest, $answer);
-            case 'relation':
-                return $this->checkRelationQuest($quest, $answer);
-            default:
-                return null;
-        }
+        return match ($questTest->type_quest) {
+            'fill' => $this->checkFillQuest($quest, $answer),
+            'choice' => $this->checkChoiceQuest($quest, $answer),
+            'blank' => $this->checkBlankQuest($quest, $answer),
+            'relation' => $this->checkRelationQuest($quest, $answer),
+            default => null
+        };
     }
 
     public function checkBlankQuest(BlankQuest $blankQuest, string $answer): array

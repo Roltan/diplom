@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ComponentController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestPageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Auth;
@@ -17,22 +20,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ViewController::class, 'viewIndex']);
+Route::get('/', [HomeController::class, 'viewIndex']);
 
 Route::group(['prefix' => '/profile'], function () {
-    Route::get('/', [ViewController::class, 'viewProfile']);
-    Route::get('/create', [ViewController::class, 'viewCreate']);
-    Route::get('/solved', [ViewController::class, 'viewSolved']);
-    Route::get('/statistic', [ViewController::class, 'viewStatistic']);
+    Route::get('/', [ProfileController::class, 'viewProfile']);
+    Route::get('/create', [ProfileController::class, 'viewCreate']);
+    Route::get('/solved', [ProfileController::class, 'viewSolved']);
+    Route::get('/statistic', [ProfileController::class, 'viewStatistic']);
 });
 
 Route::group(['prefix' => '/solved'], function () {
-    Route::get('/my/{testId}', [ViewController::class, 'viewMySolvedTest']);
-    Route::get('/{solvedId}', [ViewController::class, 'viewSolvedTest']);
+    Route::get('/my/{testId}', [TestPageController::class, 'viewMySolvedTest']);
+    Route::get('/{solvedId}', [TestPageController::class, 'viewSolvedTest']);
 });
 
-Route::get('/test/{alias}', [ViewController::class, 'viewTest']);
-Route::post('/generate', [ViewController::class, 'generateTest']);
+Route::get('/test/{alias}', [TestPageController::class, 'viewTest']);
+Route::post('/generate', [TestPageController::class, 'generateTest']);
 
 
 Route::group(['prefix' => 'quest'], function () {

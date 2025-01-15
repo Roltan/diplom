@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\Test\CreateTestRequest;
+use App\Http\Resources\Test\DescriptionTestResource;
 use App\Http\Resources\Test\TestResource;
 use App\Models\BlankQuest;
 use App\Models\ChoiceQuest;
@@ -11,14 +12,19 @@ use App\Models\QuestsTest;
 use App\Models\RelationQuest;
 use App\Models\Test;
 use App\Models\Topic;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Http\Request;
+use App\Repositories\TestRepository;
+use App\Repositories\TopicRepository;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class TestServices
 {
+    public function __construct(
+        private TestRepository $testRepository,
+        private TopicRepository $topicRepository
+    ) {}
+
     public function getTest(string $alias): Response|TestResource
     {
         $test = Test::query()
@@ -34,43 +40,54 @@ class TestServices
 
     public function createTest(CreateTestRequest $request): Response
     {
-        // проверка существования вопросов
-        foreach ($request->quest as $quest) {
-            switch ($quest['type']) {
-                case 'fill':
-                    if (!FillQuest::find($quest['id'])->exists())
-                        return response(['status' => false, 'error' => "there is no question like " . $quest['type'] . " with id " . $quest['id']], 422);
-                case 'blank':
-                    if (!BlankQuest::find($quest['id'])->exists())
-                        return response(['status' => false, 'error' => "there is no question like " . $quest['type'] . " with id " . $quest['id']], 422);
-                case 'choice':
-                    if (!ChoiceQuest::find($quest['id'])->exists())
-                        return response(['status' => false, 'error' => "there is no question like " . $quest['type'] . " with id " . $quest['id']], 422);
-                case 'relation':
-                    if (!RelationQuest::find($quest['id'])->exists())
-                        return response(['status' => false, 'error' => "there is no question like " . $quest['type'] . " with id " . $quest['id']], 422);
+        if (!$this->validateQuestions($request->quest))
+            return response(['status' => false, 'error' => 'Один или несколько вопросов не найдены'], 422);
+
+        $topic = $this->topicRepository->getByName($request->topic);
+        if ($topic === null)
+            return response(['status' => false, 'error' => 'Тема не найдена'], 404);
+
+        $testData = (new DescriptionTestResource($request))->toArray($request);
+        $testData['topic_id'] = $topic->id;
+        if ($this->testRepository->findByAlias($testData['url']))
+            return response(['status' => false, 'error' => 'Это название теста уже занято'], 400);
+
+        $test = Test::create($testData);
+        $this->attachQuestionsToTest($test->id, $request->quest);
+
+        return response(['status' => true, 'url' => $testData['url']]);
+    }
+
+    protected function validateQuestions(array $questions): bool
+    {
+        foreach ($questions as $quest) {
+            if (!$this->questionExists($quest['type'], $quest['id'])) {
+                return false;
             }
         }
+        return true;
+    }
 
-        $data = $request->only('title', 'only_user', 'leave');
-        $topic = Topic::where('topic', $request->topic)->first();
-        if ($topic == null) return response(['status' => false, 'error' => 'Тема не найдена'], 404);
+    protected function questionExists(string $type, int $id): bool
+    {
+        return match ($type) {
+            'fill' => FillQuest::where('id', $id)->exists(),
+            'blank' => BlankQuest::where('id', $id)->exists(),
+            'choice' => ChoiceQuest::where('id', $id)->exists(),
+            'relation' => RelationQuest::where('id', $id)->exists(),
+            default => false,
+        };
+    }
 
-        $data['user_id'] = Auth::user()->id;
-        $data['url'] = Str::slug($request->title);
-        $data['topic_id'] = $topic->id;
-        if (Test::query()->where('url', $data['url'])->exists())
-            return response(['status' => false, 'error' => 'Это название теста уже занято'], 400);
-        $test = Test::create($data);
-
-        foreach ($request->quest as $quest) {
+    protected function attachQuestionsToTest(int $testId, array $questions): void
+    {
+        foreach ($questions as $quest) {
             QuestsTest::create([
-                'test_id' => $test->id,
+                'test_id' => $testId,
                 'quest_id' => $quest['id'],
-                'type_quest' => $quest['type']
+                'type_quest' => $quest['type'],
             ]);
         }
-        return response(['status' => true, 'url' => $data['url']]);
     }
 
     public function deleteTest(int $id): Response
