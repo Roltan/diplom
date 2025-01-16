@@ -18,10 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => '/test'], function () {
     Route::put('/create', [TestController::class, 'create'])->middleware('authChecked');
-
-    Route::group(['prefix' => '/solved'], function () {
-        Route::post('/save', [TestController::class, 'saveSolvedTest']);
-    });
+    Route::post('/solved/save', [TestController::class, 'saveSolvedTest']);
 });
 
 Route::group(['prefix' => '/auth'], function () {

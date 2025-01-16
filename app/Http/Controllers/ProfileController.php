@@ -32,4 +32,9 @@ class ProfileController extends Controller
     {
         return $this->viewServices->viewStatistic($request);
     }
+
+    public function viewTests()
+    {
+        return $this->viewServices->viewTests();
+    }
 }

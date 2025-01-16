@@ -4,9 +4,11 @@ namespace App\Services;
 
 use App\Http\Resources\Card\SolvedResource;
 use App\Http\Resources\Card\StatisticResource;
+use App\Http\Resources\Card\TestCardResource;
 use App\Models\SolvedTest;
 use App\Models\Test;
 use App\Models\Topic;
+use App\Repositories\TestRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -185,6 +187,15 @@ class ViewServices
         return view('profile-statistic', self::convertObjectsToArray([
             'tests' => $tests->pluck('title'),
             'cards' => StatisticResource::collection($solvedTest)
+        ]));
+    }
+
+    public function viewTests(): View
+    {
+        $test = TestRepository::findByUser(Auth::user()->id);
+
+        return view('profile-test', $this->convertObjectsToArray([
+            'cards' => TestCardResource::collection($test)
         ]));
     }
 }

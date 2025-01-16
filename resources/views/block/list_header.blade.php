@@ -7,13 +7,15 @@
 
     <div class="modalka" id="modal2">
         <form class="filter form">
-            @include('/elements/input/selector', [
-                'name'=>'test',
-                'label'=>'Тест',
-                'options'=>$tests,
-                'strValue'=>true,
-                'required'=>false
-            ])
+            @isset($tests)
+                @include('/elements/input/selector', [
+                    'name'=>'test',
+                    'label'=>'Тест',
+                    'options'=>$tests,
+                    'strValue'=>true,
+                    'required'=>false
+                ])
+            @endisset
 
             @include('/elements/input/data_select')
 

@@ -18,6 +18,10 @@
             <img src="/img/lk/solved.png" alt="" />
             <span>Мои решения</span>
         </a>
+        <a href="/profile/test" class="{{ $active == 5 ? 'active' : '' }}">
+            <img src="/img/lk/solved.png" alt="" />
+            <span>Мои тесты</span>
+        </a>
     </div>
     <a href="/logout">
         <img src="/img/lk/exit.png" alt="" />
