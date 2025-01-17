@@ -196,7 +196,7 @@ function saveAnswer() {
                     window.location.href = "/solved/" + result.solved_id;
                 } else {
                     // Обрабатываем ошибки валидации
-                    errorModal(result.message);
+                    errorModal(result.error);
                     isClick = false;
                 }
             });

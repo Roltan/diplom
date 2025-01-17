@@ -24,7 +24,7 @@ class SolvedTestRepository
 
     public static function calculateCorrectAnswers(SolvedTest $solvedTest): int
     {
-        return $solvedTest->questAnswers->sum(function ($questAnswer) {
+        return $solvedTest->questAnswer->sum(function ($questAnswer) {
             return $questAnswer->countCorrect();
         });
     }
