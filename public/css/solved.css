@@ -576,10 +576,12 @@ body.modalka-open {
   }
 }
 
-input[type=checkbox]:checked.true + label::after {
+input[type=checkbox]:checked.true + label::after,
+input[type=radio]:checked.true + label::after {
   background-color: #20cf46;
 }
-input[type=checkbox]:checked.false + label::after {
+input[type=checkbox]:checked.false + label::after,
+input[type=radio]:checked.false + label::after {
   background-color: #eb1b1b;
   background-image: url("/img/checkbox/false.svg");
 }

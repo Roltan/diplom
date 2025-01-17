@@ -16,16 +16,8 @@ class SolvedQuestResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $services = new AnswerServices;
-        // цикл по всем переданным заданиям
-        $data = $this['quest']->map(function ($quest) use ($services) {
-            $answer =  $services->indexCheck($quest);
-            $answer['id'] = $quest->id;
-            return $answer;
-        })->filter()->values();
-
-        $data = json_encode($data);
-        $data = json_decode($data, true);
+        $data = $this->checkAnswer();
+        $data['id'] = $this->solved_test_id;
 
         return $data;
     }

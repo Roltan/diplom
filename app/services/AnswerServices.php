@@ -39,16 +39,11 @@ class AnswerServices
         return $count;
     }
 
-    public function indexCheck(QuestAnswer|QuestsTest $questModel): ?array
+    public function indexCheck(QuestAnswer $questModel): ?array
     {
-        if ($questModel instanceof QuestAnswer) {
-            $questTest = $questModel->questsTest;
-            $answer = json_decode($questModel->answer);
-            if ($answer == null) $answer = '';
-        } elseif ($questModel instanceof QuestsTest) {
-            $questTest = $questModel;
-            $answer = '';
-        }
+        $questTest = $questModel->questsTest;
+        $answer = json_decode($questModel->answer);
+        if ($answer == null) $answer = '';
 
         $quest = $questTest->quest;
         return match ($questTest->type_quest) {
@@ -87,7 +82,7 @@ class AnswerServices
             return [
                 'label' => $item,
                 'checked' => in_array($item, $answer),
-                'isCorrect' => in_array($item, $answer)
+                'isCorrect' => false
             ];
         });
 

@@ -3,6 +3,7 @@
 namespace App\Http\Resources\test;
 
 use App\Http\Resources\Solved\SolvedQuestResource;
+use App\Services\ViewServices;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -26,10 +27,7 @@ class SolvedTestResource extends JsonResource
             'score' => $this->score,
             'solved_time' => Carbon::createFromTimestamp($this->solved_time)->format('H:i:s'),
             'isLeave' => $this->is_escapee,
-            'answer' => new SolvedQuestResource([
-                'solved_id' => $this->id,
-                'quest' => $this->test->quest,
-            ]),
+            'answer' => SolvedQuestResource::collection($this->questAnswer),
         ];
     }
 }
