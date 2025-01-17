@@ -581,6 +581,14 @@ main {
 .list--card > span:nth-child(4) {
   align-self: end;
 }
+.list--card:has(> span:nth-child(3):last-child) {
+  grid-template-rows: auto auto;
+}
+.list--card:has(> span:nth-child(3):last-child) > span:nth-child(3) {
+  grid-column: span 2;
+  justify-self: start;
+  align-self: end;
+}
 
 .filter {
   display: flex;
