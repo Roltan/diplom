@@ -35,8 +35,11 @@ Route::group(['prefix' => '/solved'], function () {
     Route::get('/{solvedId}', [TestPageController::class, 'viewSolvedTest']);
 });
 
-Route::get('/test/{alias}', [TestPageController::class, 'viewTest']);
-Route::post('/generate', [TestPageController::class, 'generateTest']);
+Route::group(['prefix' => '/test'], function () {
+    Route::get('/{alias}', [TestPageController::class, 'viewTest']);
+    Route::get('/edit/{alias}', [TestPageController::class, 'viewTestSettings']);
+    Route::post('/generate', [TestPageController::class, 'generateTest']);
+});
 
 
 Route::group(['prefix' => 'quest'], function () {

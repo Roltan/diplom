@@ -7,10 +7,8 @@ use App\Models\ChoiceQuest;
 use App\Models\FillQuest;
 use App\Models\QuestsTest;
 use App\Models\RelationQuest;
-use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\DB;
 
 class TestResource extends JsonResource
 {
@@ -29,7 +27,8 @@ class TestResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'quest' => new QuestResource($quest)
+            'quest' => new QuestResource($quest),
+            'only_user' => $this->only_user
         ];
     }
 

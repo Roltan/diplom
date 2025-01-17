@@ -19,15 +19,21 @@
     <main class="container">
         @include('block/settings-test', [
             'title' => isset($title)? $title : '',
-            'only_user' => $only_user
+            'topic' => $topic
         ])
 
-        <div class="test--button" id="edit--footer">
-            <button type="button" class="button button__blue button__bold" id="saveTest" onclick="editSettingsTest()">Сохранить тест</button>
-        </div>
-
         @foreach ($quest as $item)
-            @include('/elements/quest/correctQuest', $item)
+            @include('/elements/quest/edit', $item)
         @endforeach
+
+        <div class="test--button test--button__max" id="edit--footer">
+            <button class="test--add" id="add_quest">
+                <div>
+                    <img src="/img/edit/add.png" alt="" />
+                </div>
+                Добавить вопрос
+            </button>
+            <button type="button" class="button button__blue button__bold" id="saveTest" onclick="saveTest()">Сохранить тест</button>
+        </div>
     </main>
 @endsection

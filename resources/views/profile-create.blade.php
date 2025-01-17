@@ -14,7 +14,7 @@
         @include('/block/navLK', ['active'=>2])
 
         <div class="main">
-            <form action='/generate' method="POST">
+            <form action='/test/generate' method="POST">
                 <div class="input input__dark">
                     <label for="title">Название</label>
                     <input type="text" name="title" id="title" class="input--field" required/>

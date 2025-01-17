@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Services\GenerateServices;
 use App\Services\TestServices;
 use App\Services\SolvedTestServices;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class TestPageController extends Controller
@@ -23,9 +24,8 @@ class TestPageController extends Controller
     public function viewTest(string $alias): RedirectResponse|View
     {
         $test = $this->testServices->getTest($alias);
-        if ($test->status() != 200)
+        if ($test instanceof Response)
             return redirect('/')->with('error', $test->original['error']);
-        $test = $test->json();
 
         return view('test', ViewServices::convertObjectsToArray($test));
     }
@@ -33,9 +33,8 @@ class TestPageController extends Controller
     public function viewSolvedTest(int $solvedId): RedirectResponse|View
     {
         $response = $this->solvedTestServices->getSolvedTest($solvedId);
-        if ($response->status() != 200)
+        if ($response instanceof Response)
             return redirect('/')->with('error', $response->original['error']);
-        $response = $response->original;
 
         return view('solved', ViewServices::convertObjectsToArray($response));
     }
@@ -43,11 +42,20 @@ class TestPageController extends Controller
     public function viewMySolvedTest(int $testId): RedirectResponse|View
     {
         $response = $this->solvedTestServices->getSolvedTest($testId, Auth::user()->id);
-        if ($response->status() != 200)
+        if ($response instanceof Response)
             return redirect('/')->with('error', $response->original['error']);
-        $response = $response->original;
 
         return view('solved', ViewServices::convertObjectsToArray($response));
+    }
+
+    public function viewTestSettings(string $alias): RedirectResponse|View
+    {
+        $test = $this->testServices->getTest($alias);
+        if ($test instanceof Response)
+            return redirect('/')->with('error', $test->original['error']);
+
+        // dd(ViewServices::convertObjectsToArray($test));
+        return view('edit', ViewServices::convertObjectsToArray($test));
     }
 
     public function generateTest(GenerateTestRequest $request): RedirectResponse|View
@@ -57,6 +65,6 @@ class TestPageController extends Controller
             return redirect('/')->with('error', $response->original['error']);
         $response = $response->original;
 
-        return view('edit', ViewServices::convertObjectsToArray($response));
+        return view('create', ViewServices::convertObjectsToArray($response));
     }
 }

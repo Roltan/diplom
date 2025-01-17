@@ -35,7 +35,7 @@
                 </div>
             </section>
             <div class="line"></div>
-            <form class="form" action='/generate' method="POST">
+            <form class="form" action='/test/generate' method="POST">
                 <div>
                     <div class="input">
                         <label for="overCount">Количество вопросов</label>

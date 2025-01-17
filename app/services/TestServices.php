@@ -20,11 +20,6 @@ use Illuminate\Support\Str;
 
 class TestServices
 {
-    public function __construct(
-        // private TestRepository $testRepository,
-        // private TopicRepository $topicRepository
-    ) {}
-
     public function getTest(string $alias): Response|TestResource
     {
         $test = Test::query()
