@@ -1,5 +1,12 @@
 import { errorModal } from "./auth/modal.js";
 
+// получить alias теста
+function getAlias() {
+    const path = window.location.pathname; // Получаем путь
+    const parts = path.split("/"); // Разделяем путь на части
+    return parts[parts.length - 1]; // Возвращаем последний элемент массив
+}
+
 function createModal(testUrl) {
     document.body.innerHTML += `
         <div class="modalka modalka--wrapper modalka-open" id="modal200" style="display: flex">
@@ -51,11 +58,11 @@ function fetchData(url, method, data) {
         body: JSON.stringify(data),
     })
         .then((response) => response.json())
-        .then((responseData) => {
-            if (responseData.status) {
-                createModal(responseData.url);
+        .then((response) => {
+            if (response.status) {
+                createModal(response.url);
             } else {
-                errorModal(responseData.message);
+                errorModal(response.message);
             }
         })
         .catch((error) => {
@@ -101,10 +108,12 @@ function saveTest() {
 function editSettingsTest() {
     const title = document.getElementById("title").value;
     const onlyUser = document.getElementById("only_user").checked;
+    const alias = getAlias();
 
     const data = {
         title: title,
         only_user: onlyUser,
+        alias: alias,
     };
 
     fetchData("/api/test/edit", "PUT", data);
@@ -112,3 +121,5 @@ function editSettingsTest() {
 
 window.saveTest = saveTest;
 window.editSettingsTest = editSettingsTest;
+
+export { getAlias };

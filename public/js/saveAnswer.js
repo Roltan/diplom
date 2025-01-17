@@ -1,14 +1,9 @@
 import { errorModal } from "./auth/modal.js";
+import { getAlias } from "./saveTest.js";
+
 const startTime = new Date().getTime();
 let isUserAway = false;
 let isClick = false;
-
-// получить alias теста
-function getAlias() {
-    const path = window.location.pathname; // Получаем путь
-    const parts = path.split("/"); // Разделяем путь на части
-    return parts[parts.length - 1]; // Возвращаем последний элемент массив
-}
 
 // событие на уход пользователя со страницы
 document.addEventListener("visibilitychange", function () {

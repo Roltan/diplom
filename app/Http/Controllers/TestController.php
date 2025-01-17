@@ -8,6 +8,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Response;
 use App\Services\SolvedTestServices;
 use App\Http\Requests\SaveSolvedRequest;
+use App\Http\Requests\Test\EditTestRequest;
 
 class TestController extends Controller
 {
@@ -19,6 +20,11 @@ class TestController extends Controller
     public function create(CreateTestRequest $createTestRequest): Response|ResponseFactory
     {
         return $this->testServices->createTest($createTestRequest);
+    }
+
+    public function edit(EditTestRequest $request): Response
+    {
+        return $this->testServices->editTest($request);
     }
 
     public function saveSolvedTest(SaveSolvedRequest $request): Response

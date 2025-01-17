@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\Test\CreateTestRequest;
+use App\Http\Requests\Test\EditTestRequest;
 use App\Http\Resources\Test\DescriptionTestResource;
 use App\Http\Resources\Test\TestResource;
 use App\Models\BlankQuest;
@@ -11,7 +12,6 @@ use App\Models\FillQuest;
 use App\Models\QuestsTest;
 use App\Models\RelationQuest;
 use App\Models\Test;
-use App\Models\Topic;
 use App\Repositories\TestRepository;
 use App\Repositories\TopicRepository;
 use Illuminate\Http\Response;
@@ -51,6 +51,25 @@ class TestServices
         $this->attachQuestionsToTest($test->id, $request->quest);
 
         return response(['status' => true, 'url' => $testData['url']]);
+    }
+
+    public function editTest(EditTestRequest $request): Response
+    {
+        $test = TestRepository::findByAlias($request->alias);
+        if ($test == null)
+            return response(['error' => 'test not found'], 404);
+
+        $data = $request->only([
+            'title',
+            'only_user'
+        ]);
+
+        if (isset($data['title']))
+            $data['url'] = Str::slug($data['title']);
+
+        $test->update($data);
+        $test->refresh();
+        return response(['status' => true, 'url' => $test->url], 200);
     }
 
     protected function validateQuestions(array $questions): bool

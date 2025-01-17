@@ -19,7 +19,6 @@ class DescriptionTestResource extends JsonResource
         return [
             'title' => $this->title,
             'only_user' => $this->only_user,
-            'leave' => $this->leave,
             'user_id' => Auth::user()->id,
             'url' => Str::slug($this->title),
             'topic_id' => $this->topic_id,

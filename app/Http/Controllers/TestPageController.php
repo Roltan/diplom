@@ -50,6 +50,10 @@ class TestPageController extends Controller
 
     public function viewTestSettings(string $alias): RedirectResponse|View
     {
+        $user = Auth::user();
+        if ($user === null)
+            return redirect('/')->with('error', 'У вас нет прав посещать ту страницу');
+
         $test = $this->testServices->getTest($alias);
         if ($test instanceof Response)
             return redirect('/')->with('error', $test->original['error']);

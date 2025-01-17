@@ -93,8 +93,11 @@ class ViewServices
         return view('index', ['topics' => $topic]);
     }
 
-    public function viewCreate(): View
+    public function viewCreate(): RedirectResponse|View
     {
+        $user = Auth::user();
+        if ($user === null)
+            return redirect('/')->with('error', 'У вас нет прав посещать ту страницу');
         $topic = Topic::query()
             ->orderBy('topic')
             ->get()
