@@ -15,13 +15,6 @@ use App\Repositories\RelationQuestRepository;
 
 class QuestGenerationService
 {
-    public function __construct(
-        private FillQuestRepository $fillQuestRepository,
-        private BlankQuestRepository $blankQuestRepository,
-        private ChoiceQuestRepository $choiceQuestRepository,
-        private RelationQuestRepository $relationQuestRepository,
-    ) {}
-
     public function reGenerate(GenerateQuestRequest $request): Response
     {
         $type = $this->determineQuestionType($request);
@@ -72,10 +65,10 @@ class QuestGenerationService
     protected function getQuestionByType(string $type, string $topic): mixed
     {
         return match ($type) {
-            'fill' => $this->fillQuestRepository->getRandomByTopic($topic),
-            'blank' => $this->blankQuestRepository->getRandomByTopic($topic),
-            'choice' => $this->choiceQuestRepository->getRandomByTopic($topic),
-            'relation' => $this->relationQuestRepository->getRandomByTopic($topic),
+            'fill' => FillQuestRepository::getRandomByTopic($topic),
+            'blank' => BlankQuestRepository::getRandomByTopic($topic),
+            'choice' => ChoiceQuestRepository::getRandomByTopic($topic),
+            'relation' => RelationQuestRepository::getRandomByTopic($topic),
             default => response(['status' => false, 'error' => 'unknown type quest'], 400),
         };
     }

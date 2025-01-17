@@ -21,8 +21,8 @@ use Illuminate\Support\Str;
 class TestServices
 {
     public function __construct(
-        private TestRepository $testRepository,
-        private TopicRepository $topicRepository
+        // private TestRepository $testRepository,
+        // private TopicRepository $topicRepository
     ) {}
 
     public function getTest(string $alias): Response|TestResource
@@ -43,13 +43,13 @@ class TestServices
         if (!$this->validateQuestions($request->quest))
             return response(['status' => false, 'error' => 'Один или несколько вопросов не найдены'], 422);
 
-        $topic = $this->topicRepository->getByName($request->topic);
+        $topic = TopicRepository::getByName($request->topic);
         if ($topic === null)
             return response(['status' => false, 'error' => 'Тема не найдена'], 404);
 
         $testData = (new DescriptionTestResource($request))->toArray($request);
         $testData['topic_id'] = $topic->id;
-        if ($this->testRepository->findByAlias($testData['url']))
+        if (TestRepository::findByAlias($testData['url']))
             return response(['status' => false, 'error' => 'Это название теста уже занято'], 400);
 
         $test = Test::create($testData);

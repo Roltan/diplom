@@ -6,7 +6,7 @@ use App\Models\Topic;
 
 class TopicRepository
 {
-    public function getByName(string $name): ?Topic
+    public static function getByName(string $name): ?Topic
     {
         return Topic::query()->where('topic', $name)->first();
     }

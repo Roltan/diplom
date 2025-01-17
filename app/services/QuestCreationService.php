@@ -16,13 +16,9 @@ use App\Repositories\TopicRepository;
 
 class QuestCreationService
 {
-    public function __construct(
-        private TopicRepository $topicRepository,
-    ) {}
-
     public function create(CreateQuestRequest $request): Response
     {
-        $topic = $this->topicRepository->getByName($request->topic);
+        $topic = TopicRepository::getByName($request->topic);
         if ($topic === null) {
             return response(['status' => false, 'error' => 'Тема не найдена'], 404);
         }

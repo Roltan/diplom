@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class TestRepository
 {
-    public function findByAlias(string $alias): ?Test
+    public static function findByAlias(string $alias): ?Test
     {
         return Test::query()
             ->where('url', $alias)

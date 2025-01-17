@@ -15,21 +15,16 @@ use Illuminate\Support\Facades\Auth;
 
 class SolvedTestServices
 {
-    public function __construct(
-        private SolvedTestRepository $solvedTestRepository,
-        private TestRepository $testRepository
-    ) {}
-
     public function saveSolvedTest(SaveSolvedRequest $request): Response
     {
         $studentId = Auth::check() ? Auth::user()->id : null;
-        $test = $this->testRepository->findByAlias($request->test_alias);
+        $test = TestRepository::findByAlias($request->test_alias);
 
         if ($test === null) {
             return response(['status' => false, 'error' => 'Тест не найден'], 404);
         }
 
-        if ($this->solvedTestRepository->userHasSolvedTest($studentId, $test->id)) {
+        if (SolvedTestRepository::userHasSolvedTest($studentId, $test->id)) {
             return response(['status' => false, 'error' => 'Вы уже решали этот тест'], 400);
         }
 
@@ -62,7 +57,7 @@ class SolvedTestServices
 
     protected function updateSolvedTestScore(SolvedTest $solvedTest): void
     {
-        $correct = $this->solvedTestRepository->calculateCorrectAnswers($solvedTest);
+        $correct = SolvedTestRepository::calculateCorrectAnswers($solvedTest);
         $percent = (int) round($correct / $solvedTest->test->maxScore() * 100);
         $grade = $this->getGrade($percent, 50, 70, 90);
 
@@ -98,7 +93,7 @@ class SolvedTestServices
             return null;
         }
 
-        return $this->solvedTestRepository->findByUserAndTest($userId, $testId);
+        return SolvedTestRepository::findByUserAndTest($userId, $testId);
     }
 
     protected function getGrade(int $percent, int $end2, int $end3, int $end4): int
