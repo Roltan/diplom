@@ -26,4 +26,9 @@
             'ссылке',
         ]
     ])
+
+    <div class="input">
+        <label for="max_time">Ограничение по времени</label>
+        <input type="time" name="max_time" id="max_time" class="input--field" value="" required/>
+    </div>
 </div>

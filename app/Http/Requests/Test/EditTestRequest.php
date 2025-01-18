@@ -17,7 +17,8 @@ class EditTestRequest extends FormRequest
         return [
             'alias' => ['required', 'string'],
             'title' => ['nullable', 'string', 'max:255'],
-            'only_user' => ['nullable', 'boolean']
+            'only_user' => ['nullable', 'boolean'],
+            'max_time' => ['nullable', 'string', 'regex:/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/']
         ];
     }
 
@@ -28,6 +29,7 @@ class EditTestRequest extends FormRequest
             $fieldsToCheck = [
                 'title',
                 'only_user',
+                'max_time'
             ];
 
             $data = $this->all();
@@ -44,6 +46,14 @@ class EditTestRequest extends FormRequest
             // Если ни одно поле не заполнено, добавляем ошибку
             if (!$atLeastOneFieldExists)
                 $validator->errors()->add('fields', 'Хотя бы одно из полей (' . implode(', ', $fieldsToCheck) . ') должно быть заполнено.');
+
+            // Преобразуем max_time из формата HH:MM в секунды
+            if (isset($data['max_time']) && !empty($data['max_time'])) {
+                $timeParts = explode(':', $data['max_time']);
+                $hours = (int)$timeParts[0];
+                $minutes = (int)$timeParts[1];
+                $this->merge(['max_time' => ($hours * 3600) + ($minutes * 60)]); // Преобразуем в секунды
+            }
         });
     }
 

@@ -61,7 +61,8 @@ class TestServices
 
         $data = $request->only([
             'title',
-            'only_user'
+            'only_user',
+            'max_time'
         ]);
 
         if (isset($data['title']))

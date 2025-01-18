@@ -23,8 +23,22 @@ class CreateTestRequest extends FormRequest
             'quest.*.id' => ['required', 'integer', 'min:1'],
             'quest.*.type' => ['required', Rule::in(['fill', 'blank', 'choice', 'relation'])],
             'only_user' => ['nullable', 'boolean'],
-            'leave' => ['nullable', 'boolean']
+            'leave' => ['nullable', 'boolean'],
+            'max_time' => ['nullable', 'string', 'regex:/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/']
         ];
+    }
+
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            // Преобразуем max_time из формата HH:MM в секунды
+            if (isset($data['max_time']) && !empty($data['max_time'])) {
+                $timeParts = explode(':', $this->max_time);
+                $hours = (int)$timeParts[0];
+                $minutes = (int)$timeParts[1];
+                $this->merge(['max_time' => ($hours * 3600) + ($minutes * 60)]); // Преобразуем в секунды
+            }
+        });
     }
 
     public function messages(): array
