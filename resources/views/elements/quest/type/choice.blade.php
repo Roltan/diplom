@@ -9,7 +9,7 @@
         @foreach ($answers as $key => $answer)
             <div class="input input__{{ $is_multiple ? 'checkbox' : 'radio' }}">
                 <input
-                    type="{{ ($is_multiple or $disabled) ? 'checkbox' : 'radio' }}"
+                    type="{{ ($is_multiple or isset($disabled)) ? 'checkbox' : 'radio' }}"
                     name="quest{{$id}}" id="quest{{$id}}choice{{$key}}"
                     class="input--field {{isset($answer['isCorrect']) ? ($answer['isCorrect'] ? 'true' : 'false') : ''}}"
                     {{$disabled ?? ''}}
