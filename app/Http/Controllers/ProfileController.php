@@ -45,9 +45,9 @@ class ProfileController extends Controller
         return view('profile-statistic', $this->convertObjectsToArray($data));
     }
 
-    public function viewTests(): RedirectResponse|View
+    public function viewTests(Request $request): RedirectResponse|View
     {
-        $data = $this->viewServices->viewTests();
+        $data = $this->viewServices->viewTests($request);
         if (is_string($data))
             return redirect('/')->with('error', $data);
         return view('profile-test', $this->convertObjectsToArray($data));

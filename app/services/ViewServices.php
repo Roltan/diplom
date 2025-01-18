@@ -43,7 +43,7 @@ class ViewServices
         });
     }
 
-    private function applyDateFilter($query, ?int $day, ?int $month, ?int $year): Builder
+    private function applyDateFilter(Builder $query, ?int $day, ?int $month, ?int $year): Builder
     {
         if ($day !== null || $month !== null || $year !== null) {
             $query->where(function ($query) use ($day, $month, $year) {
@@ -150,8 +150,6 @@ class ViewServices
 
         $solvedTest = $solvedTest->get();
 
-
-
         $solvedTest = $solvedTest->filter(function ($solvedTest) {
             return $solvedTest->solved()->count() !== 0;
         })->flatMap(function ($solvedTest) {
@@ -172,13 +170,23 @@ class ViewServices
         ];
     }
 
-    public function viewTests(): string|array
+    public function viewTests(Request $request): string|array
     {
         $user = Auth::user();
         if ($user === null)
             return 'У вас нет прав посещать ту страницу';
 
-        $test = TestRepository::findByUser($user->id);
+        $test = Test::query()
+            ->where('user_id', $user->id);
+
+        $test = $this->applyDateFilter(
+            $test,
+            $request->input('day'),
+            $request->input('month'),
+            $request->input('year')
+        );
+
+        $test = $test->get();
 
         return [
             'cards' => TestCardResource::collection($test)
