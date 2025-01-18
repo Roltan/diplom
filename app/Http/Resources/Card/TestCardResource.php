@@ -19,7 +19,7 @@ class TestCardResource extends JsonResource
             'href' => "/test/edit/" . $this->url,
             'span' => [
                 $this->title,
-                $this->created_at->format('d-m-Y'),
+                $this->created_at->format('d.m.Y'),
                 $this->topic->topic
             ]
         ];

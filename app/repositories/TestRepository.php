@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Test;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
 
 class TestRepository
 {
@@ -14,10 +14,12 @@ class TestRepository
             ->first();
     }
 
-    public static function findByUser(int $userId): array|Collection
+    public static function searchByTest(Builder $query, string $searchTerm): Builder
     {
-        return Test::query()
-            ->where('user_id', $userId)
-            ->get();
+        return $query->where(function ($query) use ($searchTerm) {
+            $query->whereHas('topic', function ($q) use ($searchTerm) {
+                $q->where('topic', 'like', '%' . $searchTerm . '%');
+            })->orWhere('title', 'like', '%' . $searchTerm . '%');
+        });
     }
 }

@@ -23,7 +23,7 @@ class StatisticResource extends JsonResource
                 $student,
                 $this->score . '/' . $test->maxScore(),
                 $test->title,
-                $this->created_at->format('d-m-Y')
+                $this->created_at->format('d.m.Y')
             ]
         ];
     }

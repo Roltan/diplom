@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\SolvedTest;
+use Illuminate\Database\Eloquent\Builder;
 
 class SolvedTestRepository
 {
@@ -26,6 +27,30 @@ class SolvedTestRepository
     {
         return $solvedTest->questAnswer->sum(function ($questAnswer) {
             return $questAnswer->countCorrect();
+        });
+    }
+
+    public static function filterByTestTitle(Builder $query, string $testTitle): Builder
+    {
+        return $query->whereHas('test', function ($query) use ($testTitle) {
+            $query->where('title', $testTitle);
+        });
+    }
+
+    public static function searchBySolved(Builder $query, string $searchTerm): Builder
+    {
+        return $query->whereHas('test', function ($query) use ($searchTerm) {
+            $query->whereHas('teacher', function ($query) use ($searchTerm) {
+                $query->where('name', 'like', '%' . $searchTerm . '%');
+            })->orWhere('title', 'like', '%' . $searchTerm . '%');
+        });
+    }
+    public static function searchByStatistic(Builder $query, string $searchTerm): Builder
+    {
+        return $query->whereHas('student', function ($query) use ($searchTerm) {
+            $query->where('name', 'like', '%' . $searchTerm . '%');
+        })->orWhereHas('test', function ($query) use ($searchTerm) {
+            $query->where('title', 'like', '%' . $searchTerm . '%');
         });
     }
 }

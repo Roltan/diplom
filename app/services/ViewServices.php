@@ -8,14 +8,9 @@ use App\Http\Resources\Card\TestCardResource;
 use App\Models\SolvedTest;
 use App\Models\Test;
 use App\Models\Topic;
-use App\Repositories\TestRepository;
 use App\Repositories\TopicRepository;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Builder;
 
 class ViewServices
 {
@@ -61,18 +56,15 @@ class ViewServices
         $tests = $solvedTest->get();
 
         // Фильтрация по названию теста
-        if ($request->has('test_title')) {
-            $testTitle = $request->input('test_title');
-            $solvedTest->whereHas('test', function ($query) use ($testTitle) {
-                $query->where('title', 'like', '%' . $testTitle . '%');
-            });
-        }
+        if ($request->has('test_title'))
+            $solvedTest->filterByTestTitle($request->input('test_title'));
+
+        if ($request->has('search'))
+            $solvedTest = $solvedTest->searchInSolved($request->input('search'));
 
         // Фильтрация по дате
-        if ($request->has('date')) {
-            // Применяем фильтрацию по дате
-            $solvedTest->whereDate('created_at', $request->input('date'));
-        }
+        if ($request->has('date'))
+            $solvedTest = $solvedTest->whereDate('created_at', $request->input('date'));
 
         $solvedTest = $solvedTest->get();
 
@@ -96,10 +88,8 @@ class ViewServices
         $testsAll = $tests->get();
 
         // Фильтрация по названию теста, если параметр передан
-        if ($request->has('test')) {
-            $testTitle = $request->input('test');
-            $tests->where('title', $testTitle);
-        }
+        if ($request->has('test'))
+            $tests->where('title', $request->input('test'));
 
         // Получаем ID тестов пользователя
         $testIds = $tests->pluck('id');
@@ -108,11 +98,12 @@ class ViewServices
         $solvedTests = SolvedTest::query()
             ->whereIn('test_id', $testIds);
 
+        if ($request->has('search'))
+            $solvedTests = $solvedTests->searchByStatistic($request->input('search'));
+
         // Применяем фильтрацию по дате
-        if ($request->has('date')) {
-            // Применяем фильтрацию по дате
-            $solvedTests->whereDate('created_at', $request->input('date'));
-        }
+        if ($request->has('date'))
+            $solvedTests = $solvedTests->whereDate('created_at', $request->input('date'));
 
         // Получаем отфильтрованные решения
         $solvedTests = $solvedTests->get();
@@ -132,10 +123,11 @@ class ViewServices
         $test = Test::query()
             ->where('user_id', $user->id);
 
-        if ($request->has('date')) {
-            // Применяем фильтрацию по дате
-            $test->whereDate('created_at', $request->input('date'));
-        }
+        if ($request->has('search'))
+            $test = $test->searchByTest($request->input('search'));
+
+        if ($request->has('date'))
+            $test = $test->whereDate('created_at', $request->input('date'));
 
         $test = $test->get();
 

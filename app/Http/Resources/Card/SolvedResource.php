@@ -22,7 +22,7 @@ class SolvedResource extends JsonResource
                 $test->teacher->name,
                 $this->score . '/' . $test->maxScore(),
                 $test->title,
-                $this->created_at->format('d-m-Y')
+                $this->created_at->format('d.m.Y')
             ]
         ];
     }
