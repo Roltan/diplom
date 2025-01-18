@@ -9,6 +9,7 @@ use App\Models\SolvedTest;
 use App\Models\Test;
 use App\Models\Topic;
 use App\Repositories\TestRepository;
+use App\Repositories\TopicRepository;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,27 +19,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ViewServices
 {
-    public static function convertObjectsToArray($data): mixed
-    {
-        // Если данные - массив, рекурсивно обрабатываем каждый элемент
-        if (is_array($data)) {
-            return array_map(fn($item) => self::convertObjectsToArray($item), $data);
-        }
-
-        // Если данные - объект, преобразуем его в массив и рекурсивно обрабатываем
-        if (is_object($data)) {
-            return self::convertObjectsToArray(
-                json_decode(
-                    json_encode($data),
-                    true
-                )
-            );
-        }
-
-        // Если данные не являются массивом или объектом, возвращаем их как есть
-        return $data;
-    }
-
     private function filterByDate($solvedTest, ?int $day, ?string $month, ?int $year): Collection
     {
         return $solvedTest->filter(function ($solved) use ($day, $month, $year) {
@@ -84,43 +64,42 @@ class ViewServices
         return $query;
     }
 
-    public function viewIndex(): View
+    public function viewIndex(): array
     {
         $topic = Topic::query()
             ->orderBy('topic')
             ->get()
             ->pluck('topic');
-        return view('index', ['topics' => $topic]);
+        return ['topics' => $topic];
     }
 
-    public function viewCreate(): RedirectResponse|View
+    public function viewCreate(): string|array
     {
         $user = Auth::user();
         if ($user === null)
-            return redirect('/')->with('error', 'У вас нет прав посещать ту страницу');
-        $topic = Topic::query()
-            ->orderBy('topic')
-            ->get()
-            ->pluck('topic');
-        return view('profile-create', ['topics' => $topic]);
+            return 'У вас нет прав посещать ту страницу';
+
+        $topic = TopicRepository::getTopics();
+        return ['topics' => $topic];
     }
 
-    public function viewProfile(): RedirectResponse|View
+    public function viewProfile(): string|array
     {
         $user = Auth::user();
         if ($user === null)
-            return redirect('/')->with('error', 'У вас нет прав посещать ту страницу');
-        return view('profile', [
+            return 'У вас нет прав посещать ту страницу';
+
+        return [
             'name' => $user->name,
             'email' => $user->email
-        ]);
+        ];
     }
 
-    public function viewSolved(Request $request): RedirectResponse|View
+    public function viewSolved(Request $request): string|array
     {
         $user = Auth::user();
         if ($user === null)
-            return redirect('/')->with('error', 'У вас нет прав посещать ту страницу');
+            return 'У вас нет прав посещать ту страницу';
 
         $solvedTest = SolvedTest::query()
             ->where('user_id', $user->id);
@@ -147,17 +126,17 @@ class ViewServices
         $tests = $tests->map(function ($solved) {
             return $solved->test->title;
         });
-        return view('profile-solved', self::convertObjectsToArray([
+        return [
             'tests' => $tests,
             'cards' => SolvedResource::collection($solvedTest)
-        ]));
+        ];
     }
 
-    public function viewStatistic(Request $request): RedirectResponse|View
+    public function viewStatistic(Request $request): string|array
     {
         $user = Auth::user();
         if ($user === null)
-            return redirect('/')->with('error', 'У вас нет прав посещать ту страницу');
+            return 'У вас нет прав посещать ту страницу';
 
         $solvedTest = Test::query()
             ->where('user_id', $user->id);
@@ -187,18 +166,22 @@ class ViewServices
             $request->input('year')
         );
 
-        return view('profile-statistic', self::convertObjectsToArray([
+        return [
             'tests' => $tests->pluck('title'),
             'cards' => StatisticResource::collection($solvedTest)
-        ]));
+        ];
     }
 
-    public function viewTests(): View
+    public function viewTests(): string|array
     {
-        $test = TestRepository::findByUser(Auth::user()->id);
+        $user = Auth::user();
+        if ($user === null)
+            return 'У вас нет прав посещать ту страницу';
 
-        return view('profile-test', $this->convertObjectsToArray([
+        $test = TestRepository::findByUser($user->id);
+
+        return [
             'cards' => TestCardResource::collection($test)
-        ]));
+        ];
     }
 }

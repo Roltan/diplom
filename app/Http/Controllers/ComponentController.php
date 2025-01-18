@@ -33,7 +33,7 @@ class ComponentController extends Controller
         if ($response->status() != 200)
             return redirect('/')->with('error', $response->original['error']);
         $quest = $response->original['quest'];
-        $quest = json_decode(json_encode($quest), true);
+        $quest = $this->convertObjectsToArray($quest);
 
         return view('elements/quest/edit', $quest);
     }

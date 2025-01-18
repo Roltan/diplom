@@ -13,28 +13,43 @@ class ProfileController extends Controller
         public ViewServices $viewServices
     ) {}
 
-    public function viewCreate(): View
+    public function viewCreate(): RedirectResponse|View
     {
-        return $this->viewServices->viewCreate();
+        $data = $this->viewServices->viewCreate();
+        if (is_string($data))
+            return redirect('/')->with('error', $data);
+        return view('profile-create', $data);
     }
 
     public function viewProfile(): RedirectResponse|View
     {
-        return $this->viewServices->viewProfile();
+        $data = $this->viewServices->viewProfile();
+        if (is_string($data))
+            return redirect('/')->with('error', $data);
+        return view('profile', $data);
     }
 
     public function viewSolved(Request $request): RedirectResponse|View
     {
-        return $this->viewServices->viewSolved($request);
+        $data = $this->viewServices->viewSolved($request);
+        if (is_string($data))
+            return redirect('/')->with('error', $data);
+        return view('profile-solved', $this->convertObjectsToArray($data));
     }
 
     public function viewStatistic(Request $request): RedirectResponse|View
     {
-        return $this->viewServices->viewStatistic($request);
+        $data = $this->viewServices->viewStatistic($request);
+        if (is_string($data))
+            return redirect('/')->with('error', $data);
+        return view('profile-statistic', $this->convertObjectsToArray($data));
     }
 
-    public function viewTests()
+    public function viewTests(): RedirectResponse|View
     {
-        return $this->viewServices->viewTests();
+        $data = $this->viewServices->viewTests();
+        if (is_string($data))
+            return redirect('/')->with('error', $data);
+        return view('profile-test', $this->convertObjectsToArray($data));
     }
 }

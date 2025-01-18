@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Resources\test;
+namespace App\Http\Resources\Solved;
 
-use App\Http\Resources\Solved\SolvedQuestResource;
 use App\Services\ViewServices;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

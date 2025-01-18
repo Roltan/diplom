@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\SaveSolvedRequest;
-use App\Http\Resources\test\SolvedTestResource;
+use App\Http\Resources\Solved\SolvedTestResource;
 use App\Models\QuestAnswer;
 use App\Models\SolvedTest;
 use App\Models\Test;

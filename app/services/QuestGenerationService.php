@@ -20,11 +20,10 @@ class QuestGenerationService
         $type = $this->determineQuestionType($request);
         $quest = $this->getUniqueQuestion($type, $request->topic, $request->ids ?? []);
 
-        if ($quest instanceof Response) {
+        if ($quest instanceof Response)
             return $quest;
-        }
 
-        return response(ViewServices::convertObjectsToArray(['status' => true, 'quest' => $quest]));
+        return response(['status' => true, 'quest' => $quest]);
     }
 
     protected function determineQuestionType(GenerateQuestRequest $request): string

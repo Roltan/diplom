@@ -27,7 +27,7 @@ class TestPageController extends Controller
         if ($test instanceof Response)
             return redirect('/')->with('error', $test->original['error']);
 
-        return view('test', ViewServices::convertObjectsToArray($test));
+        return view('test', $this->convertObjectsToArray($test));
     }
 
     public function viewSolvedTest(int $solvedId): RedirectResponse|View
@@ -36,7 +36,7 @@ class TestPageController extends Controller
         if ($response instanceof Response)
             return redirect('/')->with('error', $response->original['error']);
 
-        return view('solved', ViewServices::convertObjectsToArray($response));
+        return view('solved', $this->convertObjectsToArray($response));
     }
 
     public function viewMySolvedTest(int $testId): RedirectResponse|View
@@ -45,7 +45,7 @@ class TestPageController extends Controller
         if ($response instanceof Response)
             return redirect('/')->with('error', $response->original['error']);
 
-        return view('solved', ViewServices::convertObjectsToArray($response));
+        return view('solved', $this->convertObjectsToArray($response));
     }
 
     public function viewTestSettings(string $alias): RedirectResponse|View
@@ -58,8 +58,7 @@ class TestPageController extends Controller
         if ($test instanceof Response)
             return redirect('/')->with('error', $test->original['error']);
 
-        // dd(ViewServices::convertObjectsToArray($test));
-        return view('edit', ViewServices::convertObjectsToArray($test));
+        return view('edit', $this->convertObjectsToArray($test));
     }
 
     public function generateTest(GenerateTestRequest $request): RedirectResponse|View
@@ -69,6 +68,6 @@ class TestPageController extends Controller
             return redirect('/')->with('error', $response->original['error']);
         $response = $response->original;
 
-        return view('create', ViewServices::convertObjectsToArray($response));
+        return view('create', $this->convertObjectsToArray($response));
     }
 }

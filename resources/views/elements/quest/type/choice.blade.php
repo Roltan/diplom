@@ -1,7 +1,3 @@
-{{-- @php
-if($is_multiple)
-    dd($answers);
-@endphp --}}
 <div class="quest quest__choice">
     <span>{{$quest}}</span>
     <div>
