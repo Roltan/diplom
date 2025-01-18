@@ -19,32 +19,12 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ViewServices
 {
-    private function filterByDate($solvedTest, ?int $day, ?string $month, ?int $year): Collection
+    private function applyDateFilter(Builder $query, Request $request): Builder
     {
-        return $solvedTest->filter(function ($solved) use ($day, $month, $year) {
-            $match = true;
+        $day = $request->input('day');
+        $month = $request->input('month');
+        $year = $request->input('year');
 
-            // Фильтрация по дню
-            if ($day !== null) {
-                $match = $match && $solved->created_at->day == $day;
-            }
-
-            // Фильтрация по месяцу
-            if ($month !== null) {
-                $match = $match && $solved->created_at->month == $month;
-            }
-
-            // Фильтрация по году
-            if ($year !== null) {
-                $match = $match && $solved->created_at->year == $year;
-            }
-
-            return $match;
-        });
-    }
-
-    private function applyDateFilter(Builder $query, ?int $day, ?int $month, ?int $year): Builder
-    {
         if ($day !== null || $month !== null || $year !== null) {
             $query->where(function ($query) use ($day, $month, $year) {
                 if ($day !== null) {
@@ -116,9 +96,7 @@ class ViewServices
         // Фильтрация по дате
         $solvedTest = $this->applyDateFilter(
             $solvedTest,
-            $request->input('day'),
-            $request->input('month'),
-            $request->input('year')
+            $request
         );
 
         $solvedTest = $solvedTest->get();
@@ -136,37 +114,37 @@ class ViewServices
     {
         $user = Auth::user();
         if ($user === null)
-            return 'У вас нет прав посещать ту страницу';
+            return 'У вас нет прав посещать эту страницу';
 
-        $solvedTest = Test::query()
-            ->where('user_id', $user->id);
-        $tests = $solvedTest->get();
+        // Получаем тесты пользователя
+        $tests = Test::query()->where('user_id', $user->id);
+        $testsAll = $tests->get();
 
         // Фильтрация по названию теста, если параметр передан
         if ($request->has('test')) {
             $testTitle = $request->input('test');
-            $solvedTest->where('title', $testTitle);
+            $tests->where('title', $testTitle);
         }
 
-        $solvedTest = $solvedTest->get();
+        // Получаем ID тестов пользователя
+        $testIds = $tests->pluck('id');
 
-        $solvedTest = $solvedTest->filter(function ($solvedTest) {
-            return $solvedTest->solved()->count() !== 0;
-        })->flatMap(function ($solvedTest) {
-            return $solvedTest->solved()->orderByDesc('id')->get();
-        });
+        // Запрашиваем решения (SolvedTest) для этих тестов
+        $solvedTests = SolvedTest::query()
+            ->whereIn('test_id', $testIds);
 
-        // Фильтрация по дате
-        $solvedTest = $this->filterByDate(
-            $solvedTest,
-            $request->input('day'),
-            $request->input('month'),
-            $request->input('year')
+        // Применяем фильтрацию по дате
+        $solvedTests = $this->applyDateFilter(
+            $solvedTests,
+            $request
         );
 
+        // Получаем отфильтрованные решения
+        $solvedTests = $solvedTests->get();
+
         return [
-            'tests' => $tests->pluck('title'),
-            'cards' => StatisticResource::collection($solvedTest)
+            'tests' => $testsAll->pluck('title'),
+            'cards' => StatisticResource::collection($solvedTests)
         ];
     }
 
@@ -181,9 +159,7 @@ class ViewServices
 
         $test = $this->applyDateFilter(
             $test,
-            $request->input('day'),
-            $request->input('month'),
-            $request->input('year')
+            $request
         );
 
         $test = $test->get();
