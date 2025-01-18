@@ -13,11 +13,15 @@
                     'label'=>'Тест',
                     'options'=>$tests,
                     'strValue'=>true,
-                    'required'=>false
+                    'required'=>false,
+                    'value'=>request('test')
                 ])
             @endisset
 
-            @include('/elements/input/data_select')
+            @include('/elements/input/data_select', [
+                'name' => 'date',
+                'value' => request('date')
+            ])
 
             <button type="submit" class="button button__light button__bold">Применить</button>
         </form>

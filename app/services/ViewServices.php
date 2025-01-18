@@ -19,31 +19,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ViewServices
 {
-    private function applyDateFilter(Builder $query, Request $request): Builder
-    {
-        $day = $request->input('day');
-        $month = $request->input('month');
-        $year = $request->input('year');
-
-        if ($day !== null || $month !== null || $year !== null) {
-            $query->where(function ($query) use ($day, $month, $year) {
-                if ($day !== null) {
-                    $query->whereDay('created_at', $day);
-                }
-
-                if ($month !== null) {
-                    $query->whereMonth('created_at', $month);
-                }
-
-                if ($year !== null) {
-                    $query->whereYear('created_at', $year);
-                }
-            });
-        }
-
-        return $query;
-    }
-
     public function viewIndex(): array
     {
         $topic = Topic::query()
@@ -94,10 +69,10 @@ class ViewServices
         }
 
         // Фильтрация по дате
-        $solvedTest = $this->applyDateFilter(
-            $solvedTest,
-            $request
-        );
+        if ($request->has('date')) {
+            // Применяем фильтрацию по дате
+            $solvedTest->whereDate('created_at', $request->input('date'));
+        }
 
         $solvedTest = $solvedTest->get();
 
@@ -134,10 +109,10 @@ class ViewServices
             ->whereIn('test_id', $testIds);
 
         // Применяем фильтрацию по дате
-        $solvedTests = $this->applyDateFilter(
-            $solvedTests,
-            $request
-        );
+        if ($request->has('date')) {
+            // Применяем фильтрацию по дате
+            $solvedTests->whereDate('created_at', $request->input('date'));
+        }
 
         // Получаем отфильтрованные решения
         $solvedTests = $solvedTests->get();
@@ -157,10 +132,10 @@ class ViewServices
         $test = Test::query()
             ->where('user_id', $user->id);
 
-        $test = $this->applyDateFilter(
-            $test,
-            $request
-        );
+        if ($request->has('date')) {
+            // Применяем фильтрацию по дате
+            $test->whereDate('created_at', $request->input('date'));
+        }
 
         $test = $test->get();
 

@@ -145,14 +145,8 @@ a:hover {
 .input__img label > img {
   height: 45px;
 }
-.input__data > div {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 5px;
-}
-.input__data > div > select {
-  width: 100%;
+.input__data input[type=date] {
+  padding-right: 10px;
 }
 .input__little {
   display: inline-block;
