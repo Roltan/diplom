@@ -20,6 +20,8 @@ class FillQuest extends Model
         'options',
     ];
 
+    protected $appends = ['type'];
+
     // связи
     public function topic(): BelongsTo
     {
@@ -32,7 +34,7 @@ class FillQuest extends Model
     }
 
     // методы
-    public function type(): string
+    public function getTypeAttribute(): string
     {
         return 'fill';
     }

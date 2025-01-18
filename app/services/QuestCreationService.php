@@ -25,9 +25,8 @@ class QuestCreationService
 
         $model = $this->createQuestionByType($request->type, $request, $topic->id);
 
-        if ($model instanceof Response) {
+        if ($model instanceof Response)
             return $model;
-        }
 
         return response(['status' => true, 'quest' => $model]);
     }
@@ -58,21 +57,27 @@ class QuestCreationService
     protected function createBlankQuestion(CreateQuestRequest $request, int $topicId): BlankQuest
     {
         $data = $request->only(['quest', 'correct']);
+        $data['correct'] = json_encode($data['correct']);
         return BlankQuest::create($data + ['topic_id' => $topicId]);
     }
 
     protected function createChoiceQuestion(CreateQuestRequest $request, int $topicId): ChoiceQuest
     {
         $data = $request->only(['quest', 'correct', 'uncorrect']);
-        if (count($data['correct']) > 1) {
+        if (count($data['correct']) > 1)
             $data['is_multiple'] = true;
-        }
+
+        $data['correct'] = json_encode($data['correct']);
+        $data['uncorrect'] = json_encode($data['uncorrect']);
+
         return ChoiceQuest::create($data + ['topic_id' => $topicId]);
     }
 
     protected function createRelationQuestion(CreateQuestRequest $request, int $topicId): RelationQuest
     {
         $data = $request->only(['quest', 'first_column', 'second_column']);
+        $data['first_column'] = json_encode($data['first_column']);
+        $data['second_column'] = json_encode($data['second_column']);
         return RelationQuest::create($data + ['topic_id' => $topicId]);
     }
 

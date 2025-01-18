@@ -22,6 +22,8 @@ class ChoiceQuest extends Model
         'is_multiple',
     ];
 
+    protected $appends = ['type'];
+
     // связи
     public function topic(): BelongsTo
     {
@@ -34,7 +36,7 @@ class ChoiceQuest extends Model
     }
 
     // методы
-    public function type(): string
+    public function getTypeAttribute(): string
     {
         return 'choice';
     }

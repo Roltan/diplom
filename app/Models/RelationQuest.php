@@ -21,6 +21,8 @@ class RelationQuest extends Model
         'second_column'
     ];
 
+    protected $appends = ['type'];
+
     // связи
     public function topic(): BelongsTo
     {
@@ -33,7 +35,7 @@ class RelationQuest extends Model
     }
 
     // методы
-    public function type(): string
+    public function getTypeAttribute(): string
     {
         return 'relation';
     }
