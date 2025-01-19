@@ -19,7 +19,8 @@
     <main class="container">
         @include('block/settings-test', [
             'title' => isset($title)? $title : '',
-            'only_user' => $only_user
+            'only_user' => $only_user,
+            'max_time' => isset($max_time)? $max_time : ''
         ])
 
         <div class="test--button" id="edit--footer">

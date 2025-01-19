@@ -29,6 +29,6 @@
 
     <div class="input">
         <label for="max_time">Ограничение по времени</label>
-        <input type="time" name="max_time" id="max_time" class="input--field" value="" required/>
+        <input type="time" name="max_time" id="max_time" class="input--field" value="@isset($max_time){{$max_time}}@endisset" required/>
     </div>
 </div>

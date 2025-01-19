@@ -7,6 +7,7 @@ use App\Models\ChoiceQuest;
 use App\Models\FillQuest;
 use App\Models\QuestsTest;
 use App\Models\RelationQuest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,12 +24,19 @@ class TestResource extends JsonResource
         foreach ($this->quest as $q) {
             $quest[] = $this->getQuest($q);
         }
+
         $quest = collect($quest)->shuffle();
+
+        $formattedTime = $this->max_time != null
+            ? Carbon::createFromTimestamp($this->max_time)->format('H:i')
+            : null; // или '00:00', если нужно значение по умолчанию
+
         return [
             'id' => $this->id,
             'title' => $this->title,
             'quest' => new QuestResource($quest),
-            'only_user' => $this->only_user
+            'only_user' => $this->only_user,
+            'max_time' => $formattedTime
         ];
     }
 
