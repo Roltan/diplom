@@ -4,15 +4,10 @@
         <label for="title">Название теста</label>
         <input type="text" name="title" id="title" class="input--field" value="@isset($title){{$title}}@endisset" required/>
     </div>
-    <div class="input input__radio">
-        <input
-            type="checkbox"
-            name="only_user"
-            id="only_user"
-            class="input--field toggle"
-            {{(isset($only_user) and $only_user==true)? 'checked' : ''}}
-        />
-        <label for="only_user">Только авторизованные тестируемые</label>
+
+    <div class="input">
+        <label for="max_time">Ограничение по времени</label>
+        <input type="time" name="max_time" id="max_time" class="input--field" value="@isset($max_time){{$max_time}}@endisset" required/>
     </div>
 
     @isset($topic)
@@ -27,8 +22,14 @@
         ]
     ])
 
-    <div class="input">
-        <label for="max_time">Ограничение по времени</label>
-        <input type="time" name="max_time" id="max_time" class="input--field" value="@isset($max_time){{$max_time}}@endisset" required/>
+    <div class="input input__radio">
+        <input
+            type="checkbox"
+            name="only_user"
+            id="only_user"
+            class="input--field toggle"
+            {{(isset($only_user) and $only_user==true)? 'checked' : ''}}
+        />
+        <label for="only_user">Только авторизованные тестируемые</label>
     </div>
 </div>
