@@ -20,6 +20,9 @@ class EditChoiceQuest extends EditRecord
     protected function mutateFormDataBeforeSave(array $data): array
     {
         if (isset($data['correct']) && is_array($data['correct'])) {
+            // проверяем количество правильных ответов
+            $data['is_multiple'] = count($data['correct']) == 1;
+
             // Преобразуем массив ["answer" => "dolores"] в ["dolores"]
             $data['correct'] = json_encode(array_column($data['correct'], 'answer'));
         }

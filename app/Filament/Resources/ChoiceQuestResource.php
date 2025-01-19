@@ -55,9 +55,6 @@ class ChoiceQuestResource extends Resource
                                 Toggle::make('vis')
                                     ->label('Видимость')
                                     ->default(true),
-                                Toggle::make('is_multiple')
-                                    ->label('Несколько ответов')
-                                    ->default(false),
                             ]),
                         Tab::make('Ответы')
                             ->columns(2)
