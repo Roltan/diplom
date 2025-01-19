@@ -43,6 +43,7 @@ a:hover {
   justify-content: center;
   align-items: center;
   border: none;
+  text-decoration: none;
 }
 .button__blue {
   background: #123a60;
@@ -545,6 +546,9 @@ body.modalka-open {
   font-weight: bold;
   width: 100%;
   text-align: center;
+}
+.settings > h1.settings--left {
+  text-align: start;
 }
 .settings > :nth-child(1),
 .settings :nth-child(2) {

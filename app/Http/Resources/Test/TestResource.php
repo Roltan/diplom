@@ -29,7 +29,7 @@ class TestResource extends JsonResource
 
         $formattedTime = $this->max_time != null
             ? Carbon::createFromTimestamp($this->max_time)->format('H:i')
-            : null; // или '00:00', если нужно значение по умолчанию
+            : null;
 
         return [
             'id' => $this->id,

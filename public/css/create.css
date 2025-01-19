@@ -43,6 +43,7 @@ a:hover {
   justify-content: center;
   align-items: center;
   border: none;
+  text-decoration: none;
 }
 .button__blue {
   background: #123a60;

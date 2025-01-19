@@ -27,7 +27,14 @@ class TestPageController extends Controller
         if ($test instanceof Response)
             return redirect('/')->with('error', $test->original['error']);
 
-        return view('test', $this->convertObjectsToArray($test));
+        $test = $this->convertObjectsToArray($test);
+        if ($test['max_time'] != null and !request()->input('prepared'))
+            return view('alert', [
+                'title' => $test['title'],
+                'max_time' => $test['max_time']
+            ]);
+
+        return view('test', $test);
     }
 
     public function viewSolvedTest(int $solvedId): RedirectResponse|View
