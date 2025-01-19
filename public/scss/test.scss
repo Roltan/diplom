@@ -118,3 +118,32 @@
 #testLink {
     cursor: pointer;
 }
+
+.timer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    background: linear-gradient(60deg, #123a60 50%, #2578c6 80%);
+    border-top-right-radius: 35px;
+    padding: 10px 20px;
+
+    color: #fff;
+    font-size: 50px;
+
+    /* Стиль для мигания красным */
+    &.blink-red {
+        animation: blink 1s infinite;
+    }
+
+    /* Анимация мигания */
+    @keyframes blink {
+        0%,
+        100% {
+            color: red;
+        }
+        50% {
+            color: #fff;
+        }
+    }
+}

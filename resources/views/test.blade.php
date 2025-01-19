@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="/css/test.css" />
     <script defer src="/js/drag.js"></script>
     <script defer type="module" src="/js/saveAnswer.js"></script>
+    <script defer type="module" src="/js/timer.js"></script>
 @endsection
 
 @section('mainContent')
@@ -22,4 +23,10 @@
             <button class="button button__blue button__bold" id="finish_test">Завершить тест</button>
         </div>
     </main>
+
+    @isset($max_time)
+        <div class="timer" id="timer">
+            {{ $max_time }}
+        </div>
+    @endisset
 @endsection

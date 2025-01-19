@@ -206,3 +206,5 @@ function saveAnswer() {
 }
 
 bindSaveAnswer();
+
+export { saveAnswer };
