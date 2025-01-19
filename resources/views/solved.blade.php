@@ -28,7 +28,7 @@
                     <span>Набрал баллов: {{$score}}</span>
                     <span>Потрачено времени: {{$solved_time}}</span>
                     <span>
-                        <img src="/img/checkbox/{{$isLeave ? 'true' : 'false'}}.png" alt="" />
+                        <img src="/img/checkbox/{{$isLeave ? 'false' : 'true'}}.png" alt="" />
                         Не покидал страницу
                     </span>
                 </div>
