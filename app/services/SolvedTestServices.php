@@ -20,13 +20,11 @@ class SolvedTestServices
         $studentId = Auth::check() ? Auth::user()->id : null;
         $test = TestRepository::findByAlias($request->test_alias);
 
-        if ($test === null) {
+        if ($test === null)
             return response(['status' => false, 'error' => 'Тест не найден'], 404);
-        }
 
-        if (SolvedTestRepository::userHasSolvedTest($studentId, $test->id)) {
+        if ($this->userHasSolvedTest($test->id))
             return response(['status' => false, 'error' => 'Вы уже решали этот тест'], 400);
-        }
 
         $solvedTest = SolvedTest::create([
             'test_id' => $test->id,
@@ -42,6 +40,14 @@ class SolvedTestServices
             'status' => true,
             'solved_id' => $solvedTest->id
         ]);
+    }
+
+    public static function userHasSolvedTest(int $testId): bool
+    {
+        $studentId = Auth::check() ? Auth::user()->id : null;
+        if (SolvedTestRepository::userHasSolvedTest($studentId, $testId))
+            return true;
+        return false;
     }
 
     protected function saveAnswers(SolvedTest $solvedTest, array $answers): void

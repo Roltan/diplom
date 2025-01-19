@@ -27,6 +27,9 @@ class TestPageController extends Controller
         if ($test instanceof Response)
             return redirect('/')->with('error', $test->original['error']);
 
+        if (SolvedTestServices::userHasSolvedTest($test->id))
+            return redirect('/')->with('error', 'Вы уже решали этот тест');
+
         $test = $this->convertObjectsToArray($test);
         if ($test['max_time'] != null and !request()->input('prepared'))
             return view('alert', [
