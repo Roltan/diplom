@@ -18,9 +18,9 @@ class TestCardResource extends JsonResource
         return [
             'href' => "/test/edit/" . $this->url,
             'span' => [
-                $this->title,
-                $this->created_at->format('d.m.Y'),
-                $this->topic->topic
+                'Название теста' => $this->title,
+                'Дата создания' => $this->created_at->format('d.m.Y'),
+                'Тема' => $this->topic->topic
             ]
         ];
     }

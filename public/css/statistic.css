@@ -560,29 +560,16 @@ main {
   border-radius: 20px;
   padding: 5px 20px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-content: space-between;
+  grid-template-columns: max-content 1fr;
+  row-gap: 10px;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
   color: #fff;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-decoration: none;
 }
 .list--card:hover {
   color: #bfddf8;
-}
-.list--card > span:nth-child(2),
-.list--card span:nth-child(4) {
-  justify-self: end;
-}
-.list--card > span:nth-child(4) {
-  align-self: end;
-}
-.list--card:has(> span:nth-child(3):last-child) {
-  grid-template-rows: auto auto;
-}
-.list--card:has(> span:nth-child(3):last-child) > span:nth-child(3) {
-  grid-column: span 2;
-  justify-self: start;
-  align-self: end;
 }
 
 .filter {
@@ -597,6 +584,16 @@ main {
   width: 100%;
 }
 
+@media (max-width: 991px) {
+  .list--card {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0;
+  }
+  .list--card > span:not(:last-child) {
+    margin-bottom: 5px;
+  }
+}
 @media (max-width: 768px) {
   .statistic--header .input {
     width: 100%;

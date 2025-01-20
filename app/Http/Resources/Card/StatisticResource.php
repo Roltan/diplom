@@ -20,10 +20,10 @@ class StatisticResource extends JsonResource
         return [
             'href' => '/solved' . '/' . $this->id,
             'span' => [
-                $student,
-                $this->score . '/' . $test->maxScore(),
-                $test->title,
-                $this->created_at->format('d.m.Y')
+                'Тестируемый' => $student,
+                'Балл' => $this->score . '/' . $test->maxScore(),
+                'Название теста' => $test->title,
+                'Дата решения' => $this->created_at->format('d.m.Y')
             ]
         ];
     }

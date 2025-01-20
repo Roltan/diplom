@@ -19,10 +19,10 @@ class SolvedResource extends JsonResource
         return [
             'href' => '/solved/my/' . $test->id,
             'span' => [
-                $test->teacher->name,
-                $this->score . '/' . $test->maxScore(),
-                $test->title,
-                $this->created_at->format('d.m.Y')
+                'Автор теста' => $test->teacher->name,
+                'Балл' => $this->score . '/' . $test->maxScore(),
+                'Название теста' => $test->title,
+                'Дата решения' => $this->created_at->format('d.m.Y')
             ]
         ];
     }
