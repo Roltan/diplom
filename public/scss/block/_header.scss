@@ -1,6 +1,7 @@
 .header {
     padding-top: 10px;
     padding-bottom: 10px;
+
     > div {
         display: flex;
         flex-direction: row;
@@ -9,7 +10,6 @@
 
         padding-top: 2px;
         min-height: 80px;
-        width: 100vw;
     }
 
     &--logo {
@@ -18,16 +18,9 @@
         > img {
             height: 100%;
         }
-        > img:nth-child(2) {
-            display: none;
-        }
 
         @media (max-width: 768px) {
-            height: 41px;
-        }
-
-        @media (max-width: 480px) {
-            height: 40px; // Уменьшаем размер шрифта на 20% на экранах шириной до 480px
+            height: 60px;
         }
     }
 
@@ -42,18 +35,26 @@
         font-size: 2.5rem;
         text-align: end;
     }
+}
 
-    &--lk {
-        .header--logo {
-            @media (max-width: 768px) {
-                > a {
-                    display: none;
-                }
+.burger {
+    display: none;
+}
+.logo--mini {
+    display: none;
+}
 
-                > img {
-                    display: block;
-                }
-            }
-        }
+@media (max-width: 768px) {
+    .logo--full {
+        display: none;
+    }
+    .logo--mini {
+        display: block;
+    }
+    .burger {
+        display: block;
+    }
+    .header--buttons {
+        gap: 5px;
     }
 }

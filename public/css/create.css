@@ -378,7 +378,6 @@ body.modalka-open {
   justify-content: space-between;
   padding-top: 2px;
   min-height: 80px;
-  width: 100vw;
 }
 .header--logo {
   height: 105px;
@@ -386,17 +385,9 @@ body.modalka-open {
 .header--logo > img {
   height: 100%;
 }
-.header--logo > img:nth-child(2) {
-  display: none;
-}
 @media (max-width: 768px) {
   .header--logo {
-    height: 41px;
-  }
-}
-@media (max-width: 480px) {
-  .header--logo {
-    height: 40px;
+    height: 60px;
   }
 }
 .header--buttons {
@@ -409,15 +400,29 @@ body.modalka-open {
   font-size: 2.5rem;
   text-align: end;
 }
-@media (max-width: 768px) {
-  .header--lk .header--logo > a {
-    display: none;
-  }
-  .header--lk .header--logo > img {
-    display: block;
-  }
+
+.burger {
+  display: none;
 }
 
+.logo--mini {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .logo--full {
+    display: none;
+  }
+  .logo--mini {
+    display: block;
+  }
+  .burger {
+    display: block;
+  }
+  .header--buttons {
+    gap: 5px;
+  }
+}
 main {
   display: flex;
   flex-direction: row;
@@ -458,6 +463,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: -moz-max-content;
+  width: max-content;
 }
 .navLK figure {
   position: absolute;
@@ -470,23 +477,41 @@ main {
   border-top-right-radius: 45px;
   border-bottom-right-radius: 45px;
 }
+
 .navLK__bar {
   display: flex;
+  align-items: end;
   max-width: 300px;
-  width: 60vw;
+  width: 60vw !important;
   max-height: 400px;
   height: 60vh;
   z-index: 4;
   position: absolute;
   top: 20px;
-  left: 0;
+  right: 0;
+  transform: translateX(200vw);
   padding-left: 20px;
+  transition: 0.2s;
 }
 .navLK__bar a {
+  width: 50vw !important;
   gap: 10px;
+  flex-direction: row-reverse;
 }
 .navLK__bar a > img {
   width: 40px;
+}
+.navLK__bar a span {
+  text-align: end;
+}
+.navLK__bar figure {
+  width: 60vw;
+  right: auto;
+  left: 0;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 45px;
+  border-bottom-left-radius: 45px;
 }
 
 .main {
@@ -500,11 +525,6 @@ main {
 @media (max-width: 768px) {
   nav.navLK:not(.navLK__bar) {
     display: none;
-  }
-  .navLK figure {
-    width: 80vw;
-    right: auto;
-    left: 0;
   }
 }
 .main > form {

@@ -1,7 +1,8 @@
 <header class="header">
     <div class="container">
         <a class="header--logo" href="/">
-            <img src="/img/лого.png" alt="" />
+            <img src="/img/лого.png" alt="" class="logo--full"/>
+            <img src="/img/logo-m.png" alt="" class="logo--mini"/>
         </a>
         <div class="header--buttons">
             @if (Auth::check())

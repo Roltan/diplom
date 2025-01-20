@@ -22,13 +22,29 @@ function openModalHandler() {
     const modal = document.getElementById(modalId);
     modal.style.display = "flex";
     document.body.classList.add("modalka-open");
+
+    if (modalId == "navLK") {
+        setTimeout(() => {
+            modal.getElementsByClassName("navLK__bar")[0].style.transform =
+                "translateX(0px)";
+        }, 10);
+    }
 }
 
 // Обработчик для закрытия модалки
 function closeModalHandler(event) {
     if (event.target === this) {
-        this.style.display = "none";
-        document.body.classList.remove("modalka-open");
+        if (this.id == "navLK") {
+            this.getElementsByClassName("navLK__bar")[0].style.transform =
+                "translateX(200vw)";
+            setTimeout(() => {
+                this.style.display = "none";
+                document.body.classList.remove("modalka-open");
+            }, 200);
+        } else {
+            this.style.display = "none";
+            document.body.classList.remove("modalka-open");
+        }
     }
 }
 
