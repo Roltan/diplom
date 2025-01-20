@@ -94,11 +94,12 @@ main {
 }
 
 @media (max-width: 768px) {
-    nav.navLK {
+    nav.navLK:not(.navLK__bar) {
         display: none;
     }
 
     .navLK figure {
+        width: 80vw;
         right: auto;
         left: 0;
     }

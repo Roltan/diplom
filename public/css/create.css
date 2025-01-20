@@ -410,10 +410,10 @@ body.modalka-open {
   text-align: end;
 }
 @media (max-width: 768px) {
-  .header--lk .header--logo > img:nth-child(1) {
+  .header--lk .header--logo > a {
     display: none;
   }
-  .header--lk .header--logo > img:nth-child(2) {
+  .header--lk .header--logo > img {
     display: block;
   }
 }
@@ -498,10 +498,11 @@ main {
 }
 
 @media (max-width: 768px) {
-  nav.navLK {
+  nav.navLK:not(.navLK__bar) {
     display: none;
   }
   .navLK figure {
+    width: 80vw;
     right: auto;
     left: 0;
   }
