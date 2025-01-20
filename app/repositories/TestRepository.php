@@ -22,4 +22,11 @@ class TestRepository
             })->orWhere('title', 'like', '%' . $searchTerm . '%');
         });
     }
+
+    public static function filterByTopic(Builder $query, string $topic): Builder
+    {
+        return $query->whereHas('topic', function ($query) use ($topic) {
+            $query = $query->where('topic', $topic);
+        });
+    }
 }

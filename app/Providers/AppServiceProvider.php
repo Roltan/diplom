@@ -41,6 +41,9 @@ class AppServiceProvider extends ServiceProvider
         Builder::macro('searchByTest', function (string $searchTerm) {
             return TestRepository::searchByTest($this, $searchTerm);
         });
+        Builder::macro('filterByTopic', function (string $topic) {
+            return TestRepository::filterByTopic($this, $topic);
+        });
         // Регистрируем макросы для SolvedTest
         Builder::macro('filterByTestTitle', function (string $testTitle) {
             return SolvedTestRepository::filterByTestTitle($this, $testTitle);

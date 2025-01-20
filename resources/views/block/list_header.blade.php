@@ -14,7 +14,7 @@
 
     <div class="modalka" id="modal2">
         <form class="filter form">
-            @isset($tests)
+            @if(isset($tests))
                 @include('/elements/input/selector', [
                     'name'=>'test',
                     'label'=>'Тест',
@@ -23,7 +23,16 @@
                     'required'=>false,
                     'value'=>request('test')
                 ])
-            @endisset
+            @elseif(isset($topic))
+                @include('/elements/input/selector', [
+                    'name'=>'topic',
+                    'label'=>'Тема',
+                    'options'=>$topic,
+                    'strValue'=>true,
+                    'required'=>false,
+                    'value'=>request('topic')
+                ])
+            @endif
 
             @include('/elements/input/data_select', [
                 'name' => 'date',

@@ -13,7 +13,9 @@
         @include('/block/navLK', ['active'=>5])
 
         <div class="main">
-            @include('/block/list_header')
+            @include('/block/list_header', [
+                'topic' => $topic
+            ])
 
             <div class="window">
                 <div class="list">

@@ -123,6 +123,9 @@ class ViewServices
         $test = Test::query()
             ->where('user_id', $user->id);
 
+        if ($request->has('topic'))
+            $test = $test->filterByTopic($request->input('topic'));
+
         if ($request->has('search'))
             $test = $test->searchByTest($request->input('search'));
 
@@ -132,6 +135,7 @@ class ViewServices
         $test = $test->get();
 
         return [
+            'topic' => TopicRepository::getTopics(),
             'cards' => TestCardResource::collection($test)
         ];
     }
