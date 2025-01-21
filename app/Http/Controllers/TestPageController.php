@@ -37,7 +37,7 @@ class TestPageController extends Controller
                 'max_time' => $test['max_time']
             ]);
 
-        return view('test', $test);
+        return view('pages.test.test', $test);
     }
 
     public function viewSolvedTest(int $solvedId): RedirectResponse|View
@@ -46,7 +46,7 @@ class TestPageController extends Controller
         if ($response instanceof Response)
             return redirect('/')->with('error', $response->original['error']);
 
-        return view('solved', $this->convertObjectsToArray($response));
+        return view('pages.test.solved', $this->convertObjectsToArray($response));
     }
 
     public function viewMySolvedTest(int $testId): RedirectResponse|View
@@ -55,7 +55,7 @@ class TestPageController extends Controller
         if ($response instanceof Response)
             return redirect('/')->with('error', $response->original['error']);
 
-        return view('solved', $this->convertObjectsToArray($response));
+        return view('pages.test.solved', $this->convertObjectsToArray($response));
     }
 
     public function viewTestSettings(string $alias): RedirectResponse|View
@@ -68,7 +68,7 @@ class TestPageController extends Controller
         if ($test instanceof Response)
             return redirect('/')->with('error', $test->original['error']);
 
-        return view('edit', $this->convertObjectsToArray($test));
+        return view('pages.test.edit', $this->convertObjectsToArray($test));
     }
 
     public function generateTest(GenerateTestRequest $request): RedirectResponse|View
@@ -78,6 +78,6 @@ class TestPageController extends Controller
             return redirect('/')->with('error', $response->original['error']);
         $response = $response->original;
 
-        return view('create', $this->convertObjectsToArray($response));
+        return view('pages.test.create', $this->convertObjectsToArray($response));
     }
 }

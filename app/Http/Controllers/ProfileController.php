@@ -18,7 +18,7 @@ class ProfileController extends Controller
         $data = $this->viewServices->viewCreate();
         if (is_string($data))
             return redirect('/')->with('error', $data);
-        return view('profile-create', $data);
+        return view('pages.profile.profile-create', $data);
     }
 
     public function viewProfile(): RedirectResponse|View
@@ -26,7 +26,7 @@ class ProfileController extends Controller
         $data = $this->viewServices->viewProfile();
         if (is_string($data))
             return redirect('/')->with('error', $data);
-        return view('profile', $data);
+        return view('pages.profile.profile', $data);
     }
 
     public function viewSolved(Request $request): RedirectResponse|View
@@ -34,7 +34,7 @@ class ProfileController extends Controller
         $data = $this->viewServices->viewSolved($request);
         if (is_string($data))
             return redirect('/')->with('error', $data);
-        return view('profile-solved', $this->convertObjectsToArray($data));
+        return view('pages.profile.profile-solved', $this->convertObjectsToArray($data));
     }
 
     public function viewStatistic(Request $request): RedirectResponse|View
@@ -42,7 +42,7 @@ class ProfileController extends Controller
         $data = $this->viewServices->viewStatistic($request);
         if (is_string($data))
             return redirect('/')->with('error', $data);
-        return view('profile-statistic', $this->convertObjectsToArray($data));
+        return view('pages.profile.profile-statistic', $this->convertObjectsToArray($data));
     }
 
     public function viewTests(Request $request): RedirectResponse|View
@@ -50,6 +50,6 @@ class ProfileController extends Controller
         $data = $this->viewServices->viewTests($request);
         if (is_string($data))
             return redirect('/')->with('error', $data);
-        return view('profile-test', $this->convertObjectsToArray($data));
+        return view('pages.profile.profile-test', $this->convertObjectsToArray($data));
     }
 }
