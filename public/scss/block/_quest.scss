@@ -80,6 +80,16 @@
             .dragging {
                 opacity: 0.5;
             }
+
+            @media (max-width: 768px) {
+                column-gap: 2rem;
+                padding: 0;
+            }
+
+            @media (max-width: 480px) {
+                column-gap: 0.5rem;
+                padding: 0;
+            }
         }
     }
 }

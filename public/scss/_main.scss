@@ -16,6 +16,7 @@ $white: #ffffff;
 
 html {
     font-size: 16px;
+    // overflow-x: hidden;
 
     @media (max-width: 768px) {
         font-size: 14px; // Уменьшаем размер шрифта на 10% на экранах шириной до 768px
@@ -391,8 +392,9 @@ input[type="checkbox"].toggle {
 
     & > *:not(.modalka--wrapper) {
         max-width: 720px;
-        width: 100%;
+        width: 90%;
         max-height: 100vh;
+        padding: 30px;
     }
 }
 body.modalka-open {

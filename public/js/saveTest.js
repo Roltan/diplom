@@ -10,7 +10,7 @@ function getAlias() {
 function createModal(testUrl) {
     document.body.innerHTML += `
         <div class="modalka modalka--wrapper modalka-open" id="modal200" style="display: flex">
-            <form class="form">
+            <div class="form">
                 <h1>Ссылка на ваш тест: <span id="testLink">https://quizgenius/test/${testUrl}</span></h1>
                 <div class="test--button test--button__max">
                     <a class="button button__blue button__bold" href="/">
@@ -20,7 +20,7 @@ function createModal(testUrl) {
                         В личный кабинет
                     </a>
                 </div>
-            </form>
+            </div>
         </div>
     `;
 
