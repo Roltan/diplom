@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Test;
 
+use App\Http\Resources\Quest\QuestResource;
 use App\Models\BlankQuest;
 use App\Models\ChoiceQuest;
 use App\Models\FillQuest;
