@@ -3,10 +3,10 @@
 namespace App\Services;
 
 use App\Http\Requests\Quest\CreateQuestRequest;
-use App\Http\Resources\Test\BlankResource;
-use App\Http\Resources\Test\ChoiceResource;
-use App\Http\Resources\Test\FillResource;
-use App\Http\Resources\Test\RelationResource;
+use App\Http\Resources\Quest\BlankResource;
+use App\Http\Resources\Quest\ChoiceResource;
+use App\Http\Resources\Quest\FillResource;
+use App\Http\Resources\Quest\RelationResource;
 use App\Models\BlankQuest;
 use App\Models\ChoiceQuest;
 use App\Models\FillQuest;

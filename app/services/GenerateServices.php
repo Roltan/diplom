@@ -3,8 +3,9 @@
 namespace App\Services;
 
 use App\Http\Requests\Test\GenerateTestRequest;
-use App\Http\Resources\Test\QuestResource;
-use App\Models\Topic;
+use Illuminate\Http\Request;
+use App\Http\Resources\Quest\QuestResource;
+use App\Repositories\TopicRepository;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +14,7 @@ class GenerateServices
 {
     public function generateTest(GenerateTestRequest $request): Response
     {
-        $topic = $this->getTopicByRequest($request);
+        $topic = TopicRepository::findByRequest($request);
         if ($topic === null)
             return response(['status' => false, 'error' => 'Тема не найдена'], 404);
 
@@ -24,12 +25,7 @@ class GenerateServices
         return response($data, 200);
     }
 
-    protected function getTopicByRequest(GenerateTestRequest $request): ?Topic
-    {
-        return Topic::query()->where('topic', $request->topic)->first();
-    }
-
-    protected function getQuestionCounts(GenerateTestRequest $request): array
+    protected function getQuestionCounts(Request $request): array
     {
         if (!$request->has('fillCount') && !$request->has('choiceCount') && !$request->has('blankCount') && !$request->has('relationCount'))
             return $this->divideQuestionsIntoParts($request->overCount, 4);
@@ -76,20 +72,6 @@ class GenerateServices
             ->shuffle();
     }
 
-    protected function prepareResponseData(Collection $questions, string $topic, ?string $title): array
-    {
-        $data = [
-            'quest' => new QuestResource($questions),
-            'topic' => $topic,
-        ];
-
-        if ($title !== null) {
-            $data['title'] = $title;
-        }
-
-        return $data;
-    }
-
     protected function getQuest(string $type, int $count, int $topicId): Collection
     {
         return DB::table($type . '_quests')
@@ -102,5 +84,19 @@ class GenerateServices
                 $question->type = $type;
                 return $question;
             });
+    }
+
+    protected function prepareResponseData(Collection $questions, string $topic, ?string $title): array
+    {
+        $data = [
+            'quest' => new QuestResource($questions),
+            'topic' => $topic,
+        ];
+
+        if ($title !== null) {
+            $data['title'] = $title;
+        }
+
+        return $data;
     }
 }

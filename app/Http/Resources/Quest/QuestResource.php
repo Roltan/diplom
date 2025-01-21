@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Test;
+namespace App\Http\Resources\Quest;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;

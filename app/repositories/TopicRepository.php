@@ -3,9 +3,17 @@
 namespace App\Repositories;
 
 use App\Models\Topic;
+use Illuminate\Http\Request;
 
 class TopicRepository
 {
+    public static function findByRequest(Request $request): ?Topic
+    {
+        return Topic::query()
+            ->where('topic', $request->topic)
+            ->first();
+    }
+
     public static function getByName(string $name): ?Topic
     {
         return Topic::query()

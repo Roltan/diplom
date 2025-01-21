@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Test;
+namespace App\Http\Resources\Quest;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RelationResource extends JsonResource
+class BlankResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,8 +18,7 @@ class RelationResource extends JsonResource
             'id' => $this->id,
             'type' => $this->type,
             'quest' => $this->quest,
-            'first_column' => json_decode($this->first_column),
-            'second_column' => json_decode($this->second_column)
+            'answer' => json_decode($this->correct)[0]
         ];
     }
 }
