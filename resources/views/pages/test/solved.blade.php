@@ -49,6 +49,8 @@
                 class="button button__blue button__bold"
             >Назад</a>
         </div>
+
+        @include('elements.up')
     </main>
 @endsection
 

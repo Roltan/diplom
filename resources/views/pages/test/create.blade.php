@@ -35,5 +35,7 @@
             </button>
             <button type="button" class="button button__blue button__bold" id="saveTest" onclick="saveTest()">Сохранить тест</button>
         </div>
+
+        @include('elements.up')
     </main>
 @endsection

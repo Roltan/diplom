@@ -2,13 +2,8 @@
 
 @section('links')
     <link rel="stylesheet" href="/css/test.css" />
-    <script defer type="module" src="/js/quest/resetQuest.js"></script>
-    <script defer type="module" src="/js/quest/addQuest.js"></script>
     <script defer type="module" src="/js/quest/createQuest.js"></script>
     <script defer type="module" src="/js/saveTest.js"></script>
-    <script defer src="/js/quest/delQuest.js"></script>
-    <script defer src="/js/quest/addAnswerChoice.js"></script>
-    <script defer src="/js/quest/addAnswerRelation.js"></script>
 @endsection
 
 @section('mainContent')
@@ -30,5 +25,7 @@
         @foreach ($quest as $item)
             @include('/elements/quest/correctQuest', $item)
         @endforeach
+
+        @include('elements.up')
     </main>
 @endsection
