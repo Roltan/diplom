@@ -23,7 +23,7 @@
                 </div>
                 <div>
                     <img src="/img/index/125375123.png" alt="" />
-                    <span>Подробная статистика ответов</span>
+                    <span>Настройка генерации тестов</span>
                 </div>
                 <div>
                     <img src="/img/index/123671253.png" alt="" />

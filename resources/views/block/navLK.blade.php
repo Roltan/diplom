@@ -12,7 +12,7 @@
         </a>
         <a href="/profile/statistic" class="{{ $active == 3 ? 'active' : '' }}">
             <img src="/img/lk/statistic.png" alt="" />
-            <span>Статистика</span>
+            <span>Решения моих тестов</span>
         </a>
         <a href="/profile/solved" class="{{ $active == 4 ? 'active' : '' }}">
             <img src="/img/lk/solved.png" alt="" />
