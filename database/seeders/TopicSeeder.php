@@ -13,7 +13,7 @@ class TopicSeeder extends Seeder
      */
     public function run(): void
     {
-        $total = 1000;
+        $total = 50;
         $progressBar = $this->command->getOutput()->createProgressBar($total);
 
         for ($i = 1; $i <= $total; $i++) {

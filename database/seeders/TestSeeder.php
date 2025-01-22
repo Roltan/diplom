@@ -13,7 +13,7 @@ class TestSeeder extends Seeder
      */
     public function run(): void
     {
-        $total = 1000;
+        $total = 10;
         $progressBar = $this->command->getOutput()->createProgressBar($total);
 
         for ($i = 1; $i <= $total; $i++) {

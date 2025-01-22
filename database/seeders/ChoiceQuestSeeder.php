@@ -13,7 +13,7 @@ class ChoiceQuestSeeder extends Seeder
      */
     public function run(): void
     {
-        $total = 10000;
+        $total = 100;
         $progressBar = $this->command->getOutput()->createProgressBar($total);
 
         for ($i = 1; $i <= $total; $i++) {

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('url')->unique();
             $table->boolean('only_user')->default(false);
             $table->integer('max_time')->nullable();
+            $table->boolean('is_multi')->default(false);
             $table->timestamps();
         });
     }
