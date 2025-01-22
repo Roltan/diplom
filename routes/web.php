@@ -5,8 +5,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestPageController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ViewController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*

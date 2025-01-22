@@ -1,4 +1,4 @@
-import { bindModalEvents } from "../auth/modal.js";
+import { bindModalEvents, errorModal } from "../auth/modal.js";
 
 function saveQuest(button, questType) {
     // Находим форму, связанную с этой кнопкой
@@ -42,37 +42,42 @@ function saveQuest(button, questType) {
     }
 
     // Отправляем запрос на сервер
-    fetch(`/quest/create`, {
+    fetch("/api/quest/create", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(requestBody),
     })
-        .then((response) => response.text())
-        .then((data) => {
-            // Создать DOM-элемент из строки
-            var tempDiv = document.createElement("div");
-            tempDiv.innerHTML = data;
+        .then(async (response) => {
+            if (response.status == 200) {
+                const data = await response.text();
+                // Создать DOM-элемент из строки
+                var tempDiv = document.createElement("div");
+                tempDiv.innerHTML = data;
 
-            // Найти новые элементы
-            var newQuestElement = tempDiv.querySelector(".quest__edit");
-            var newModalElement = tempDiv.querySelector(".modalka");
+                // Найти новые элементы
+                var newQuestElement = tempDiv.querySelector(".quest__edit");
+                var newModalElement = tempDiv.querySelector(".modalka");
 
-            if (!newQuestElement || !newModalElement) {
-                throw new Error("Сервер вернул некорректную вёрстку");
+                if (!newQuestElement || !newModalElement) {
+                    throw new Error("Сервер вернул некорректную вёрстку");
+                }
+
+                // Заменить старые элементы новыми
+                questElement.replaceWith(newQuestElement);
+                modalElement.replaceWith(newModalElement);
+
+                bindModalEvents();
+                document.body.classList.remove("modalka-open");
+            } else {
+                response = await response.json();
+                console.log(response);
+                errorModal(response.message);
             }
-
-            // Заменить старые элементы новыми
-            questElement.replaceWith(newQuestElement);
-            modalElement.replaceWith(newModalElement);
-
-            bindModalEvents();
-            document.body.classList.remove("modalka-open");
         })
         .catch((error) => {
-            console.error("Ошибка:", error);
-            alert("Произошла ошибка при отправке запроса");
+            errorModal(error);
         });
 }
 

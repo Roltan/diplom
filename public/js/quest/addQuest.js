@@ -16,7 +16,7 @@ addQuestionButton.addEventListener("click", () => {
     });
 
     // Отправляем POST-запрос на /quest/generate
-    fetch("/quest/generate", {
+    fetch("/api/quest/generate", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -26,30 +26,35 @@ addQuestionButton.addEventListener("click", () => {
             ids: ids,
         }),
     })
-        .then((response) => response.text())
-        .then((data) => {
-            // Создаем временный элемент для парсинга HTML
-            const tempDiv = document.createElement("div");
-            tempDiv.innerHTML = data;
+        .then(async (response) => {
+            if (response.status == 200) {
+                const data = await response.text();
+                // Создаем временный элемент для парсинга HTML
+                const tempDiv = document.createElement("div");
+                tempDiv.innerHTML = data;
 
-            // Находим новые элементы (карточка вопроса и модалка)
-            const newQuestElement = tempDiv.querySelector(".quest__edit");
-            const newModalElement = tempDiv.querySelector(".modalka");
+                // Находим новые элементы (карточка вопроса и модалка)
+                const newQuestElement = tempDiv.querySelector(".quest__edit");
+                const newModalElement = tempDiv.querySelector(".modalka");
 
-            // Находим элемент main и .test--button
-            const main = document.querySelector("main");
-            const testButton = document.querySelector("#edit--footer");
+                // Находим элемент main и .test--button
+                const main = document.querySelector("main");
+                const testButton = document.querySelector("#edit--footer");
 
-            // Вставляем новые элементы перед .test--button
-            if (newQuestElement) {
-                main.insertBefore(newQuestElement, testButton);
+                // Вставляем новые элементы перед .test--button
+                if (newQuestElement) {
+                    main.insertBefore(newQuestElement, testButton);
+                }
+                if (newModalElement) {
+                    main.insertBefore(newModalElement, testButton);
+                }
+
+                // Перепривязываем обработчики событий для модалок
+                bindModalEvents();
+            } else {
+                response = await response.json();
+                errorModal(response.message);
             }
-            if (newModalElement) {
-                main.insertBefore(newModalElement, testButton);
-            }
-
-            // Перепривязываем обработчики событий для модалок
-            bindModalEvents();
         })
         .catch((error) => console.error("Error:", error));
 });

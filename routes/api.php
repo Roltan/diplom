@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\ComponentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +20,11 @@ Route::group(['prefix' => '/test'], function () {
     Route::put('/create', [TestController::class, 'create'])->middleware('authChecked');
     Route::put('/edit', [TestController::class, 'edit'])->middleware('authChecked');
     Route::post('/solved/save', [TestController::class, 'saveSolvedTest']);
+});
+
+Route::group(['prefix' => 'quest'], function () {
+    Route::post('/generate', [ComponentController::class, 'reGenerate']);
+    Route::post('/create', [ComponentController::class, 'create']);
 });
 
 Route::group(['prefix' => '/auth'], function () {

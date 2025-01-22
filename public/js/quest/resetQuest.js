@@ -1,4 +1,4 @@
-import { bindModalEvents } from "../auth/modal.js";
+import { bindModalEvents, errorModal } from "../auth/modal.js";
 
 function resetQuest(button) {
     // Найти родительский элемент .quest__edit
@@ -26,7 +26,7 @@ function resetQuest(button) {
     });
 
     // Отправить AJAX-запрос
-    fetch("/quest/generate", {
+    fetch("/api/quest/generate", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -37,23 +37,28 @@ function resetQuest(button) {
             ids: ids,
         }),
     })
-        .then((response) => response.text())
-        .then((data) => {
-            // Создать DOM-элемент из строки
-            var tempDiv = document.createElement("div");
-            tempDiv.innerHTML = data;
+        .then(async (response) => {
+            if (response.status == 200) {
+                const data = await response.text();
+                // Создать DOM-элемент из строки
+                var tempDiv = document.createElement("div");
+                tempDiv.innerHTML = data;
 
-            // Найти новые элементы
-            var newQuestElement = tempDiv.querySelector(".quest__edit");
-            var newModalElement = tempDiv.querySelector(".modalka");
+                // Найти новые элементы
+                var newQuestElement = tempDiv.querySelector(".quest__edit");
+                var newModalElement = tempDiv.querySelector(".modalka");
 
-            // Заменить старые элементы новыми
-            questElement.replaceWith(newQuestElement);
-            modalElement.replaceWith(newModalElement);
+                // Заменить старые элементы новыми
+                questElement.replaceWith(newQuestElement);
+                modalElement.replaceWith(newModalElement);
 
-            bindModalEvents();
+                bindModalEvents();
+            } else {
+                response = await response.json();
+                errorModal(response.message);
+            }
         })
-        .catch((error) => console.error("Error:", error));
+        .catch((error) => errorModal(error));
 }
 
 window.resetQuest = resetQuest;
