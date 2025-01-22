@@ -380,6 +380,10 @@ body.modalka-open {
   overflow: hidden; /* Блокируем прокрутку страницы */
 }
 
+datalist {
+  display: none;
+}
+
 .header {
   padding-top: 10px;
   padding-bottom: 10px;

@@ -414,3 +414,6 @@ input[type="checkbox"].toggle {
 body.modalka-open {
     overflow: hidden; /* Блокируем прокрутку страницы */
 }
+datalist {
+    display: none;
+}
