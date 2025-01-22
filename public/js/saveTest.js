@@ -80,6 +80,7 @@ function saveTest() {
         const topic = document.getElementById("topic").value;
         const onlyUser = document.getElementById("only_user").checked;
         const max_time = document.getElementById("max_time").value;
+        const is_multi = document.getElementById("is_multi").checked;
 
         const quests = [];
         const questElements = document.querySelectorAll(".quest__edit");
@@ -96,6 +97,7 @@ function saveTest() {
             topic: topic,
             only_user: onlyUser,
             max_time: max_time,
+            is_multi: is_multi,
             quest: quests,
         };
 
@@ -112,12 +114,14 @@ function editSettingsTest() {
     const onlyUser = document.getElementById("only_user").checked;
     const alias = getAlias();
     const max_time = document.getElementById("max_time").value;
+    const is_multi = document.getElementById("is_multi").checked;
 
     const data = {
         title: title,
         only_user: onlyUser,
         alias: alias,
         max_time: max_time,
+        is_multi: is_multi,
     };
 
     fetchData("/api/test/edit", "PUT", data);

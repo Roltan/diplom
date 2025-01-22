@@ -29,4 +29,11 @@ class TestRepository
             $query = $query->where('topic', $topic);
         });
     }
+
+    public static function checkMulti(int $testId): bool
+    {
+        return Test::query()
+            ->find($testId)
+            ->is_multi;
+    }
 }

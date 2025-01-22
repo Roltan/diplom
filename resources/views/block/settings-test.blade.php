@@ -22,14 +22,15 @@
         ]
     ])
 
-    <div class="input input__radio">
-        <input
-            type="checkbox"
-            name="only_user"
-            id="only_user"
-            class="input--field toggle"
-            {{(isset($only_user) and $only_user==true)? 'checked' : ''}}
-        />
-        <label for="only_user">Только авторизованные тестируемые</label>
-    </div>
+    @include('/elements/input/toggle', [
+        'name' => 'only_user',
+        'checked' => isset($only_user)? $only_user : false,
+        'label' => 'Только авторизованные тестируемые'
+    ])
+
+    @include('/elements/input/toggle', [
+        'name' => 'is_multi',
+        'checked' => isset($is_multi)? $is_multi : false,
+        'label' => 'Многократное решение'
+    ])
 </div>

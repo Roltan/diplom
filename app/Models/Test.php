@@ -17,7 +17,8 @@ class Test extends Model
         'title',
         'url',
         'only_user',
-        'max_time'
+        'max_time',
+        'is_multi'
     ];
 
     // связи

@@ -32,7 +32,7 @@ class TestPageController extends Controller
 
         $test = $this->convertObjectsToArray($test);
         if ($test['max_time'] != null and !request()->input('prepared'))
-            return view('alert', [
+            return view('pages.test.alert', [
                 'title' => $test['title'],
                 'max_time' => $test['max_time']
             ]);

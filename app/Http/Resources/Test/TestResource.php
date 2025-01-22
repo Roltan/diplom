@@ -37,7 +37,8 @@ class TestResource extends JsonResource
             'title' => $this->title,
             'quest' => new QuestResource($quest),
             'only_user' => $this->only_user,
-            'max_time' => $formattedTime
+            'max_time' => $formattedTime,
+            'is_multi' => $this->is_multi
         ];
     }
 

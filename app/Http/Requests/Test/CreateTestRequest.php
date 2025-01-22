@@ -24,7 +24,8 @@ class CreateTestRequest extends FormRequest
             'quest.*.type' => ['required', Rule::in(['fill', 'blank', 'choice', 'relation'])],
             'only_user' => ['nullable', 'boolean'],
             'leave' => ['nullable', 'boolean'],
-            'max_time' => ['nullable', 'string', 'regex:/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/']
+            'max_time' => ['nullable', 'string', 'regex:/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/'],
+            'is_multi' => ['nullable', 'boolean']
         ];
     }
 
@@ -32,6 +33,7 @@ class CreateTestRequest extends FormRequest
     {
         $validator->after(function ($validator) {
             // Преобразуем max_time из формата HH:MM в секунды
+            $data = $this->all();
             if (isset($data['max_time']) && !empty($data['max_time'])) {
                 $timeParts = explode(':', $this->max_time);
                 $hours = (int)$timeParts[0];

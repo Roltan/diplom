@@ -22,7 +22,8 @@ class DescriptionTestResource extends JsonResource
             'user_id' => Auth::user()->id,
             'url' => Str::slug($this->title),
             'topic_id' => $this->topic_id,
-            'max_time' => $this->max_time
+            'max_time' => $this->max_time,
+            'is_multi' => $this->is_multi
         ];
     }
 }

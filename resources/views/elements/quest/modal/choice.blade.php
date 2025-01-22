@@ -4,25 +4,24 @@
 </div>
 <div class="answer">
     @foreach ($answers as $key => $answer)
-        <div class="input input__{{ $is_multiple ? 'checkbox' : 'radio' }}">
-            <input type="checkbox"
-                name="questEdit{{$id}}choice{{$key}}"
-                id="questEdit{{$id}}choice{{$key}}"
-                class="input--field toggle"
-                {{$answer['checked'] ? 'checked' : ''}}
-            />
-            <label for="questEdit{{$id}}choice{{$key}}">
-                <div class="input">
-                    <input
-                        type="text"
-                        name="questEdit{{$id}}choice{{$key}}value"
-                        id="questEdit{{$id}}choice{{$key}}value"
-                        class="input--field"
-                        value="{{$answer['label']}}"
-                    />
-                </div>
-            </label>
-        </div>
+        @include('/elements/input/toggle', [
+            'is_multiple' => $is_multiple,
+            'name' => 'questEdit'.$id.'choice'.$key,
+            'checked' => $answer['checked'],
+            'label' => '
+                <label for="questEdit'.$id.'choice'.$key.'">
+                    <div class="input">
+                        <input
+                            type="text"
+                            name="questEdit'.$id.'choice'.$key.'value"
+                            id="questEdit'.$id.'choice'.$key.'value"
+                            class="input--field"
+                            value="'.$answer['label'].'"
+                        />
+                    </div>
+                </label>
+            '
+        ])
     @endforeach
 </div>
 <div class="test--button test--button__max">

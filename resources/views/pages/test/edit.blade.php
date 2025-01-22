@@ -12,7 +12,7 @@
     <figure class="background"></figure>
 
     <main class="container">
-        @include('block/settings-test', [
+        @include('/block/settings-test', [
             'title' => isset($title)? $title : '',
             'only_user' => $only_user,
             'max_time' => isset($max_time)? $max_time : ''
