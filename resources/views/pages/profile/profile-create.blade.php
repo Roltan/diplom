@@ -26,29 +26,29 @@
                         <div class="input--wrap__img">
                             <img src="/img/create/choice.png" alt="" />
                             <div class="input input__dark">
-                                <label for="choice">С выбором</label>
-                                <input type="number" placeholder="число" name="choice" id="choice" class="input--field" />
+                                <label for="choiceCount">С выбором</label>
+                                <input type="number" placeholder="число" name="choiceCount" id="choiceCount" class="input--field" />
                             </div>
                         </div>
                         <div class="input--wrap__img">
                             <img src="/img/create/blank.png" alt="" />
                             <div class="input input__dark">
-                                <label for="blank">С бланком</label>
-                                <input type="number" placeholder="число" name="blank" id="blank" class="input--field" />
+                                <label for="blankCount">С бланком</label>
+                                <input type="number" placeholder="число" name="blankCount" id="blankCount" class="input--field" />
                             </div>
                         </div>
                         <div class="input--wrap__img">
                             <img src="/img/create/relation.png" alt="" />
                             <div class="input input__dark">
-                                <label for="relation">На соотношение</label>
-                                <input type="number" placeholder="число" name="relation" id="relation" class="input--field" />
+                                <label for="relationCount">На соотношение</label>
+                                <input type="number" placeholder="число" name="relationCount" id="relationCount" class="input--field" />
                             </div>
                         </div>
                         <div class="input--wrap__img">
                             <img src="/img/create/fill.png" alt="" />
                             <div class="input input__dark">
-                                <label for="fill">На заполнение</label>
-                                <input type="number" placeholder="число" name="fill" id="fill" class="input--field" />
+                                <label for="fillCount">На заполнение</label>
+                                <input type="number" placeholder="число" name="fillCount" id="fillCount" class="input--field" />
                             </div>
                         </div>
                     </div>

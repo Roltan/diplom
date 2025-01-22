@@ -9,6 +9,10 @@
 		@yield('links')
 	</head>
 	<body>
+        @if(session('error'))
+            @include('/elements/error', ['error'=>session('error')])
+        @endif
+
         @yield('mainContent')
     </body>
 </html>

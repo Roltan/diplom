@@ -6,9 +6,6 @@
 
 @section('mainContent')
     @include('block.header')
-    @if(session('error'))
-        @include('/elements/error', ['error'=>session('error')])
-    @endif
 
     <figure class="background"></figure>
 

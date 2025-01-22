@@ -1,8 +1,8 @@
 // Получаем все поля, которые нужно отслеживать
-const choiceInput = document.getElementById("choice");
-const blankInput = document.getElementById("blank");
-const relationInput = document.getElementById("relation");
-const fillInput = document.getElementById("fill");
+const choiceInput = document.getElementById("choiceCount");
+const blankInput = document.getElementById("blankCount");
+const relationInput = document.getElementById("relationCount");
+const fillInput = document.getElementById("fillCount");
 const overCountInput = document.getElementById("overCount");
 
 // Сохраняем начальные значения для сравнения

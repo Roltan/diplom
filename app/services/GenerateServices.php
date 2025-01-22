@@ -20,6 +20,8 @@ class GenerateServices
 
         $countArr = $this->getQuestionCounts($request);
         $questions = $this->generateRandomQuestions($countArr, $topic->id);
+        if ($questions instanceof Response)
+            return $questions;
 
         $data = $this->prepareResponseData($questions, $topic->topic, $request->title);
         return response($data, 200);
@@ -31,10 +33,10 @@ class GenerateServices
             return $this->divideQuestionsIntoParts($request->overCount, 4);
 
         return [
-            'fillCount' => $request->input('fillCount', 0),
-            'choiceCount' => $request->input('choiceCount', 0),
-            'blankCount' => $request->input('blankCount', 0),
-            'relationCount' => $request->input('relationCount', 0),
+            'fillCount' => $request->filled('fillCount') ? (int) $request->input('fillCount') : 0,
+            'choiceCount' => $request->filled('choiceCount') ? (int) $request->input('choiceCount') : 0,
+            'blankCount' => $request->filled('blankCount') ? (int) $request->input('blankCount') : 0,
+            'relationCount' => $request->filled('relationCount') ? (int) $request->input('relationCount') : 0
         ];
     }
 
@@ -57,12 +59,22 @@ class GenerateServices
         ];
     }
 
-    protected function generateRandomQuestions(array $countArr, int $topicId): Collection
+    protected function generateRandomQuestions(array $countArr, int $topicId): Collection|Response
     {
+        $errors = []; // Массив для накопления ошибок
+
         $fill = $this->getQuest('fill', $countArr['fillCount'], $topicId);
+        $this->checkQuestCount($fill, $countArr['fillCount'], 'fill', $errors);
         $choice = $this->getQuest('choice', $countArr['choiceCount'], $topicId);
+        $this->checkQuestCount($choice, $countArr['choiceCount'], 'choice', $errors);
         $blank = $this->getQuest('blank', $countArr['blankCount'], $topicId);
+        $this->checkQuestCount($blank, $countArr['blankCount'], 'blank', $errors);
         $relation = $this->getQuest('relation', $countArr['relationCount'], $topicId);
+        $this->checkQuestCount($relation, $countArr['relationCount'], 'relation', $errors);
+
+        // Если есть ошибки, выбрасываем исключение с объединённым сообщением
+        if (!empty($errors))
+            return response(['error' => implode("\n", $errors)], 500);
 
         return collect()
             ->merge($fill)
@@ -84,6 +96,13 @@ class GenerateServices
                 $question->type = $type;
                 return $question;
             });
+    }
+
+    protected function checkQuestCount(Collection $questions, int $expectedCount, string $type, array &$errors): void
+    {
+        if ($questions->count() < $expectedCount) {
+            $errors[] = "Недостаточно вопросов типа '$type'. Ожидалось: $expectedCount, найдено: {$questions->count()}";
+        }
     }
 
     protected function prepareResponseData(Collection $questions, string $topic, ?string $title): array
