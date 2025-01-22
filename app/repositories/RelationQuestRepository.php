@@ -6,10 +6,12 @@ use App\Models\RelationQuest;
 
 class RelationQuestRepository
 {
-    public static function getRandomByTopic(int $topicId): ?RelationQuest
+    public static function getRandomByTopic(string $topic): ?RelationQuest
     {
         return RelationQuest::query()
-            ->where('topic_id', $topicId)
+            ->whereHas('topic', function ($query) use ($topic) {
+                return $query->where('topic', $topic);
+            })
             ->inRandomOrder()
             ->first();
     }

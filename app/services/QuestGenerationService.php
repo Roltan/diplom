@@ -36,9 +36,8 @@ class QuestGenerationService
     {
         $quest = $this->switchQuest($type, $topic);
 
-        if ($quest instanceof Response) {
+        if ($quest instanceof Response)
             return $quest;
-        }
 
         while (in_array($quest->id, $excludeIds)) {
             $quest = $this->switchQuest($type, $topic);
@@ -54,9 +53,8 @@ class QuestGenerationService
     {
         $question = $this->getQuestionByType($type, $topic);
 
-        if ($question instanceof Response) {
+        if ($question instanceof Response)
             return $question;
-        }
 
         return $this->wrapQuestionInResource($type, $question);
     }

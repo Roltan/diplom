@@ -24,6 +24,7 @@ class ComponentController extends Controller
         if ($response->status() != 200)
             return response(['status' => false, 'error' => $response->original['error'], 400]);
         $quest = $response->original['quest'];
+        $quest = $this->convertObjectsToArray($quest);
 
         return view('elements/quest/edit', $quest);
     }

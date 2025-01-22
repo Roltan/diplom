@@ -6,10 +6,12 @@ use App\Models\BlankQuest;
 
 class BlankQuestRepository
 {
-    public static function getRandomByTopic(int $topicId): ?BlankQuest
+    public static function getRandomByTopic(string $topic): ?BlankQuest
     {
         return BlankQuest::query()
-            ->where('topic_id', $topicId)
+            ->whereHas('topic', function ($query) use ($topic) {
+                return $query->where('topic', $topic);
+            })
             ->inRandomOrder()
             ->first();
     }

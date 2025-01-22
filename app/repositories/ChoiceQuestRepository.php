@@ -6,10 +6,12 @@ use App\Models\ChoiceQuest;
 
 class ChoiceQuestRepository
 {
-    public static function getRandomByTopic(int $topicId): ?ChoiceQuest
+    public static function getRandomByTopic(string $topic): ?ChoiceQuest
     {
         return ChoiceQuest::query()
-            ->where('topic_id', $topicId)
+            ->whereHas('topic', function ($query) use ($topic) {
+                return $query->where('topic', $topic);
+            })
             ->inRandomOrder()
             ->first();
     }
