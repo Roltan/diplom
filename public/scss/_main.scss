@@ -299,9 +299,26 @@ input[type="checkbox"]:not(.toggle) {
         background-position: center;
         background-repeat: no-repeat;
         position: absolute;
-        top: (72px-$whiteBox)/2; // Позиционирование картинки внутри квадрата
         left: (40px - $whiteBox)/2; // Позиционирование картинки внутри квадрата
         border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+        & + label {
+            gap: 0.7rem;
+        }
+
+        & + label::before {
+            min-width: 26px;
+            min-height: 26px;
+        }
+
+        &:checked + label::after {
+            width: 22px;
+            height: 22px;
+            left: (26px - 22px)/2;
+            background-size: 16px 12px;
+        }
     }
 }
 input[type="radio"] {

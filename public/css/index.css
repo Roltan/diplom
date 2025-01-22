@@ -277,9 +277,23 @@ input[type=checkbox]:not(.toggle):checked + label::after {
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
-  top: 72px- 32px/2;
   left: 4px;
   border-radius: 5px;
+}
+@media (max-width: 768px) {
+  input[type=checkbox]:not(.toggle) + label {
+    gap: 0.7rem;
+  }
+  input[type=checkbox]:not(.toggle) + label::before {
+    min-width: 26px;
+    min-height: 26px;
+  }
+  input[type=checkbox]:not(.toggle):checked + label::after {
+    width: 22px;
+    height: 22px;
+    left: 2px;
+    background-size: 16px 12px;
+  }
 }
 
 input[type=radio] {
