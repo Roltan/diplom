@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Test;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class GenerateTestRequest extends FormRequest
 {
@@ -68,5 +69,17 @@ class GenerateTestRequest extends FormRequest
 
             'general' => 'Сумма значений fillCount, choiceCount, blankCount, relationCount должна быть равна overCount.',
         ];
+    }
+
+    protected function failedValidation($validator)
+    {
+        $errorMessages = $validator->errors()->all();
+        $errorMessage = implode('<br>', $errorMessages);
+
+        throw new HttpResponseException(
+            redirect()->back()
+                ->with('error', $errorMessage)
+                ->withInput()
+        );
     }
 }
