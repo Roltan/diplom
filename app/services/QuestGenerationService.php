@@ -19,11 +19,14 @@ class QuestGenerationService
 {
     public function reGenerate(GenerateQuestRequest $request): Response
     {
+        $topic = TopicRepository::getByName($request->topic);
+        if ($topic === null)
+            return response(['status' => false, 'error' => 'Тема не найдена'], 404);
+
         $type = $this->determineQuestionType($request);
-        $topicId = TopicRepository::getByName($request->topic)->id;
         $quest = $this->getUniqueQuestion(
             $type,
-            $topicId,
+            $topic->id,
             $request->ids ?? [],
             $request->difficulty
         );

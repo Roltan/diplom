@@ -10,6 +10,7 @@ function saveQuest(button, questType) {
     // сбор данных из формы
     let requestBody = {
         topic: document.querySelector("#topic").value,
+        difficulty: document.querySelector("#difficulty").value,
         type: questType,
         quest: form.querySelector(`#questEdit${questId}Quest`).value,
     };

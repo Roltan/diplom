@@ -11,17 +11,18 @@ use App\Models\BlankQuest;
 use App\Models\ChoiceQuest;
 use App\Models\FillQuest;
 use App\Models\RelationQuest;
+use App\Repositories\DifficultyRepository;
 use Illuminate\Http\Response;
 use App\Repositories\TopicRepository;
+use Illuminate\Http\Request;
 
 class QuestCreationService
 {
     public function create(CreateQuestRequest $request): Response
     {
         $topic = TopicRepository::getByName($request->topic);
-        if ($topic === null) {
+        if ($topic === null)
             return response(['status' => false, 'error' => 'Тема не найдена'], 404);
-        }
 
         $model = $this->createQuestionByType($request->type, $request, $topic->id);
 
@@ -31,7 +32,7 @@ class QuestCreationService
         return response(['status' => true, 'quest' => $model]);
     }
 
-    protected function createQuestionByType(string $type, CreateQuestRequest $request, int $topicId): mixed
+    protected function createQuestionByType(string $type, Request $request, int $topicId): mixed
     {
         return match ($type) {
             'fill' => new FillResource($this->createFill($topicId, $request->quest)),
@@ -42,43 +43,55 @@ class QuestCreationService
         };
     }
 
-    protected function createFill(int $topic, string $quest): FillQuest
+    protected function createFill(int $topic, Request $request): FillQuest
     {
+        $quest = $request->quest;
         $removedTags = $this->extractTagsFromQuest($quest);
         $processedQuest = $this->replaceTagsInQuest($quest, $removedTags);
+        $difficulty = DifficultyRepository::getRangeByTitle($request->difficulty)['max_value'];
 
         return FillQuest::create([
             'quest' => $processedQuest,
             'options' => json_encode($removedTags),
             'topic_id' => $topic,
+            'difficulty' => $difficulty
         ]);
     }
 
-    protected function createBlankQuestion(CreateQuestRequest $request, int $topicId): BlankQuest
+    protected function createBlankQuestion(Request $request, int $topicId): BlankQuest
     {
-        $data = $request->only(['quest', 'correct']);
-        $data['correct'] = json_encode($data['correct']);
-        return BlankQuest::create($data + ['topic_id' => $topicId]);
+        $difficulty = DifficultyRepository::getRangeByTitle($request->difficulty)['max_value'];
+        return BlankQuest::create([
+            'quest' => $request->quest,
+            'correct' => json_encode($request->correct),
+            'topic_id' => $topicId,
+            'difficulty' => $difficulty
+        ]);
     }
 
-    protected function createChoiceQuestion(CreateQuestRequest $request, int $topicId): ChoiceQuest
+    protected function createChoiceQuestion(Request $request, int $topicId): ChoiceQuest
     {
-        $data = $request->only(['quest', 'correct', 'uncorrect']);
-        if (count($data['correct']) > 1)
-            $data['is_multiple'] = true;
-
-        $data['correct'] = json_encode($data['correct']);
-        $data['uncorrect'] = json_encode($data['uncorrect']);
-
-        return ChoiceQuest::create($data + ['topic_id' => $topicId]);
+        $difficulty = DifficultyRepository::getRangeByTitle($request->difficulty)['max_value'];
+        return ChoiceQuest::create([
+            'quest' => $request->quest,
+            'correct' => json_encode($request->correct),
+            'uncorrect' => json_encode($request->uncorrect),
+            'topic_id' => $topicId,
+            'is_multiple' => count($request->correct) > 1,
+            'difficulty' => $difficulty
+        ]);
     }
 
-    protected function createRelationQuestion(CreateQuestRequest $request, int $topicId): RelationQuest
+    protected function createRelationQuestion(Request $request, int $topicId): RelationQuest
     {
-        $data = $request->only(['quest', 'first_column', 'second_column']);
-        $data['first_column'] = json_encode($data['first_column']);
-        $data['second_column'] = json_encode($data['second_column']);
-        return RelationQuest::create($data + ['topic_id' => $topicId]);
+        $difficulty = DifficultyRepository::getRangeByTitle($request->difficulty)['max_value'];
+        return RelationQuest::create([
+            'quest' => $request->quest,
+            'first_column' => json_encode($request->first_column),
+            'second_column' => json_encode($request->second_column),
+            'topic_id' => $topicId,
+            'difficulty' => $difficulty
+        ]);
     }
 
     protected function extractTagsFromQuest(string $quest): array
