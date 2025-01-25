@@ -76,7 +76,7 @@ class QuestAnswerSeeder extends Seeder
 
         // Определяем, сколько правильных ответов нужно выбрать
         $maxCorrect = count($correctAnswers);
-        $correctToSelect = rand(0, $maxCorrect); // Случайное количество правильных ответов
+        $correctToSelect = rand(0, $maxCorrect - 1); // Случайное количество правильных ответов
 
         // Выбираем случайные правильные ответы
         $selectedCorrect = [];
