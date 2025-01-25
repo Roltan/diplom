@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Quest;
 
+use App\Repositories\DifficultyRepository;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -17,6 +18,7 @@ class GenerateQuestRequest extends FormRequest
         return [
             'type' => ['nullable', 'string', Rule::in(['fill', 'blank', 'choice', 'relation'])],
             'topic' => ['required', 'string', 'filled', 'min:1'],
+            'difficulty' => ['nullable', 'string', Rule::in(DifficultyRepository::getDifficulties())],
             'ids' => ['nullable', 'array'],
             'ids.*' => ['numeric']
         ];

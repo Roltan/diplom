@@ -8,13 +8,14 @@ function resetQuest(button) {
     );
 
     // Определить тип
-    var type = questElement
+    const type = questElement
         .querySelector(".quest")
         .className.split(" ")[1]
         .split("__")[1];
 
     // Получить значение топика
-    var topic = document.getElementById("topic").value;
+    const topic = document.getElementById("topic").value;
+    const difficulty = document.getElementById("difficulty").value;
 
     // Найти все элементы с классом quest__edit
     var questElements = document.querySelectorAll(".quest__edit");
@@ -34,6 +35,7 @@ function resetQuest(button) {
         body: JSON.stringify({
             type: type,
             topic: topic,
+            difficulty: difficulty,
             ids: ids,
         }),
     })

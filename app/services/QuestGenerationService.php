@@ -11,14 +11,22 @@ use Illuminate\Http\Response;
 use App\Repositories\FillQuestRepository;
 use App\Repositories\BlankQuestRepository;
 use App\Repositories\ChoiceQuestRepository;
+use App\Repositories\QuestRepository;
 use App\Repositories\RelationQuestRepository;
+use App\Repositories\TopicRepository;
 
 class QuestGenerationService
 {
     public function reGenerate(GenerateQuestRequest $request): Response
     {
         $type = $this->determineQuestionType($request);
-        $quest = $this->getUniqueQuestion($type, $request->topic, $request->ids ?? []);
+        $topicId = TopicRepository::getByName($request->topic)->id;
+        $quest = $this->getUniqueQuestion(
+            $type,
+            $topicId,
+            $request->ids ?? [],
+            $request->difficulty
+        );
 
         if ($quest instanceof Response)
             return $quest;
@@ -32,15 +40,15 @@ class QuestGenerationService
         return $request->has('type') ? $request->type : $types[array_rand($types)];
     }
 
-    protected function getUniqueQuestion(string $type, string $topic, array $excludeIds = []): mixed
+    protected function getUniqueQuestion(string $type, int $topicId, array $excludeIds = [], ?string $difficulty): mixed
     {
-        $quest = $this->switchQuest($type, $topic);
+        $quest = $this->getQuest($type, $topicId, $difficulty);
 
         if ($quest instanceof Response)
             return $quest;
 
         while (in_array($quest->id, $excludeIds)) {
-            $quest = $this->switchQuest($type, $topic);
+            $quest = $this->getQuest($type, $topicId, $difficulty);
             if ($quest instanceof Response) {
                 return $quest;
             }
@@ -49,25 +57,14 @@ class QuestGenerationService
         return $quest;
     }
 
-    protected function switchQuest($type, $topic): BlankResource|ChoiceResource|FillResource|RelationResource|Response
+    protected function getQuest($type, $topic, ?string $difficulty): BlankResource|ChoiceResource|FillResource|RelationResource|Response
     {
-        $question = $this->getQuestionByType($type, $topic);
+        $question = QuestRepository::getQuest($type, 1, $topic, $difficulty)->first();
 
         if ($question instanceof Response)
             return $question;
 
         return $this->wrapQuestionInResource($type, $question);
-    }
-
-    protected function getQuestionByType(string $type, string $topic): mixed
-    {
-        return match ($type) {
-            'fill' => FillQuestRepository::getRandomByTopic($topic),
-            'blank' => BlankQuestRepository::getRandomByTopic($topic),
-            'choice' => ChoiceQuestRepository::getRandomByTopic($topic),
-            'relation' => RelationQuestRepository::getRandomByTopic($topic),
-            default => response(['status' => false, 'error' => 'unknown type quest'], 400),
-        };
     }
 
     protected function wrapQuestionInResource(string $type, mixed $question): mixed

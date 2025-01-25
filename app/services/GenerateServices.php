@@ -6,6 +6,7 @@ use App\Http\Requests\Test\GenerateTestRequest;
 use App\Repositories\DifficultyRepository;
 use Illuminate\Http\Request;
 use App\Http\Resources\Quest\QuestResource;
+use App\Repositories\QuestRepository;
 use App\Repositories\TopicRepository;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
@@ -64,13 +65,13 @@ class GenerateServices
     {
         $errors = []; // Массив для накопления ошибок
 
-        $fill = $this->getQuest('fill', $countArr['fillCount'], $topicId, $difficulty);
+        $fill = QuestRepository::getQuest('fill', $countArr['fillCount'], $topicId, $difficulty);
         $this->checkQuestCount($fill, $countArr['fillCount'], 'fill', $errors);
-        $choice = $this->getQuest('choice', $countArr['choiceCount'], $topicId, $difficulty);
+        $choice = QuestRepository::getQuest('choice', $countArr['choiceCount'], $topicId, $difficulty);
         $this->checkQuestCount($choice, $countArr['choiceCount'], 'choice', $errors);
-        $blank = $this->getQuest('blank', $countArr['blankCount'], $topicId, $difficulty);
+        $blank = QuestRepository::getQuest('blank', $countArr['blankCount'], $topicId, $difficulty);
         $this->checkQuestCount($blank, $countArr['blankCount'], 'blank', $errors);
-        $relation = $this->getQuest('relation', $countArr['relationCount'], $topicId, $difficulty);
+        $relation = QuestRepository::getQuest('relation', $countArr['relationCount'], $topicId, $difficulty);
         $this->checkQuestCount($relation, $countArr['relationCount'], 'relation', $errors);
 
         // Если есть ошибки, выбрасываем исключение с объединённым сообщением
@@ -83,23 +84,6 @@ class GenerateServices
             ->merge($blank)
             ->merge($relation)
             ->shuffle();
-    }
-
-    protected function getQuest(string $type, int $count, int $topicId, ?string $difficulty): Collection
-    {
-        $difficultyRange = DifficultyRepository::getRangeByTitle($difficulty);
-
-        return DB::table($type . '_quests')
-            ->where('topic_id', $topicId)
-            ->where('vis', true)
-            ->whereBetween('difficulty', $difficultyRange)
-            ->inRandomOrder()
-            ->take($count)
-            ->get()
-            ->map(function ($question) use ($type) {
-                $question->type = $type;
-                return $question;
-            });
     }
 
     protected function checkQuestCount(Collection $questions, int $expectedCount, string $type, array &$errors): void

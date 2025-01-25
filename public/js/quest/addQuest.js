@@ -1,10 +1,10 @@
 import { bindModalEvents } from "../auth/modal.js";
 
 const addQuestionButton = document.querySelector("#add_quest");
-const topicInput = document.getElementById("topic");
 
 addQuestionButton.addEventListener("click", () => {
-    const topic = topicInput.value; // Получаем значение топика
+    const topic = document.getElementById("topic").value;
+    const difficulty = document.getElementById("difficulty").value;
 
     // Найти все элементы с классом quest__edit
     var questElements = document.querySelectorAll(".quest__edit");
@@ -23,6 +23,7 @@ addQuestionButton.addEventListener("click", () => {
         },
         body: JSON.stringify({
             topic: topic,
+            difficulty: difficulty,
             ids: ids,
         }),
     })
