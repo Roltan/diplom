@@ -17,9 +17,6 @@ return new class extends Migration
             $table->integer('min_value');
             $table->integer('max_value');
             $table->timestamps();
-
-            $table->check('min_value >= 0 AND min_value <= 100');
-            $table->check('max_value >= 0 AND max_value <= 100');
         });
     }
 

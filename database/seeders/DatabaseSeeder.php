@@ -23,5 +23,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(TestSeeder::class);
         $this->call(QuestsTestSeeder::class);
+
+        $this->call(SolvedTestSeeder::class);
+        $this->call(QuestAnswerSeeder::class);
     }
 }
