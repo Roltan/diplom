@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fill_quests', function (Blueprint $table) {
+        Schema::create('difficulties', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('topic_id')->constrained('topics')->cascadeOnDelete();
-            $table->boolean('vis')->default(false);
-            $table->text('quest');
-            $table->text('options');
-            $table->integer('difficulty')->default(50);
+            $table->string('title');
+            $table->integer('min_value');
+            $table->integer('max_value');
             $table->timestamps();
+
+            $table->check('min_value >= 0 AND min_value <= 100');
+            $table->check('max_value >= 0 AND max_value <= 100');
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fill_quests');
+        Schema::dropIfExists('difficulties');
     }
 };

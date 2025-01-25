@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Test extends Model
 {
@@ -14,6 +15,7 @@ class Test extends Model
     protected $fillable = [
         'user_id',
         'topic_id',
+        'difficulty_id',
         'title',
         'url',
         'only_user',
@@ -40,6 +42,11 @@ class Test extends Model
     public function solved(): HasMany
     {
         return $this->HasMany(SolvedTest::class);
+    }
+
+    public function difficulty(): BelongsTo
+    {
+        return $this->belongsTo(Difficulty::class);
     }
 
     // методы

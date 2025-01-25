@@ -17,7 +17,8 @@ class BlankQuest extends Model
         'topic_id',
         'vis',
         'quest',
-        'correct'
+        'correct',
+        'difficulty'
     ];
 
     protected $appends = ['type'];

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->boolean('vis')->default(false);
             $table->text('quest');
             $table->text('correct');
+            $table->integer('difficulty')->default(50);
             $table->timestamps();
         });
     }

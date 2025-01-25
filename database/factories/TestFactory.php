@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Difficulty;
 use App\Models\Test;
 use App\Models\Topic;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -34,6 +35,7 @@ class TestFactory extends Factory
         return [
             'user_id' => 3, // Фиксированный user_id
             'topic_id' => Topic::inRandomOrder()->first()->id,
+            'difficulty_id' => Difficulty::inRandomOrder()->first()->id,
             'title' => $title,
             'url' => $url,
             'only_user' => $this->faker->boolean(),

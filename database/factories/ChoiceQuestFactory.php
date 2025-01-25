@@ -40,6 +40,7 @@ class ChoiceQuestFactory extends Factory
             'correct' => json_encode($correct),
             'uncorrect' => json_encode($uncorrect),
             'is_multiple' => $this->faker->boolean,
+            'difficulty' => $this->faker->numberBetween(0, 100)
         ];
     }
 }

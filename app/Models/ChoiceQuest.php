@@ -20,6 +20,7 @@ class ChoiceQuest extends Model
         'correct',
         'uncorrect',
         'is_multiple',
+        'difficulty'
     ];
 
     protected $appends = ['type'];

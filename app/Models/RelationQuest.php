@@ -18,7 +18,8 @@ class RelationQuest extends Model
         'vis',
         'quest',
         'first_column',
-        'second_column'
+        'second_column',
+        'difficulty'
     ];
 
     protected $appends = ['type'];

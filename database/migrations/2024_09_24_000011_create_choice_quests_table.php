@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('correct');
             $table->text('uncorrect');
             $table->boolean('is_multiple')->default(false);
+            $table->integer('difficulty')->default(50);
             $table->timestamps();
         });
     }

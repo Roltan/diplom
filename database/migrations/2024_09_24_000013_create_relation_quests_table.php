@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('quest');
             $table->text('first_column');
             $table->text('second_column');
+            $table->integer('difficulty')->default(50);
             $table->timestamps();
         });
     }

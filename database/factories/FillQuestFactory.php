@@ -50,6 +50,7 @@ class FillQuestFactory extends Factory
             'vis' => $this->faker->boolean,
             'quest' => $quest,
             'options' => json_encode($options),
+            'difficulty' => $this->faker->numberBetween(0, 100)
         ];
     }
 }

@@ -18,6 +18,7 @@ class FillQuest extends Model
         'vis',
         'quest',
         'options',
+        'difficulty'
     ];
 
     protected $appends = ['type'];

@@ -32,6 +32,7 @@ class BlankQuestFactory extends Factory
             'vis' => $this->faker->boolean,
             'quest' => $quest,
             'correct' => json_encode($correct),
+            'difficulty' => $this->faker->numberBetween(0, 100)
         ];
     }
 }

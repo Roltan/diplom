@@ -42,6 +42,7 @@ class RelationQuestFactory extends Factory
             'quest' => $quest,
             'first_column' => json_encode($firstColumn),
             'second_column' => json_encode($secondColumn),
+            'difficulty' => $this->faker->numberBetween(0, 100)
         ];
     }
 }
