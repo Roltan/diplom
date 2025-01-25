@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('topic_id')->constrained('topics')->cascadeOnDelete();
-            $table->foreignId('difficulty_id')->constrained('difficulties')->cascadeOnDelete();
+            $table->foreignId('difficulty_id')->nullable()->constrained('difficulties')->cascadeOnDelete();
 
             $table->string('title');
             $table->string('url')->unique();

@@ -20,11 +20,11 @@ class GenerateServices
             return response(['status' => false, 'error' => 'Тема не найдена'], 404);
 
         $countArr = $this->getQuestionCounts($request);
-        $questions = $this->generateRandomQuestions($countArr, $topic->id, $request->input('difficulty'));
+        $questions = $this->generateRandomQuestions($countArr, $topic->id, $request->difficulty);
         if ($questions instanceof Response)
             return $questions;
 
-        $data = $this->prepareResponseData($questions, $topic->topic, $request->title);
+        $data = $this->prepareResponseData($questions, $topic->topic, $request->title, $request->difficulty);
         return response($data, 200);
     }
 
@@ -109,7 +109,7 @@ class GenerateServices
         }
     }
 
-    protected function prepareResponseData(Collection $questions, string $topic, ?string $title): array
+    protected function prepareResponseData(Collection $questions, string $topic, ?string $title, ?string $difficulty): array
     {
         $data = [
             'quest' => new QuestResource($questions),
@@ -118,6 +118,10 @@ class GenerateServices
 
         if ($title !== null) {
             $data['title'] = $title;
+        }
+
+        if ($difficulty !== null) {
+            $data['difficulty'] = $difficulty;
         }
 
         return $data;

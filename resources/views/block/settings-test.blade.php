@@ -14,6 +14,10 @@
         <input type="hidden" name="topic" id="topic" value="{{$topic}}" />
     @endisset
 
+    @isset($difficulty)
+        <input type="hidden" name="difficulty" id="difficulty" value="{{$difficulty}}" />
+    @endisset
+
     @include('/elements/input/selector', [
         'name'=>'access',
         'label'=>'Доступ по',

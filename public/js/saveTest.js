@@ -81,6 +81,7 @@ function saveTest() {
         const onlyUser = document.getElementById("only_user").checked;
         const max_time = document.getElementById("max_time").value;
         const is_multi = document.getElementById("is_multi").checked;
+        const difficulty = document.getElementById("difficulty").value;
 
         const quests = [];
         const questElements = document.querySelectorAll(".quest__edit");
@@ -98,6 +99,7 @@ function saveTest() {
             only_user: onlyUser,
             max_time: max_time,
             is_multi: is_multi,
+            difficulty: difficulty,
             quest: quests,
         };
 

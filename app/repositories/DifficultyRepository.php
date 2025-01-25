@@ -24,4 +24,16 @@ class DifficultyRepository
             'max_value' => $result->max_value,
         ];
     }
+
+    public static function getIdByTitle(?string $difficulty): ?int
+    {
+        try {
+            return Difficulty::query()
+                ->where('title', $difficulty)
+                ->first()
+                ->id;
+        } catch (\Exception) {
+            return null;
+        }
+    }
 }

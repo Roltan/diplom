@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Test;
 
+use App\Repositories\DifficultyRepository;
 use App\Rules\UniqueQuestPairRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,8 @@ class CreateTestRequest extends FormRequest
             'only_user' => ['nullable', 'boolean'],
             'leave' => ['nullable', 'boolean'],
             'max_time' => ['nullable', 'string', 'regex:/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/'],
-            'is_multi' => ['nullable', 'boolean']
+            'is_multi' => ['nullable', 'boolean'],
+            'difficulty' => ['nullable', 'string', Rule::in(DifficultyRepository::getDifficulties())]
         ];
     }
 

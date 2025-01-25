@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Test;
 
+use App\Repositories\DifficultyRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,8 @@ class DescriptionTestResource extends JsonResource
             'url' => Str::slug($this->title),
             'topic_id' => $this->topic_id,
             'max_time' => $this->max_time,
-            'is_multi' => $this->is_multi
+            'is_multi' => $this->is_multi,
+            'difficulty_id' => DifficultyRepository::getIdByTitle($this->difficulty)
         ];
     }
 }
