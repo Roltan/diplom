@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\Test;
 
+use App\Repositories\DifficultyRepository;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class GenerateTestRequest extends FormRequest
 {
@@ -22,6 +24,7 @@ class GenerateTestRequest extends FormRequest
             'choiceCount' => ['nullable', 'numeric', 'min:0'],
             'blankCount' => ['nullable', 'numeric', 'min:0'],
             'relationCount' => ['nullable', 'numeric', 'min:0'],
+            'difficulty' => ['nullable', 'string', Rule::in(DifficultyRepository::getDifficulties())]
         ];
     }
 

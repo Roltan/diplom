@@ -8,6 +8,7 @@ use App\Http\Resources\Card\TestCardResource;
 use App\Models\SolvedTest;
 use App\Models\Test;
 use App\Models\Topic;
+use App\Repositories\DifficultyRepository;
 use App\Repositories\TopicRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,11 +17,12 @@ class ViewServices
 {
     public function viewIndex(): array
     {
-        $topic = Topic::query()
-            ->orderBy('topic')
-            ->get()
-            ->pluck('topic');
-        return ['topics' => $topic];
+        $topic = TopicRepository::getTopics();
+        $difficulties = DifficultyRepository::getDifficulties();
+        return [
+            'topics' => $topic,
+            'difficulties' => $difficulties
+        ];
     }
 
     public function viewCreate(): string|array
@@ -30,7 +32,11 @@ class ViewServices
             return 'У вас нет прав посещать ту страницу';
 
         $topic = TopicRepository::getTopics();
-        return ['topics' => $topic];
+        $difficulties = DifficultyRepository::getDifficulties();
+        return [
+            'topics' => $topic,
+            'difficulties' => $difficulties
+        ];
     }
 
     public function viewProfile(): string|array

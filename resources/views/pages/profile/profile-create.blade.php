@@ -65,6 +65,13 @@
                             <label for="overCount">Количество вопросов</label>
                             <input type="number" placeholder="число" name="overCount" id="overCount" class="input--field" required/>
                         </div>
+                        @include('/elements/input/selector', [
+                            'name'=>'difficulty',
+                            'label'=>'Выберете сложность',
+                            'options'=>$difficulties,
+                            'strValue' => true,
+                            'required' => false
+                        ])
                     </div>
                 </section>
 

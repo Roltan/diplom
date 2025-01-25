@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\Test\GenerateTestRequest;
+use App\Repositories\DifficultyRepository;
 use Illuminate\Http\Request;
 use App\Http\Resources\Quest\QuestResource;
 use App\Repositories\TopicRepository;
@@ -19,7 +20,7 @@ class GenerateServices
             return response(['status' => false, 'error' => 'Тема не найдена'], 404);
 
         $countArr = $this->getQuestionCounts($request);
-        $questions = $this->generateRandomQuestions($countArr, $topic->id);
+        $questions = $this->generateRandomQuestions($countArr, $topic->id, $request->input('difficulty'));
         if ($questions instanceof Response)
             return $questions;
 
@@ -59,17 +60,17 @@ class GenerateServices
         ];
     }
 
-    protected function generateRandomQuestions(array $countArr, int $topicId): Collection|Response
+    protected function generateRandomQuestions(array $countArr, int $topicId, ?string $difficulty): Collection|Response
     {
         $errors = []; // Массив для накопления ошибок
 
-        $fill = $this->getQuest('fill', $countArr['fillCount'], $topicId);
+        $fill = $this->getQuest('fill', $countArr['fillCount'], $topicId, $difficulty);
         $this->checkQuestCount($fill, $countArr['fillCount'], 'fill', $errors);
-        $choice = $this->getQuest('choice', $countArr['choiceCount'], $topicId);
+        $choice = $this->getQuest('choice', $countArr['choiceCount'], $topicId, $difficulty);
         $this->checkQuestCount($choice, $countArr['choiceCount'], 'choice', $errors);
-        $blank = $this->getQuest('blank', $countArr['blankCount'], $topicId);
+        $blank = $this->getQuest('blank', $countArr['blankCount'], $topicId, $difficulty);
         $this->checkQuestCount($blank, $countArr['blankCount'], 'blank', $errors);
-        $relation = $this->getQuest('relation', $countArr['relationCount'], $topicId);
+        $relation = $this->getQuest('relation', $countArr['relationCount'], $topicId, $difficulty);
         $this->checkQuestCount($relation, $countArr['relationCount'], 'relation', $errors);
 
         // Если есть ошибки, выбрасываем исключение с объединённым сообщением
@@ -84,11 +85,14 @@ class GenerateServices
             ->shuffle();
     }
 
-    protected function getQuest(string $type, int $count, int $topicId): Collection
+    protected function getQuest(string $type, int $count, int $topicId, ?string $difficulty): Collection
     {
+        $difficultyRange = DifficultyRepository::getRangeByTitle($difficulty);
+
         return DB::table($type . '_quests')
             ->where('topic_id', $topicId)
             ->where('vis', true)
+            ->whereBetween('difficulty', $difficultyRange)
             ->inRandomOrder()
             ->take($count)
             ->get()

@@ -16,7 +16,7 @@
     <div class="input {{ $class ?? '' }}">
         <label for="{{ $name }}">{{ $label }}</label>
         <select name="{{ $name }}" id="{{ $name }}" class="input--field" @if(!isset($required) or $required==true) required @endif>
-            <option value="" @if(!isset($value) or !isset($required) or $required==true) disabled selected hidden @endif>Выбрать вариант</option>
+            <option value="" @if(!isset($required) or $required==true) disabled selected hidden @endif>Выбрать вариант</option>
             @if (!isset($strValue))
                 @foreach($options as $optionValue => $text)
                     <option value="{{ $optionValue }}" @if(isset($value) && $value == $optionValue) selected @endif >{{ $text }}</option>

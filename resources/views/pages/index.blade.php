@@ -44,12 +44,13 @@
                         'options'=>$topics,
                         'strValue' => true
                     ])
-                     {{-- @include('/elements/input/data_list', [
-                        'name'=>'topic',
-                        'label'=>'Выберете тему',
-                        'options'=>$topics,
-                        'strValue' => true
-                     ]) --}}
+                    @include('/elements/input/selector', [
+                        'name'=>'difficulty',
+                        'label'=>'Выберете сложность',
+                        'options'=>$difficulties,
+                        'strValue' => true,
+                        'required' => false
+                    ])
                 </div>
 
                 <button type="submit" class="button button__blue button__bold">Сгенерировать</button>
