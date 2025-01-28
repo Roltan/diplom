@@ -19,7 +19,8 @@ class ViewServices
     {
         $topic = TopicRepository::getTopics();
         $difficulties = DifficultyRepository::getDifficulties();
-        $tests = Test::paginate(10);
+        $tests = (new AdviseServices)
+            ->index(request());
         return [
             'topics' => $topic,
             'difficulties' => $difficulties,
