@@ -19,9 +19,11 @@ class ViewServices
     {
         $topic = TopicRepository::getTopics();
         $difficulties = DifficultyRepository::getDifficulties();
+        $tests = Test::paginate(10);
         return [
             'topics' => $topic,
-            'difficulties' => $difficulties
+            'difficulties' => $difficulties,
+            'cards' => TestCardResource::collection($tests)
         ];
     }
 

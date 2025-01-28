@@ -2,6 +2,7 @@
 
 @section('links')
     <link rel="stylesheet" href="/css/index.css" />
+    <script src="/js/paginate.js" defer></script>
 @endsection
 
 @section('mainContent')
@@ -56,5 +57,14 @@
                 <button type="submit" class="button button__blue button__bold">Сгенерировать</button>
             </form>
         </div>
+
+        @include('/block/list_header')
+
+        <div class="list" id="list">
+            @foreach($cards as $card)
+                @include('/elements/card', $card)
+            @endforeach
+        </div>
+        <div id="loading" style="display: none;">Загрузка...</div>
     </main>
 @endsection

@@ -10,9 +10,9 @@
             value="{!! request('search') !!}"
         />
     </div>
-    <img src="/img/filter.png" alt="" class="openModalBtn" data-modal="modal2" />
+    <img src="/img/filter.png" alt="" class="openModalBtn" data-modal="filter" />
 
-    <div class="modalka" id="modal2">
+    <div class="modalka" id="filter">
         <form class="filter form">
             @if(isset($tests))
                 @include('/elements/input/selector', [

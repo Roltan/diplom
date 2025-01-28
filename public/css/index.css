@@ -456,6 +456,210 @@ datalist {
     text-align: center;
   }
 }
+main.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 60px;
+  height: 75vh;
+}
+
+.navLK {
+  position: relative;
+  max-width: 500px;
+  width: 50vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 30px 30px 0px;
+}
+.navLK a {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  align-items: center;
+  color: #c9ddff;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+.navLK a > img {
+  width: 60px;
+}
+.navLK a:hover {
+  color: #97b0dc;
+}
+.navLK a.active {
+  color: #ffffff !important;
+}
+.navLK div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: -moz-max-content;
+  width: max-content;
+}
+.navLK figure {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60vw;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(120deg, #123a60 26%, #2578c6 65%);
+  border-top-right-radius: 45px;
+  border-bottom-right-radius: 45px;
+}
+
+.navLK__bar {
+  display: flex;
+  align-items: end;
+  max-width: 300px;
+  width: 60vw !important;
+  max-height: 400px;
+  height: 60vh;
+  z-index: 4;
+  position: absolute;
+  top: 20px;
+  right: 0;
+  transform: translateX(200vw);
+  padding-left: 20px;
+  transition: 0.2s;
+}
+.navLK__bar a {
+  width: 50vw !important;
+  gap: 10px;
+  flex-direction: row-reverse;
+}
+.navLK__bar a > img {
+  width: 40px;
+}
+.navLK__bar a span {
+  text-align: end;
+}
+.navLK__bar figure {
+  width: 60vw;
+  right: auto;
+  left: 0;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 45px;
+  border-bottom-left-radius: 45px;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  nav.navLK:not(.navLK__bar) {
+    display: none;
+  }
+}
+.main {
+  gap: 20px;
+}
+
+.statistic--header {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+.statistic--header > .input {
+  width: 300px;
+}
+
+.window {
+  width: 100%;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+  overflow-y: auto;
+}
+.window::-webkit-scrollbar {
+  width: 10px; /* Ширина скроллбара */
+}
+.window::-webkit-scrollbar-track {
+  background: #123a60; /* Цвет фона трека */
+  border-radius: 15px;
+}
+.window::-webkit-scrollbar-thumb {
+  background: #c9ddff; /* Цвет ползунка */
+  border-radius: 15px; /* Скругление углов ползунка */
+}
+.window::-webkit-scrollbar-thumb:hover {
+  background: #bbcff3; /* Цвет ползунка при наведении */
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  padding-right: 10px;
+}
+
+.list--card {
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #2b76bc;
+  border-radius: 20px;
+  padding: 5px 20px;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  row-gap: 10px;
+  -moz-column-gap: 5px;
+       column-gap: 5px;
+  color: #fff;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+.list--card:hover {
+  color: #bfddf8;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  width: 450px;
+  height: 300px;
+  background: linear-gradient(40deg, #123a60 26%, #2578c6 65%);
+}
+.filter > .input {
+  width: 100%;
+}
+
+@media (max-width: 991px) {
+  .list--card {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0;
+  }
+  .list--card > span:not(:last-child) {
+    margin-bottom: 5px;
+  }
+}
+@media (max-width: 768px) {
+  .statistic--header .input {
+    width: 100%;
+  }
+  .window {
+    overflow-y: unset;
+    padding-bottom: 50px;
+  }
+  .filter {
+    width: 100%;
+  }
+}
 .slogan {
   color: #123a60;
   font-size: 3rem;
@@ -469,6 +673,7 @@ datalist {
   justify-content: space-between;
   gap: 10px;
   width: 100%;
+  margin-bottom: 50px;
 }
 
 .descriptions {
@@ -506,6 +711,10 @@ datalist {
   gap: 15px;
 }
 
+.list {
+  margin-top: 20px;
+}
+
 @media (max-width: 990px) {
   .index--main {
     flex-direction: column-reverse;
@@ -514,7 +723,6 @@ datalist {
   }
   .descriptions {
     max-width: 600px;
-    padding-bottom: 50px;
   }
   .index--main > form {
     max-width: 600px;

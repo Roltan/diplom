@@ -15,6 +15,6 @@ class HomeController extends Controller
     public function viewIndex(): View
     {
         $data = $this->viewServices->viewIndex();
-        return view('pages.index', $data);
+        return view('pages.index', $this->convertObjectsToArray($data));
     }
 }
