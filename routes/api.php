@@ -24,6 +24,7 @@ Route::group(['prefix' => '/test'], function () {
     Route::put('/create', [TestController::class, 'create'])->middleware('authChecked');
     Route::put('/edit', [TestController::class, 'edit'])->middleware('authChecked');
     Route::post('/solved/save', [TestController::class, 'saveSolvedTest']);
+    Route::get('/advise', [ComponentController::class, 'advise']);
 });
 
 Route::group(['prefix' => 'quest'], function () {

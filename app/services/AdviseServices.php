@@ -129,6 +129,7 @@ class AdviseServices
             })
             ->sortDesc() // Сортируем по весу
             ->take(10); // Ограничиваем количество
+        // TODO приходят решения тестов а не тесты
 
         if ($recommendedTests->isEmpty())
             return collect();

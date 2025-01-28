@@ -19,8 +19,7 @@ class ViewServices
     {
         $topic = TopicRepository::getTopics();
         $difficulties = DifficultyRepository::getDifficulties();
-        $tests = (new AdviseServices)
-            ->index(request());
+        $tests = (new AdviseServices)->index(request());
         return [
             'topics' => $topic,
             'difficulties' => $difficulties,

@@ -1,27 +1,19 @@
 let currentPage = 1;
 const container = document.getElementById("list");
-const loading = document.getElementById("loading");
 let lastPage = Infinity; // Инициализируем lastPage значением Infinity, чтобы изначально допускать загрузку
 let isLoading = false;
 
 function loadMoreNews() {
     currentPage++;
-    loading.style.display = "block";
 
-    fetch("/api/news?page=" + currentPage)
+    fetch("/api/test/advise")
         .then((response) => response.json())
         .then((data) => {
-            loading.style.display = "none";
-            lastPage = data.news.last_page; // Обновляем значение lastPage
-            data.news.data.forEach((item) => {
+            lastPage += data.tests.length; // Обновляем значение lastPage
+            data.tests.forEach((item) => {
                 const newItem = document.createElement("div");
-                newItem.className = "news-item";
-                newItem.innerHTML = `
-                    <img src="${item.photo}" alt="фото">
-                    <h1>${item.title}</h1>
-                    <p>${item.description}</p>
-                    <h2>${item.publication}</h2>
-                `;
+                newItem.innerHTML = item;
+                console.log(item);
                 container.appendChild(newItem);
             });
             isLoading = false;
