@@ -37,6 +37,12 @@ class ChoiceQuest extends Model
     }
 
     // методы
+    public function maxScore(): int
+    {
+        return count(json_decode($this->correct))
+            + count(json_decode($this->uncorrect));
+    }
+
     public function getTypeAttribute(): string
     {
         return 'choice';

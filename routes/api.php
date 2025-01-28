@@ -1,8 +1,10 @@
 <?php
 
+use App\Console\Commands\UpdateQuestionDifficulty;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ComponentController;
+use App\Services\DifficultyServices;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::post('/updateDifficulty', [UpdateQuestionDifficulty::class, 'handle']);
 
 Route::group(['prefix' => '/test'], function () {
     Route::put('/create', [TestController::class, 'create'])->middleware('authChecked');

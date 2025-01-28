@@ -36,6 +36,11 @@ class RelationQuest extends Model
     }
 
     // методы
+    public function maxScore(): int
+    {
+        return count(json_decode($this->second_column));
+    }
+
     public function getTypeAttribute(): string
     {
         return 'relation';

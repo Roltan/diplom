@@ -66,7 +66,6 @@ class Test extends Model
                 case "fill":
                     $count += count(json_decode($quest->quest->options));
                     break;
-
                 case "relation":
                     $count += count(json_decode($quest->quest->second_column));
                     break;

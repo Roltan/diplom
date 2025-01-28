@@ -35,6 +35,11 @@ class BlankQuest extends Model
     }
 
     // методы
+    public function maxScore(): int
+    {
+        return 1;
+    }
+
     public function getTypeAttribute(): string
     {
         return 'blank';

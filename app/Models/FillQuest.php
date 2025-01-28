@@ -35,6 +35,11 @@ class FillQuest extends Model
     }
 
     // методы
+    public function maxScore(): int
+    {
+        return count(json_decode($this->options));
+    }
+
     public function getTypeAttribute(): string
     {
         return 'fill';

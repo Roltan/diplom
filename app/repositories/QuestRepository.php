@@ -2,7 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Models\BlankQuest;
+use App\Models\ChoiceQuest;
 use App\Models\FillQuest;
+use App\Models\RelationQuest;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -23,5 +26,14 @@ class QuestRepository
                 $question->type = $type;
                 return $question;
             });
+    }
+
+    public static function getAnswers(BlankQuest|ChoiceQuest|FillQuest|RelationQuest $quest): Collection
+    {
+        return $quest->questsTest()
+            ->with('answers') // Жадная загрузка ответов
+            ->get()
+            ->pluck('answers') // Извлекаем ответы из всех questsTest
+            ->flatten(); // Преобразуем коллекцию коллекций в одну коллекцию
     }
 }
