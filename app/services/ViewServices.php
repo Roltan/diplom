@@ -74,7 +74,9 @@ class ViewServices
         if ($request->has('filter-date'))
             $solvedTest = $solvedTest->whereDate('created_at', $request->input('filter-date'));
 
-        $solvedTest = $solvedTest->get();
+        $solvedTest = $solvedTest
+            ->orderByDesc('created_at')
+            ->get();
 
         $tests = $tests->map(function ($solved) {
             return $solved->test->title;
@@ -114,7 +116,9 @@ class ViewServices
             $solvedTests = $solvedTests->whereDate('created_at', $request->input('filter-date'));
 
         // Получаем отфильтрованные решения
-        $solvedTests = $solvedTests->get();
+        $solvedTests = $solvedTests
+            ->orderByDesc('created_at')
+            ->get();
 
         return [
             'tests' => $testsAll->pluck('title'),
@@ -140,7 +144,9 @@ class ViewServices
         if ($request->has('filter-date'))
             $test = $test->whereDate('created_at', $request->input('filter-date'));
 
-        $test = $test->get();
+        $test = $test
+            ->orderByDesc('created_at')
+            ->get();
 
         return [
             'topic' => TopicRepository::getTopics(),
