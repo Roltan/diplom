@@ -34,7 +34,7 @@ class AdviseServices
         $topics = $user->getAdviseTopic();
         $difficulties = $user->getAdviseDifficulty();
 
-        [$tests, $personalTests] = TestRepository::getAdviseUser(
+        [$testsCount, $personalTests] = TestRepository::getAdviseUser(
             $topics,
             $difficulties,
             $user->id,
@@ -44,14 +44,14 @@ class AdviseServices
 
         // Если персональных рекомендаций мало, добавляем общие
         if ($personalTests->count() < $limit) {
-            $generalPage = max(1, $page - ceil($tests->count() / $limit));
-            $generalTests = $this->getGeneralTests($user, $generalPage, $limit);
-            $personalTests = $personalTests->merge($generalTests[0]);
+            $generalPage = max(1, $page - ceil($testsCount / $limit));
+            [$generalTests, $generalTestsCount] = $this->getGeneralTests($user, $generalPage, $limit);
+            $personalTests = $personalTests->merge($generalTests);
         }
 
         // Если все еще мало, добавляем резервные рекомендации
         if ($personalTests->count() < $limit) {
-            $generalPage = max(1, $page - ceil($tests->count() + $generalTests[1] / $limit));
+            $generalPage = max(1, $page - ceil($testsCount + $generalTestsCount / $limit));
             $fallbackTests = TestRepository::getAdviseGuest($generalPage, $limit, false);
             $personalTests = $personalTests->merge($fallbackTests);
         }
@@ -93,6 +93,7 @@ class AdviseServices
             $test = $test->whereDate('created_at', $request->input('filter-date'));
 
         $test = $test->skip(($page - 1) * $limit)
+            ->where('is_public', 1)
             ->take($limit)
             ->get();
 

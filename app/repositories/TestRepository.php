@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Test;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class TestRepository
 {
@@ -18,6 +19,7 @@ class TestRepository
     public static function searchByTest(Builder $query, string $searchTerm): Builder
     {
         return $query->where(function ($query) use ($searchTerm) {
+            $searchTerm = Str::lower($searchTerm);
             $query->whereHas('topic', function ($q) use ($searchTerm) {
                 $q->where('topic', 'like', '%' . $searchTerm . '%');
             })->orWhere('title', 'like', '%' . $searchTerm . '%');
@@ -41,7 +43,8 @@ class TestRepository
     public static function getGeneralTests(Collection $recommendedTests, int $page, int $limit): array
     {
         $allTests = Test::query()
-            ->whereIn('id', $recommendedTests->keys());
+            ->whereIn('id', $recommendedTests->keys())
+            ->where('is_public', 1);
         $test = $allTests
             ->skip(($page - 1) * $limit)
             ->take($limit)
@@ -57,6 +60,7 @@ class TestRepository
             $tests = $tests->where('only_user', 1);
 
         return $tests
+            ->where('is_public', 1)
             ->withCount('solved')
             ->orderBy('solved_count')
             ->skip(($page - 1) * $limit)
@@ -70,12 +74,13 @@ class TestRepository
             ->whereIn('topic_id', $topics)
             ->whereIn('difficulty_id', $difficulties)
             ->where('user_id', '!=', $userId)
-            ->with('topic', 'difficulty');
+            ->where('is_public', 1);
+        // ->with('topic', 'difficulty');
         $personalTests = $tests
             ->skip(($page - 1) * $limit)
             ->take($limit)
             ->get();
 
-        return [$tests, $personalTests];
+        return [$tests->get()->count(), $personalTests];
     }
 }
