@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\SolvedTest;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class SolvedTestRepository
 {
@@ -45,6 +46,7 @@ class SolvedTestRepository
             })->orWhere('title', 'like', '%' . $searchTerm . '%');
         });
     }
+
     public static function searchByStatistic(Builder $query, string $searchTerm): Builder
     {
         return $query->whereHas('student', function ($query) use ($searchTerm) {
@@ -52,5 +54,36 @@ class SolvedTestRepository
         })->orWhereHas('test', function ($query) use ($searchTerm) {
             $query->where('title', 'like', '%' . $searchTerm . '%');
         });
+    }
+
+    public static function getSimilarUsers(array $solvedTestIds, int $userId): Collection
+    {
+        return SolvedTest::query()
+            ->whereIn('test_id', $solvedTestIds)
+            ->where('user_id', '!=', $userId)
+            ->groupBy('user_id')
+            ->selectRaw('user_id, COUNT(*) as common_tests_count')
+            ->orderByDesc('common_tests_count')
+            ->get();
+    }
+
+    public static function getRecommendedTests(array $solvedTestIds, Collection $similarUsers): Collection
+    {
+        $userArr = $similarUsers->pluck('user_id');
+        $userWeights = $similarUsers->pluck('common_tests_count', 'user_id');
+
+        // Находим тесты, которые решали похожие пользователи
+        return SolvedTest::query()
+            ->whereIn('user_id', $userArr)
+            ->whereNotIn('test_id', $solvedTestIds) // Исключаем тесты, которые уже решал пользователь
+            ->get()
+            ->groupBy('test_id') // Группируем по ID теста
+            ->map(function ($solvedTests) use ($userWeights) {
+                // Считаем общий вес для каждого теста
+                return $solvedTests->sum(function ($solvedTest) use ($userWeights) {
+                    return $userWeights[$solvedTest->user_id] ?? 0;
+                });
+            })
+            ->sortDesc();
     }
 }

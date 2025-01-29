@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Difficulty;
 use App\Models\Test;
 use App\Models\Topic;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -33,7 +34,7 @@ class TestFactory extends Factory
         }
 
         return [
-            'user_id' => 3, // Фиксированный user_id
+            'user_id' => User::inRandomOrder()->first()->id,
             'topic_id' => Topic::inRandomOrder()->first()->id,
             'difficulty_id' => Difficulty::inRandomOrder()->first()->id,
             'title' => $title,

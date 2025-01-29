@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Test;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class TestRepository
 {
@@ -35,5 +36,42 @@ class TestRepository
         return Test::query()
             ->find($testId)
             ->is_multi;
+    }
+
+    public static function getGeneralTests(Collection $recommendedTests, int $page, int $limit): array
+    {
+        $allTests = Test::query()
+            ->whereIn('id', $recommendedTests->keys());
+        $test = $allTests
+            ->skip(($page - 1) * $limit)
+            ->take($limit)
+            ->get();
+
+        return [$test, $allTests->get()->count()];
+    }
+
+    public static function getAdviseGuest(int $page, int $limit): Collection
+    {
+        return Test::query()
+            ->withCount('solved')
+            ->orderBy('solved_count')
+            ->skip(($page - 1) * $limit)
+            ->take($limit)
+            ->get();
+    }
+
+    public static function getAdviseUser(array $topics, array $difficulties, int $userId, int $page, int $limit): array
+    {
+        $tests = Test::query()
+            ->whereIn('topic_id', $topics)
+            ->whereIn('difficulty_id', $difficulties)
+            ->where('user_id', '!=', $userId)
+            ->with('topic', 'difficulty');
+        $personalTests = $tests
+            ->skip(($page - 1) * $limit)
+            ->take($limit)
+            ->get();
+
+        return [$tests, $personalTests];
     }
 }
