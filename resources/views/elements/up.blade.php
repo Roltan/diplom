@@ -12,8 +12,13 @@
 
     window.addEventListener("scroll", function () {
         const btn = document.querySelector(".button__top");
+        @if (isset($height))
+            const height = {{ $height }};
+        @else
+            const height = 300;
+        @endif
 
-        if (window.scrollY > 300) {
+        if (window.scrollY > height) {
             btn.style.display = 'flex';
         } else {
             btn.style.display = 'none';

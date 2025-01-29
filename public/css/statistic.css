@@ -456,7 +456,7 @@ datalist {
     text-align: center;
   }
 }
-main.row {
+main:not(.index) {
   display: flex;
   flex-direction: row;
   justify-content: start;

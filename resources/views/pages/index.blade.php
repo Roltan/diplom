@@ -10,7 +10,7 @@
 
     <figure class="background"></figure>
 
-    <main class="container">
+    <main class="container index">
         <div class="slogan">Создайте свой тест за считанные минуты!</div>
 
         <div class="index--main">
@@ -65,6 +65,6 @@
                 @include('/elements/card', $card)
             @endforeach
         </div>
-        <div id="loading" style="display: none;">Загрузка...</div>
+        @include('elements.up', ['height'=>1000])
     </main>
 @endsection
