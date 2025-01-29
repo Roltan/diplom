@@ -366,6 +366,8 @@ input[type="checkbox"].toggle {
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: center;
+        height: 100%;
         gap: 1.25rem;
     }
     & + label::before {

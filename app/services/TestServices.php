@@ -63,7 +63,8 @@ class TestServices
             'title',
             'only_user',
             'max_time',
-            'is_multi'
+            'is_multi',
+            'is_public'
         ]);
 
         if (isset($data['title']))

@@ -81,6 +81,7 @@ function saveTest() {
         const onlyUser = document.getElementById("only_user").checked;
         const max_time = document.getElementById("max_time").value;
         const is_multi = document.getElementById("is_multi").checked;
+        const is_public = document.getElementById("is_public").checked;
         const difficulty = document.getElementById("difficulty").value;
 
         const quests = [];
@@ -100,6 +101,7 @@ function saveTest() {
             max_time: max_time,
             is_multi: is_multi,
             difficulty: difficulty,
+            is_public: is_public,
             quest: quests,
         };
 
@@ -117,6 +119,7 @@ function editSettingsTest() {
     const alias = getAlias();
     const max_time = document.getElementById("max_time").value;
     const is_multi = document.getElementById("is_multi").checked;
+    const is_public = document.getElementById("is_public").checked;
 
     const data = {
         title: title,
@@ -124,6 +127,7 @@ function editSettingsTest() {
         alias: alias,
         max_time: max_time,
         is_multi: is_multi,
+        is_public: is_public,
     };
 
     fetchData("/api/test/edit", "PUT", data);

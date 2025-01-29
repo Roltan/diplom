@@ -19,6 +19,7 @@ class EditTestRequest extends FormRequest
             'title' => ['nullable', 'string', 'max:255'],
             'only_user' => ['nullable', 'boolean'],
             'is_multi' => ['nullable', 'boolean'],
+            'is_public' => ['nullable', 'boolean'],
             'max_time' => ['nullable', 'string', 'regex:/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/']
         ];
     }
@@ -31,7 +32,8 @@ class EditTestRequest extends FormRequest
                 'title',
                 'only_user',
                 'max_time',
-                'is_multi'
+                'is_multi',
+                'is_public'
             ];
 
             $data = $this->all();

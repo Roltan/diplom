@@ -25,6 +25,7 @@ class DescriptionTestResource extends JsonResource
             'topic_id' => $this->topic_id,
             'max_time' => $this->max_time,
             'is_multi' => $this->is_multi,
+            'is_public' => $this->is_public,
             'difficulty_id' => DifficultyRepository::getIdByTitle($this->difficulty)
         ];
     }

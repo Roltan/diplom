@@ -27,6 +27,7 @@ class CreateTestRequest extends FormRequest
             'leave' => ['nullable', 'boolean'],
             'max_time' => ['nullable', 'string', 'regex:/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/'],
             'is_multi' => ['nullable', 'boolean'],
+            'is_public' => ['nullable', 'boolean'],
             'difficulty' => ['nullable', 'string', Rule::in(DifficultyRepository::getDifficulties())]
         ];
     }

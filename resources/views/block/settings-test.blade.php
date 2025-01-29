@@ -18,12 +18,10 @@
         <input type="hidden" name="difficulty" id="difficulty" value="{{$difficulty}}" />
     @endisset
 
-    @include('/elements/input/selector', [
-        'name'=>'access',
-        'label'=>'Доступ по',
-        'options'=>[
-            'ссылке',
-        ]
+    @include('/elements/input/toggle', [
+        'name' => 'is_public',
+        'checked' => isset($is_public)? $is_public : true,
+        'label' => 'Разрешить рекомендовать этот тест'
     ])
 
     @include('/elements/input/toggle', [
