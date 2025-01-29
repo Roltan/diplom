@@ -20,7 +20,7 @@ class AdviseServices
         $page = (int) $request->input('page', 1);
         $limit = 20;
 
-        if ($request->hasAny('search', 'date', 'topic'))
+        if ($request->hasAny('filter-search', 'filter-date', 'filter-topic'))
             return $this->filter($request, $page, $limit, Auth::check());
 
         return Auth::check() ?
@@ -83,14 +83,14 @@ class AdviseServices
         if ($only_user)
             $test = $test->where('only_user', 1);
 
-        if ($request->has('topic'))
-            $test = $test->filterByTopic($request->input('topic'));
+        if ($request->has('filter-topic'))
+            $test = $test->filterByTopic($request->input('filter-topic'));
 
-        if ($request->has('search'))
-            $test = $test->searchByTest($request->input('search'));
+        if ($request->has('filter-search'))
+            $test = $test->searchByTest($request->input('filter-search'));
 
-        if ($request->has('date'))
-            $test = $test->whereDate('created_at', $request->input('date'));
+        if ($request->has('filter-date'))
+            $test = $test->whereDate('created_at', $request->input('filter-date'));
 
         $test = $test->skip(($page - 1) * $limit)
             ->take($limit)

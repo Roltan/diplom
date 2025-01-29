@@ -62,11 +62,19 @@
             'topic' => $topics
         ])
 
-        <div class="list" id="list">
-            @foreach($cards as $card)
-                @include('/elements/card', $card)
-            @endforeach
-        </div>
-        @include('elements.up', ['height'=>1000])
+        @if (count($cards) > 0)
+            <div class="list" id="list">
+                @foreach($cards as $card)
+                    @include('/elements/card', $card)
+                @endforeach
+            </div>
+            @include('elements.up', ['height'=>1000])
+        @else
+            @if (request()->hasAny('search', 'date', 'topic'))
+                <div class="slogan bottom">Извините, по вашему запросу ничего не найдено</div>
+            @else
+                <div class="slogan bottom">Извините, нам нечего вам порекомендовать</div>
+            @endif
+        @endif
     </main>
 @endsection

@@ -9,6 +9,7 @@
         'name' => $name,
         'label' => $label,
         'options' => $options,
+        'value' => isset($value)? $value : null,
         'strValue' => isset($strValue)? $strValue : null,
         'required' => isset($required)? $required : null
     ])
@@ -40,7 +41,7 @@
             formElement.addEventListener('submit', function(event) {
                 if (selectElement.value === '') {
                     // Удаляем параметр из данных формы, если выбран плейсхолдер
-                    selectElement.disabled = true; // Отключаем элемент, чтобы он не отправлялся
+                    selectElement.disabled = true;
                 }
             });
         }

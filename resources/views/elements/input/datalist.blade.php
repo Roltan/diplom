@@ -6,6 +6,7 @@
         id="{{ $name }}"
         name="{{ $name }}"
         list="{{ $name }}_list"
+        @isset($value) value="{{ $value }}" @endisset
         class="input--field"
         placeholder="Начните вводить..."
         @if(!isset($required) or $required==true) required @endif

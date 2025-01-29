@@ -665,6 +665,9 @@ main:not(.index) {
   text-align: center;
   width: 100%;
 }
+.slogan.bottom {
+  margin-bottom: 40px;
+}
 
 .index--main {
   display: flex;

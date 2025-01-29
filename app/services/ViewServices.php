@@ -67,12 +67,12 @@ class ViewServices
         if ($request->has('test_title'))
             $solvedTest->filterByTestTitle($request->input('test_title'));
 
-        if ($request->has('search'))
-            $solvedTest = $solvedTest->searchInSolved($request->input('search'));
+        if ($request->has('filter-search'))
+            $solvedTest = $solvedTest->searchInSolved($request->input('filter-search'));
 
         // Фильтрация по дате
-        if ($request->has('date'))
-            $solvedTest = $solvedTest->whereDate('created_at', $request->input('date'));
+        if ($request->has('filter-date'))
+            $solvedTest = $solvedTest->whereDate('created_at', $request->input('filter-date'));
 
         $solvedTest = $solvedTest->get();
 
@@ -96,8 +96,8 @@ class ViewServices
         $testsAll = $tests->get();
 
         // Фильтрация по названию теста, если параметр передан
-        if ($request->has('test'))
-            $tests->where('title', $request->input('test'));
+        if ($request->has('filter-test'))
+            $tests->where('title', $request->input('filter-test'));
 
         // Получаем ID тестов пользователя
         $testIds = $tests->pluck('id');
@@ -106,12 +106,12 @@ class ViewServices
         $solvedTests = SolvedTest::query()
             ->whereIn('test_id', $testIds);
 
-        if ($request->has('search'))
-            $solvedTests = $solvedTests->searchByStatistic($request->input('search'));
+        if ($request->has('filter-search'))
+            $solvedTests = $solvedTests->searchByStatistic($request->input('filter-search'));
 
         // Применяем фильтрацию по дате
-        if ($request->has('date'))
-            $solvedTests = $solvedTests->whereDate('created_at', $request->input('date'));
+        if ($request->has('filter-date'))
+            $solvedTests = $solvedTests->whereDate('created_at', $request->input('filter-date'));
 
         // Получаем отфильтрованные решения
         $solvedTests = $solvedTests->get();
@@ -131,14 +131,14 @@ class ViewServices
         $test = Test::query()
             ->where('user_id', $user->id);
 
-        if ($request->has('topic'))
-            $test = $test->filterByTopic($request->input('topic'));
+        if ($request->has('filter-topic'))
+            $test = $test->filterByTopic($request->input('filter-topic'));
 
-        if ($request->has('search'))
-            $test = $test->searchByTest($request->input('search'));
+        if ($request->has('filter-search'))
+            $test = $test->searchByTest($request->input('filter-search'));
 
-        if ($request->has('date'))
-            $test = $test->whereDate('created_at', $request->input('date'));
+        if ($request->has('filter-date'))
+            $test = $test->whereDate('created_at', $request->input('filter-date'));
 
         $test = $test->get();
 
