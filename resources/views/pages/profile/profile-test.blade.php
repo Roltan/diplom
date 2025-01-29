@@ -9,7 +9,7 @@
 
     <figure class="background"></figure>
 
-    <main class="container row">
+    <main class="container">
         @include('/block/navLK', ['active'=>5])
 
         <div class="main">

@@ -50,9 +50,13 @@ class TestRepository
         return [$test, $allTests->get()->count()];
     }
 
-    public static function getAdviseGuest(int $page, int $limit): Collection
+    public static function getAdviseGuest(int $page, int $limit, bool $only_user = true): Collection
     {
-        return Test::query()
+        $tests = Test::query();
+        if ($only_user)
+            $tests = $tests->where('only_user', 1);
+
+        return $tests
             ->withCount('solved')
             ->orderBy('solved_count')
             ->skip(($page - 1) * $limit)

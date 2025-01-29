@@ -58,7 +58,9 @@
             </form>
         </div>
 
-        @include('/block/list_header')
+        @include('/block/list_header', [
+            'topic' => $topics
+        ])
 
         <div class="list" id="list">
             @foreach($cards as $card)

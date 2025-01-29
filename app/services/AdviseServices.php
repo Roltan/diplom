@@ -2,14 +2,14 @@
 
 namespace App\Services;
 
+use App\Http\Resources\Card\TestCardResource;
 use App\Models\SolvedTest;
 use App\Models\Test;
 use App\Models\User;
 use App\Repositories\SolvedTestRepository;
 use App\Repositories\TestRepository;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -17,12 +17,15 @@ class AdviseServices
 {
     public function index(Request $request): Collection
     {
-        $page = $request->input('page', 1);
+        $page = (int) $request->input('page', 1);
         $limit = 20;
 
-        if (Auth::check())
-            return $this->AdviseUser($page, $limit);
-        return $this->AdviseGuest($page, $limit);
+        if ($request->hasAny('search', 'date', 'topic'))
+            return $this->filter($request, $page, $limit, Auth::check());
+
+        return Auth::check() ?
+            $this->AdviseUser($page, $limit) :
+            TestRepository::getAdviseGuest($page, $limit);
     }
 
     protected function AdviseUser(int $page, int $limit): Collection
@@ -49,7 +52,7 @@ class AdviseServices
         // Если все еще мало, добавляем резервные рекомендации
         if ($personalTests->count() < $limit) {
             $generalPage = max(1, $page - ceil($tests->count() + $generalTests[1] / $limit));
-            $fallbackTests = $this->AdviseGuest($generalPage, $limit);
+            $fallbackTests = TestRepository::getAdviseGuest($generalPage, $limit, false);
             $personalTests = $personalTests->merge($fallbackTests);
         }
 
@@ -73,8 +76,27 @@ class AdviseServices
         return TestRepository::getGeneralTests($recommendedTests, $page, $limit);
     }
 
-    protected function AdviseGuest(int $page, int $limit): Collection
+    protected function filter(Request $request, int $page, int $limit, bool $only_user = true): Collection
     {
-        return TestRepository::getAdviseGuest($page, $limit);
+        $test = Test::query();
+
+        if ($only_user)
+            $test = $test->where('only_user', 1);
+
+        if ($request->has('topic'))
+            $test = $test->filterByTopic($request->input('topic'));
+
+        if ($request->has('search'))
+            $test = $test->searchByTest($request->input('search'));
+
+        if ($request->has('date'))
+            $test = $test->whereDate('created_at', $request->input('date'));
+
+        $test = $test->skip(($page - 1) * $limit)
+            ->take($limit)
+            ->get();
+
+        return collect()
+            ->merge(TestCardResource::collection($test));
     }
 }

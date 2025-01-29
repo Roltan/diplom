@@ -6,7 +6,7 @@ let isLoading = false;
 function loadMore() {
     currentPage++;
 
-    fetch("/api/test/advise?page=" + currentPage)
+    fetch("/api/test/advise" + queryParameters())
         .then((response) => response.json())
         .then((data) => {
             lastPage += data.tests.length; // Обновляем значение lastPage
@@ -32,6 +32,27 @@ function loadMore() {
             console.log(duplicateFound);
             isLoading = false;
         });
+}
+
+function queryParameters() {
+    var parameters = "?page=" + currentPage;
+
+    const search = document.querySelector("#search").value;
+    if (search != "") {
+        parameters += "?search=" + search;
+    }
+
+    const topic = document.querySelector("#topic").value;
+    if (topic != "") {
+        parameters += "?topic=" + topic;
+    }
+
+    const date = document.querySelector("#date").value;
+    if (date != "") {
+        parameters += "?date=" + date;
+    }
+
+    return parameters;
 }
 
 window.addEventListener("scroll", () => {
