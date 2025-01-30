@@ -17,4 +17,9 @@ class HomeController extends Controller
         $data = $this->viewServices->viewIndex();
         return view('pages.index', $this->convertObjectsToArray($data));
     }
+
+    public function viewPolicy(): View
+    {
+        return view('pages.policy');
+    }
 }

@@ -18,7 +18,8 @@
             'max_time' => isset($max_time)? $max_time : ''
         ])
 
-        <div class="test--button" id="edit--footer">
+        <div class="test--button test--button__max" id="edit--footer">
+            <a href="{{ url()->previous() }}" class="button button__blue button__bold">Назад</a>
             <button type="button" class="button button__blue button__bold" id="saveTest" onclick="editSettingsTest()">Сохранить тест</button>
         </div>
 

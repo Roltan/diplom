@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'viewIndex']);
+Route::get('/policy', [HomeController::class, 'viewPolicy']);
 
 Route::group(['prefix' => '/profile'], function () {
     Route::get('/', [ProfileController::class, 'viewProfile']);
