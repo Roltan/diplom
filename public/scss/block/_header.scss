@@ -40,6 +40,17 @@
     }
 }
 
+.forgotBtn {
+    background: none;
+    border: none;
+
+    color: $whiteBlue;
+    text-decoration: underline;
+    &:hover {
+        color: #97b0dc;
+    }
+}
+
 .burger {
     display: none;
 }

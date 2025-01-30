@@ -18,6 +18,11 @@ function bindModalEvents() {
 
 // Обработчик для открытия модалки
 function openModalHandler() {
+    const modals = document.getElementsByClassName("modalka");
+    for (let i = 0; i < modals.length; i++) {
+        modals[i].style.display = "none";
+    }
+
     const modalId = this.getAttribute("data-modal");
     const modal = document.getElementById(modalId);
     modal.style.display = "flex";

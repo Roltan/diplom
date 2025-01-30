@@ -434,6 +434,16 @@ datalist {
   font-size: 2.5rem;
   text-align: end;
 }
+.forgotBtn {
+  background: none;
+  border: none;
+  color: #c9ddff;
+  text-decoration: underline;
+}
+.forgotBtn:hover {
+  color: #97b0dc;
+}
+
 .burger {
   display: none;
 }

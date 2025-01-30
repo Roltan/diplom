@@ -32,8 +32,15 @@
                 <input type="password" name="password" id="password_login" class="input--field" />
             </div>
             <button type="submit" class="button button__blue button__bold">Войти</button>
+            <button type="button" class="forgotBtn openModalBtn" data-modal="forgotModal">Забыл пароль</button>
         </form>
     </div>
+
+    @include('block.reset_password', [
+        'name'=>'forgot',
+        'title' => 'Восстановление пароля',
+        'massage' => 'Вам на почту отправлено письмо с ссылкой для восстановления пароля'
+    ]);
 
     <script defer type="module" src="/js/auth/register.js"></script>
     <div class="modalka modalka--wrapper" id="modal2">
