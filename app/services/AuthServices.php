@@ -2,12 +2,15 @@
 
 namespace App\Services;
 
+use App\Http\Requests\Auth\EmailRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PasswordResetMail;
 
 class AuthServices
 {
@@ -46,5 +49,23 @@ class AuthServices
 
         Auth::login($user);
         return response(['status' => true], 200);
+    }
+
+    public function forgot(EmailRequest $request): Response
+    {
+        $user = User::query()
+            ->where('email', $request->email)
+            ->first();
+
+        if ($user == null)
+            return response(['status' => false, 'message' => 'Неверная почта'], 404);
+
+        $token = app('auth.password.broker')->createToken($user);
+
+        $resetLink = '/password/reset/?token=' . $token;
+
+        Mail::to($user->email)->send(new PasswordResetMail($resetLink));
+
+        return response(['status' => true]);
     }
 }

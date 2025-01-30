@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\EmailRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegRequest;
 use App\Services\AuthServices;
@@ -30,5 +31,10 @@ class UserController extends Controller
     public function register(RegRequest $regRequest): Response
     {
         return $this->authServices->register($regRequest);
+    }
+
+    public function forgot(EmailRequest $emailRequest): Response
+    {
+        return $this->authServices->forgot($emailRequest);
     }
 }
