@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\EmailRequest;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\PasswordRequest;
 use App\Http\Requests\Auth\RegRequest;
 use App\Services\AuthServices;
 use Illuminate\Contracts\View\View;
@@ -45,5 +46,10 @@ class UserController extends Controller
             return redirect('/')->with('error', $response);
 
         return redirect('/')->with('email', $response['email']);
+    }
+
+    public function changePassword(PasswordRequest $request): Response
+    {
+        return $this->authServices->changePassword($request);
     }
 }

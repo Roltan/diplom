@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\Auth\EmailRequest;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\PasswordRequest;
 use App\Http\Requests\Auth\RegRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PasswordResetMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 
 class AuthServices
@@ -76,12 +78,23 @@ class AuthServices
         $token = $request->query('token');
         $email = $request->query('email');
 
-        if (!Password::tokenExists(User::where('email', $email)->first(), $token)) {
+        if (!Password::tokenExists(User::where('email', $email)->first(), $token))
             return 'Недействительный токен';
-        }
 
         return [
             'email' => $email
         ];
+    }
+
+    public function changePassword(PasswordRequest $request): Response
+    {
+        $user = User::where('email', $request->email)->first();
+        if ($user == null)
+            return response(['status' => false, 'message' => 'Пользователь не найден'], 404);
+
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
+        return response(['status' => true]);
     }
 }
