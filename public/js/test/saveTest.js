@@ -1,4 +1,4 @@
-import { errorModal } from "./auth/modal.js";
+import { errorModal } from "../auth/modal.js";
 
 // получить alias теста
 function getAlias() {

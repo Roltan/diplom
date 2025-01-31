@@ -2,9 +2,9 @@
 
 @section('links')
     <link rel="stylesheet" href="/css/test.css" />
-    <script defer src="/js/drag.js"></script>
-    <script defer type="module" src="/js/saveAnswer.js"></script>
-    <script defer type="module" src="/js/timer.js"></script>
+    <script defer src="/js/quest/drag.js"></script>
+    <script defer type="module" src="/js/test/saveAnswer.js"></script>
+    <script defer type="module" src="/js/test/timer.js"></script>
 @endsection
 
 @section('mainContent')

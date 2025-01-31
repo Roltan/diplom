@@ -1,4 +1,4 @@
-import { errorModal, load } from "./auth/modal.js";
+import { errorModal, load } from "../auth/modal.js";
 import { getAlias } from "./saveTest.js";
 
 const startTime = new Date().getTime();

@@ -5,7 +5,7 @@
     <script defer type="module" src="/js/quest/resetQuest.js"></script>
     <script defer type="module" src="/js/quest/addQuest.js"></script>
     <script defer type="module" src="/js/quest/createQuest.js"></script>
-    <script defer type="module" src="/js/saveTest.js"></script>
+    <script defer type="module" src="/js/test/saveTest.js"></script>
     <script defer src="/js/quest/delQuest.js"></script>
     <script defer src="/js/quest/addAnswerChoice.js"></script>
     <script defer src="/js/quest/addAnswerRelation.js"></script>

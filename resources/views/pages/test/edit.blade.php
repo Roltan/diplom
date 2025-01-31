@@ -3,7 +3,7 @@
 @section('links')
     <link rel="stylesheet" href="/css/test.css" />
     <script defer type="module" src="/js/quest/createQuest.js"></script>
-    <script defer type="module" src="/js/saveTest.js"></script>
+    <script defer type="module" src="/js/test/saveTest.js"></script>
 @endsection
 
 @section('mainContent')

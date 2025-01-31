@@ -2,7 +2,7 @@
 
 @section('links')
     <link rel="stylesheet" href="/css/create.css" />
-    <script defer src="/js/editCount.js"></script>
+    <script defer src="/js/test/editCount.js"></script>
 @endsection
 
 @section('mainContent')
