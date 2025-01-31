@@ -69,5 +69,23 @@ function errorModal(error) {
     bindModalEvents();
 }
 
+function load() {
+    var loader = document.getElementById("loader");
+
+    if (loader == null) {
+        document.body.innerHTML += `
+            <div class="modalka modalka--wrapper load modalka-open" id="loader" style="display: flex">
+                <div>
+                    <div class="spinner-border text-dark" role="status">
+                        <span class="visually-hidden">Загрузка...</span>
+                    </div>
+                </в>
+            </div>
+        `;
+    } else {
+        loader.remove();
+    }
+}
+
 bindModalEvents();
-export { bindModalEvents, errorModal };
+export { bindModalEvents, errorModal, load };

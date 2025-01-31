@@ -1,4 +1,4 @@
-import { errorModal } from "./modal.js";
+import { errorModal, load } from "./modal.js";
 
 const forgot = document.getElementById("forgot");
 const reset = document.getElementById("resetPassword");
@@ -65,6 +65,7 @@ function changePassword(event) {
 }
 
 function editPassword(event) {
+    load();
     const email = document.getElementById("email").value;
 
     fetch("/api/auth/forgot", {
@@ -87,5 +88,8 @@ function editPassword(event) {
             } else {
                 errorModal(result.message);
             }
+        })
+        .finally(() => {
+            load();
         });
 }

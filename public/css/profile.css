@@ -386,11 +386,20 @@ input[type=checkbox].toggle:hover:not(:disabled) + label::after {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.1882352941);
 }
-.modalka > *:not(.modalka--wrapper) {
+.modalka:not(.load) > *:not(.modalka--wrapper) {
   max-width: 720px;
   width: 90%;
   max-height: 100vh;
   padding: 30px;
+}
+.modalka.load > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 35px;
+  background: linear-gradient(120deg, #123a60 26%, #2578c6 65%);
 }
 
 body.modalka-open {
