@@ -10,6 +10,12 @@
 
     <figure class="background"></figure>
 
+    @if(session('email'))
+        @include('elements.reset_password.reset', [
+            'email'=>session('email')
+        ])
+    @endif
+
     <main class="container index">
         <div class="slogan">Создайте свой тест за считанные минуты!</div>
 

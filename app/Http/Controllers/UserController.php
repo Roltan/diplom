@@ -37,4 +37,13 @@ class UserController extends Controller
     {
         return $this->authServices->forgot($emailRequest);
     }
+
+    public function viewResetPassword(Request $request): RedirectResponse
+    {
+        $response = $this->authServices->viewResetPassword($request);
+        if (is_string($response))
+            return redirect('/')->with('error', $response);
+
+        return redirect('/')->with('email', $response['email']);
+    }
 }

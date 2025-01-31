@@ -1,7 +1,11 @@
 import { errorModal } from "./modal.js";
 
-document.getElementById("forgot").addEventListener("submit", sendMail);
-document.getElementById("reset").addEventListener("submit", sendMail);
+const forgot = document.getElementById("forgot");
+const reset = document.getElementById("reset");
+
+if (forgot != null) forgot.addEventListener("submit", sendMail);
+
+if (reset != null) reset.addEventListener("submit", sendMail);
 
 function sendMail(event) {
     event.preventDefault(); // Предотвращаем стандартное поведение формы

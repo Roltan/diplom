@@ -11,6 +11,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PasswordResetMail;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 
 class AuthServices
 {
@@ -62,10 +64,24 @@ class AuthServices
 
         $token = app('auth.password.broker')->createToken($user);
 
-        $resetLink = '/password/reset/?token=' . $token;
+        $resetLink = '/password/reset/?token=' . $token . '&email=' . $request->email;
 
         Mail::to($user->email)->send(new PasswordResetMail($resetLink));
 
         return response(['status' => true]);
+    }
+
+    public function viewResetPassword(Request $request): array|string
+    {
+        $token = $request->query('token');
+        $email = $request->query('email');
+
+        if (!Password::tokenExists(User::where('email', $email)->first(), $token)) {
+            return 'Недействительный токен';
+        }
+
+        return [
+            'email' => $email
+        ];
     }
 }

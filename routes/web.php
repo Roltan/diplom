@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestPageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use PharIo\Manifest\AuthorCollection;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'viewIndex']);
+Route::get('/password/reset', [UserController::class, 'viewResetPassword']);
 Route::get('/policy', [HomeController::class, 'viewPolicy']);
 
 Route::group(['prefix' => '/profile'], function () {
