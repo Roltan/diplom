@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\Auth\EditRequest;
 use App\Http\Requests\Auth\EmailRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\PasswordRequest;
@@ -95,6 +96,17 @@ class AuthServices
         $user->update([
             'password' => Hash::make($request->password)
         ]);
+        return response(['status' => true]);
+    }
+
+    public function edit(EditRequest $request): Response
+    {
+        $data = $request->only(['name', 'email']);
+        $user = User::find($request->id);
+        if ($user == null)
+            return response(['status' => false, 'message' => 'Пользователь не найден'], 404);
+
+        $user->update($data);
         return response(['status' => true]);
     }
 }

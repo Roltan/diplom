@@ -37,4 +37,5 @@ Route::group(['prefix' => '/auth'], function () {
     Route::post('/register', [UserController::class, 'register']);
     Route::post('/forgot', [UserController::class, 'forgot']);
     Route::post('/changePassword', [UserController::class, 'changePassword']);
+    Route::post('/edit', [UserController::class, 'edit']);
 });

@@ -179,10 +179,10 @@ a:hover {
   border: none !important;
 }
 .input__little select {
-  background-image: url("/img/arrow_little1.svg");
+  background-image: url("/img/select/arrow_little1.svg");
 }
 .input__little select:active, .input__little select:focus {
-  background-image: url("/img/arrow_little2.svg");
+  background-image: url("/img/select/arrow_little2.svg");
 }
 .input__little select:hover, .input__little select:active, .input__little select:focus {
   background-position: right 10px center;
@@ -222,7 +222,7 @@ select {
   appearance: none; /* Убираем стандартную стрелку в некоторых браузерах */
   -webkit-appearance: none; /* Для Safari и Chrome */
   -moz-appearance: none; /* Для Firefox */
-  background-image: url("/img/arrow_selector1.svg");
+  background-image: url("/img/select/arrow_selector1.svg");
   background-repeat: no-repeat;
   background-position: right 10px center; /* Позиция стрелки */
   background-size: 16px; /* Размер стрелки */
@@ -234,7 +234,7 @@ select:hover:not(:disabled) {
   padding-left: 14px;
 }
 select:active, select:focus {
-  background-image: url("/img/arrow_selector2.svg");
+  background-image: url("/img/select/arrow_selector2.svg");
   background-position: right 10px bottom 54%;
 }
 select:hover, select:active, select:focus {

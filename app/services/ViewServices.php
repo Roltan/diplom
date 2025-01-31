@@ -48,6 +48,7 @@ class ViewServices
             return 'У вас нет прав посещать ту страницу';
 
         return [
+            'id' => $user->id,
             'name' => $user->name,
             'email' => $user->email
         ];

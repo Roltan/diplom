@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\EditRequest;
 use App\Http\Requests\Auth\EmailRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\PasswordRequest;
@@ -51,5 +52,10 @@ class UserController extends Controller
     public function changePassword(PasswordRequest $request): Response
     {
         return $this->authServices->changePassword($request);
+    }
+
+    public function edit(EditRequest $editRequest): Response
+    {
+        return $this->authServices->edit($editRequest);
     }
 }
