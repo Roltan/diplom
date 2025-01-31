@@ -3,6 +3,7 @@
 @section('links')
     <link rel="stylesheet" href="/css/profile.css" />
     <script type="module" defer src="/js/auth/edit.js"></script>
+    <script defer type="module" src="/js/auth/password.js"></script>
 @endsection
 
 @section('mainContent')
@@ -31,7 +32,10 @@
                     <input type="email" name="email" id="email" class="input--field" readonly value="{{$email}}"/>
                 </div>
 
-                <button type="submit" class="button button__blue button__bold">Сохранить</button>
+                <div class="form--button">
+                    <button type="submit" class="button button__blue button__bold">Сохранить</button>
+                    <button type="button" class="button button__blue button__bold" id="edit_password">Изменить пароль</button>
+                </div>
             </form>
         </div>
     </main>

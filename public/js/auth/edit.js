@@ -6,9 +6,8 @@ document.getElementById("editProfile").addEventListener("click", function () {
     document.getElementById("email").readOnly = false;
 
     // Показываем кнопку отправки формы
-    document.querySelector(
-        '#profile_data button[type="submit"]'
-    ).style.display = "block";
+    document.querySelector("#profile_data .form--button").style.display =
+        "flex";
 
     // Скрываем кнопку редактирования
     this.style.display = "none";

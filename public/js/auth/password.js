@@ -1,12 +1,12 @@
 import { errorModal } from "./modal.js";
 
 const forgot = document.getElementById("forgot");
-const resetRequest = document.getElementById("reset");
 const reset = document.getElementById("resetPassword");
+const edit = document.getElementById("edit_password");
 
 if (forgot != null) forgot.addEventListener("submit", sendMail);
-if (resetRequest != null) resetRequest.addEventListener("submit", sendMail);
 if (reset != null) reset.addEventListener("submit", changePassword);
+if (edit != null) edit.addEventListener("click", editPassword);
 
 function sendMail(event) {
     event.preventDefault(); // Предотвращаем стандартное поведение формы
@@ -16,7 +16,7 @@ function sendMail(event) {
     const data = Object.fromEntries(formData.entries());
 
     // Отправляем запрос на сервер
-    fetch("/api/auth/" + this.id, {
+    fetch("/api/auth/forgot", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -29,8 +29,7 @@ function sendMail(event) {
         .then(async (result) => {
             if (result.status) {
                 this.closest(".modalka").style.display = "none";
-                document.getElementById("submit_" + this.id).style.display =
-                    "flex";
+                document.getElementById("submit_forgot").style.display = "flex";
             } else {
                 errorModal(result.message);
             }
@@ -59,6 +58,32 @@ function changePassword(event) {
             if (result.status) {
                 this.closest(".modalka").style.display = "none";
                 document.getElementById("modal1").style.display = "flex";
+            } else {
+                errorModal(result.message);
+            }
+        });
+}
+
+function editPassword(event) {
+    const email = document.getElementById("email").value;
+
+    fetch("/api/auth/forgot", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            email: email,
+        }),
+    })
+        .then((response) => {
+            return response.json();
+        })
+        .then(async (result) => {
+            if (result.status) {
+                errorModal(
+                    "На вашу почту отправлено письмо с подтверждением смены пароля"
+                );
             } else {
                 errorModal(result.message);
             }

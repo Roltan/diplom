@@ -589,10 +589,12 @@ main:not(.index) {
 .main > form > .input {
   width: 100%;
 }
-.main > form > .button {
+.main > form > .form--button {
   display: none;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
   width: 100%;
-  margin-top: 15px;
 }
 
 .avatar {
