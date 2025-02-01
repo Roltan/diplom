@@ -1,10 +1,10 @@
-@import "block/variables";
-@import "block/_header";
-
 @font-face {
     font-family: Evolventa;
     src: url("../fonts/Evolventa/Evolventa-Regular.ttf");
 }
+$darkBlue: #123a60;
+$whiteBlue: #c9ddff;
+$white: #ffffff;
 
 * {
     box-sizing: border-box;
@@ -16,6 +16,7 @@
 
 html {
     font-size: 16px;
+    // overflow-x: hidden;
 
     @media (max-width: 768px) {
         font-size: 14px; // Уменьшаем размер шрифта на 10% на экранах шириной до 768px
@@ -27,9 +28,9 @@ html {
 }
 
 a {
-    color: white;
+    color: $whiteBlue;
     &:hover {
-        color: $hoverText;
+        color: #97b0dc;
     }
 }
 
@@ -50,24 +51,24 @@ a {
 
     &__blue {
         background: $darkBlue;
-        color: white;
+        color: $white;
 
         &:hover {
-            background-color: $whiteBlue;
+            background-color: #2b76bc;
         }
         &:active {
-            color: $hoverBlue;
+            color: #74b7f8;
         }
     }
     &__light {
-        background-color: $white;
-        color: white;
+        background-color: #2b76bc;
+        color: #fff;
 
         &:hover {
             background-color: #3d88cf;
         }
         &:active {
-            color: $hoverBlue;
+            color: #74b7f8;
         }
     }
     &__image {
@@ -109,7 +110,8 @@ a {
     width: 100vw;
     height: 100vh;
     z-index: -5;
-    @include white_gradient;
+    background: rgb(201, 221, 255);
+    background: linear-gradient(60deg, #d4e4ff 39%, #ffffff 72%);
 }
 
 .form {
@@ -118,7 +120,7 @@ a {
     gap: 15px;
     padding: 30px 60px;
     border-radius: 35px;
-    @include dark_gradient;
+    background: linear-gradient(120deg, #123a60 26%, #2578c6 65%);
 
     & > h1 {
         width: 100%;
@@ -136,14 +138,14 @@ a {
 
     > label {
         font-size: 1.5rem;
-        color: $white;
+        color: $whiteBlue;
     }
 
     &--field {
-        background-color: $white;
+        background-color: $whiteBlue;
         border: none;
         border-radius: 20px;
-        color: $white;
+        color: #2b76bc;
         padding-left: 20px;
 
         width: 100%;
@@ -188,7 +190,7 @@ a {
 
         .input--field {
             background-color: #e2ebfa;
-            color: $darkBlue;
+            color: #123a60;
             height: fit-content;
 
             border-radius: 8px;
@@ -218,14 +220,14 @@ input[type="password"],
 input[type="email"],
 input[type="number"] {
     &:-moz-placeholder {
-        color: rgba($whiteBlue, 0.7);
+        color: #2b76bc70;
     }
     &::-webkit-input-placeholder {
-        color: rgba($whiteBlue, 0.7);
+        color: #2b76bc70;
     }
 
     &:hover:not(:disabled) {
-        border: solid $hoverBlue 7px;
+        border: solid #74b7f8 7px;
         padding-left: 14px;
     }
     &:active,
@@ -246,7 +248,7 @@ select {
 
     &:hover:not(:disabled) {
         background-position: right 3px bottom 54%; /* Позиция стрелки */
-        border: solid $hoverBlue 7px;
+        border: solid #74b7f8 7px;
         padding-left: 14px;
     }
     &:active,
@@ -275,17 +277,17 @@ input[type="checkbox"]:not(.toggle) {
         content: "";
         min-width: 40px;
         min-height: 40px;
-        background-color: white;
+        background-color: #ffffff;
         border-radius: 5px;
     }
     &:not(:disabled, :checked):hover + label::before {
-        background-color: $hoverBlue;
+        background-color: #74b7f8;
     }
     &:checked + label::before {
-        border: solid white 5px;
+        border: solid #ffffff 5px;
     }
     &:checked:hover:not(:disabled) + label::after {
-        background-color: $hoverBlue;
+        background-color: #74b7f8;
     }
     &:checked + label::after {
         content: "";
@@ -335,15 +337,15 @@ input[type="radio"] {
         content: "";
         min-width: 40px;
         min-height: 40px;
-        background-color: white;
+        background-color: #ffffff;
         border-radius: 100%;
     }
     &:not(:checked, :disabled):hover + label::before {
-        background-color: $hoverBlue;
+        background-color: #74b7f8;
     }
     &:checked + label::after {
         content: "";
-        background-color: $darkBlue;
+        background-color: #123a60;
         $whiteBox: 32px;
         width: $whiteBox;
         height: $whiteBox;
@@ -353,7 +355,7 @@ input[type="radio"] {
         border-radius: 100%;
     }
     &:checked:hover:not(:disabled) + label::after {
-        background-color: $hoverBlue;
+        background-color: #74b7f8;
     }
 }
 input[type="checkbox"].toggle {
@@ -373,7 +375,7 @@ input[type="checkbox"].toggle {
         content: "";
         min-width: 80px;
         min-height: 40px;
-        background-color: white;
+        background-color: #ffffff;
         border-radius: 40px;
     }
     & + label::after {
@@ -437,7 +439,7 @@ input[type="checkbox"].toggle {
         height: 50px;
 
         border-radius: 35px;
-        @include dark_gradient;
+        background: linear-gradient(120deg, #123a60 26%, #2578c6 65%);
     }
 }
 body.modalka-open {

@@ -1,4 +1,4 @@
-main {
+main:not(.index) {
     display: flex;
     flex-direction: row;
     justify-content: start;
@@ -26,7 +26,7 @@ main {
         gap: 25px;
         align-items: center;
 
-        color: $white;
+        color: #c9ddff;
         text-decoration: none;
         font-size: 1.5rem;
 
@@ -35,11 +35,11 @@ main {
         }
 
         &:hover {
-            color: $hoverText;
+            color: #97b0dc;
         }
 
         &.active {
-            color: white !important;
+            color: #ffffff !important;
         }
     }
     & div {
@@ -57,7 +57,7 @@ main {
         height: 100%;
         z-index: -1;
 
-        @include dark_gradient;
+        background: linear-gradient(120deg, #123a60 26%, #2578c6 65%);
         border-top-right-radius: 45px;
         border-bottom-right-radius: 45px;
     }
@@ -112,6 +112,9 @@ main {
     flex-direction: column;
     justify-content: start;
     align-items: center;
+}
+
+@media (max-width: 768px) {
 }
 
 @media (max-width: 768px) {

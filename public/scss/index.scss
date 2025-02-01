@@ -1,7 +1,17 @@
-@import "block/variables";
-@import "block/scrollList";
+@import "statistic";
+// @import "_main";
 
-@include slogan;
+.slogan {
+    color: $darkBlue;
+    font-size: 3rem;
+    text-align: center;
+
+    width: 100%;
+
+    &.bottom {
+        margin-bottom: 40px;
+    }
+}
 
 .index--main {
     display: flex;
@@ -37,8 +47,9 @@
 }
 
 .line {
+    // height: 100%;
     width: 3px;
-    background-color: $whiteBlue;
+    background-color: #2b76bc;
 }
 
 .form {

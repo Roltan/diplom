@@ -1,5 +1,5 @@
 .main--header {
-    color: $darkBlue;
+    color: #123a60;
     font-size: 3rem;
     font-weight: bold;
     width: 100%;
@@ -20,9 +20,9 @@
     padding: 20px 40px;
     border-radius: 30px;
     margin-bottom: 30px;
-    @include dark_gradient(120deg, 65%, 80%);
+    background: linear-gradient(120deg, #123a60 65%, #2578c6 80%);
 
-    color: $whiteText;
+    color: #e0eafa;
     font-size: 1.5rem;
 
     > div {
@@ -67,8 +67,8 @@
                 height: fit-content;
                 padding-left: 10px;
 
-                color: $darkBlue;
-                background-color: $white;
+                color: #123a60;
+                background-color: #c9ddff;
                 border-radius: 15px;
             }
 
@@ -103,7 +103,7 @@
     overflow-y: auto;
 
     > span {
-        color: $white;
+        color: #c9ddff;
         font-size: 1.5rem;
     }
 

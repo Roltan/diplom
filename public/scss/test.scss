@@ -1,4 +1,5 @@
-@import "block/variables";
+@import "_main";
+@import "block/header";
 @import "block/quest";
 
 .test--button {
@@ -31,10 +32,10 @@
     padding: 20px 40px;
     border-radius: 30px;
     margin-bottom: 30px;
-    @include dark_gradient(120deg, 65%, 80%);
+    background: linear-gradient(120deg, #123a60 65%, #2578c6 80%);
 
     > h1 {
-        color: $whiteText;
+        color: #e0eafa;
         font-size: 2rem;
         font-weight: bold;
         width: 100%;
@@ -94,7 +95,7 @@
     background: none;
     border: none;
 
-    color: $darkBlue;
+    color: #123a60;
     font-size: 2rem;
     text-align: start;
 
@@ -103,7 +104,7 @@
         justify-content: center;
         align-items: center;
 
-        background-color: $darkBlue;
+        background-color: #123a60;
         border-radius: 100%;
 
         width: 60px;
@@ -118,7 +119,7 @@
     }
 
     &__light {
-        color: $whiteText;
+        color: #e0eafa;
     }
 }
 
@@ -131,11 +132,11 @@
     bottom: 0;
     left: 0;
 
-    @include dark_gradient(60deg, 50%, 80%);
+    background: linear-gradient(60deg, #123a60 50%, #2578c6 80%);
     border-top-right-radius: 35px;
     padding: 10px 20px;
 
-    color: white;
+    color: #fff;
     font-size: 50px;
 
     /* Стиль для мигания красным */
@@ -150,7 +151,7 @@
             color: red;
         }
         50% {
-            color: white;
+            color: #fff;
         }
     }
 }
