@@ -64,6 +64,8 @@
             </form>
         </div>
 
+        <div class="slogan">Рекомендуем вам решить эти тесты</div>
+
         @include('/block/list_header', [
             'topic' => $topics
         ])
