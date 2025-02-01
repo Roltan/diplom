@@ -1,18 +1,7 @@
-@import "_main";
-@import "block/header";
+@import "block/variables";
 @import "block/quest";
 
-.test--button {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    margin-bottom: 50px;
-
-    &__max {
-        justify-content: space-between;
-    }
-}
+@include test--button;
 
 .settings {
     display: flex;
@@ -23,9 +12,9 @@
     padding: 20px 40px;
     border-radius: 30px;
     margin-bottom: 30px;
-    background: linear-gradient(120deg, #123a60 65%, #2578c6 80%);
+    @include dark_gradient(120deg, 65%, 80%);
 
-    color: #e0eafa;
+    color: $whiteText;
 
     > h1 {
         font-size: 2rem;

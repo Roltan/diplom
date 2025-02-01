@@ -1,23 +1,9 @@
-@import "_main";
-@import "block/_header";
-@import "block/_navLK";
+@import "block/variables";
+@import "block/scrollList";
+@import "block/navLK";
 
 .main {
     gap: 20px;
-}
-
-.statistic--header {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    align-items: center;
-    gap: 15px;
-
-    width: 100%;
-    > .input {
-        width: 300px;
-    }
 }
 
 .window {
@@ -30,48 +16,17 @@
     }
 
     &::-webkit-scrollbar-track {
-        background: #123a60; /* Цвет фона трека */
+        background: $darkBlue; /* Цвет фона трека */
         border-radius: 15px;
     }
 
     &::-webkit-scrollbar-thumb {
-        background: #c9ddff; /* Цвет ползунка */
+        background: $white; /* Цвет ползунка */
         border-radius: 15px; /* Скругление углов ползунка */
     }
 
     &::-webkit-scrollbar-thumb:hover {
         background: #bbcff3; /* Цвет ползунка при наведении */
-    }
-}
-
-.list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 100%;
-    padding-right: 10px;
-}
-
-.list--card {
-    width: 100%;
-    height: fit-content;
-
-    background-color: #2b76bc;
-    border-radius: 20px;
-    padding: 5px 20px;
-
-    display: grid;
-    grid-template-columns: max-content 1fr;
-
-    row-gap: 10px;
-    column-gap: 5px;
-
-    color: #fff;
-    font-size: 1.5rem;
-    text-decoration: none;
-
-    &:hover {
-        color: #bfddf8;
     }
 }
 
@@ -89,29 +44,9 @@
     }
 }
 
-@media (max-width: 991px) {
-    .list--card {
-        display: flex;
-        flex-direction: column;
-        row-gap: 0;
-
-        & > span:not(:last-child) {
-            margin-bottom: 5px;
-        }
-    }
-}
-
 @media (max-width: 768px) {
-    .statistic--header .input {
-        width: 100%;
-    }
-
     .window {
         overflow-y: unset;
         padding-bottom: 50px;
-    }
-
-    .filter {
-        width: 100%;
     }
 }

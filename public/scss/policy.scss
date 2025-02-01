@@ -1,30 +1,8 @@
-@import "_main";
-@import "block/_header";
+@import "block/variables";
+
+@include slogan;
+@include test--button;
 
 main {
     color: $darkBlue;
-}
-
-.slogan {
-    color: $darkBlue;
-    font-size: 3rem;
-    text-align: center;
-
-    width: 100%;
-
-    &.bottom {
-        margin-bottom: 40px;
-    }
-}
-
-.test--button {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-    margin-bottom: 50px;
-
-    &__max {
-        justify-content: space-between;
-    }
 }

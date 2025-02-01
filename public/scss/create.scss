@@ -1,6 +1,5 @@
-@import "_main";
-@import "block/_header";
-@import "block/_navLK";
+@import "block/variables";
+@import "block/navLK";
 
 .main > form {
     width: 100%;
