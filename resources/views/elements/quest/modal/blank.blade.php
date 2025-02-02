@@ -3,11 +3,19 @@
     <input type="text" name="questEdit{{$id}}Quest" id="questEdit{{$id}}Quest" class="input--field" value="{{$quest}}"/>
 </div>
 <div class="answer answer__blank">
-    <div class="input">
-        <label for="questEdit{{$id}}answer">Ответ</label>
-        <input type="text" name="questEdit{{$id}}answer" id="questEdit{{$id}}answer" class="input--field" value="{{$answer}}"/>
-    </div>
+    @for ($i=0; $i<count($answer); $i++)
+        <div class="input">
+            <label for="questEdit{{$id}}Blank{{$i}}">Ответ</label>
+            <input type="text" name="questEdit{{$id}}Blank{{$i}}" id="questEdit{{$id}}Blank{{$i}}" class="input--field" value="{{$answer[$i]}}"/>
+        </div>
+    @endfor
 </div>
-<div class="test--button">
+<div class="test--button test--button__max">
+    <button type="button" class="test--add test--add__light test--add__choice" onclick="addAnswerBlank(this)">
+        <div>
+            <img src="/img/edit/add.png" alt="" />
+        </div>
+        Добавить ответ
+    </button>
     <button type="button" class="button button__blue button__bold" onclick="saveQuest(this, 'blank')">Сохранить</button>
 </div>

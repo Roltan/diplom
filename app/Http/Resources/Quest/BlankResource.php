@@ -18,7 +18,7 @@ class BlankResource extends JsonResource
             'id' => $this->id,
             'type' => $this->type,
             'quest' => $this->quest,
-            'answer' => json_decode($this->correct)[0]
+            'answer' => json_decode($this->correct)
         ];
     }
 }

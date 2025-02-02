@@ -9,6 +9,7 @@
     <script defer src="/js/quest/delQuest.js"></script>
     <script defer src="/js/quest/addAnswerChoice.js"></script>
     <script defer src="/js/quest/addAnswerRelation.js"></script>
+    <script defer src="/js/quest/addAnswerBlank.js"></script>
 @endsection
 
 @section('mainContent')

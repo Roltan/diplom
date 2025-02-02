@@ -11,7 +11,7 @@
             name="quest{{$id}}"
             id="quest{{$id}}"
             class="input--field"
-            value="{{isset($disabled) ? (is_array($answer) ? implode(' / ', $answer) : $answer) : ''}}"
+            value="{{isset($disabled) ? (is_array($answer) ? implode(' или  ', $answer) : $answer) : ''}}"
             {{$disabled ?? ''}}
         />
     </div>

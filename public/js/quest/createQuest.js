@@ -7,10 +7,12 @@ function saveQuest(button, questType) {
     const questId = modalElement.id.replace("questEdit", "");
     let questElement = document.querySelector(`#quest${questId}`);
 
+    const difficulty = document.querySelector("#difficulty");
+
     // сбор данных из формы
     let requestBody = {
         topic: document.querySelector("#topic").value,
-        difficulty: document.querySelector("#difficulty").value,
+        difficulty: difficulty ? difficulty.value : null,
         type: questType,
         quest: form.querySelector(`#questEdit${questId}Quest`).value,
     };
@@ -26,7 +28,7 @@ function saveQuest(button, questType) {
         case "blank":
             requestBody = {
                 ...requestBody,
-                ...getBlankRequestBody(form, questId),
+                ...getBlankRequestBody(form),
             };
             break;
         case "fill":
@@ -112,9 +114,12 @@ function getChoiceRequestBody(form, questId) {
 }
 
 // Функция для формирования тела запроса для типа вопроса "blank"
-function getBlankRequestBody(form, questId) {
-    const answerInput = form.querySelector(`#questEdit${questId}answer`);
-    const correct = [answerInput.value]; // Массив из одного элемента
+function getBlankRequestBody(form) {
+    const answerDiv = form.querySelector(".answer");
+    const answerInputs = answerDiv.querySelectorAll(`.input--field`);
+    const correct = Array.from(answerInputs)
+        .map((input) => input.value.trim())
+        .filter((value) => value !== "");
 
     return {
         correct: correct,
