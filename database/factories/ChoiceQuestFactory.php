@@ -32,9 +32,10 @@ class ChoiceQuestFactory extends Factory
             $this->faker->words(10), // 10 случайных слов
             $this->faker->numberBetween(3, 6) // от 3 до 6 элементов в массиве
         );
+        $countTopic = Topic::all()->count();
 
         return [
-            'topic_id' => Topic::inRandomOrder()->first()->id,
+            'topic_id' => $this->faker->numberBetween(3, $countTopic),
             'vis' => $this->faker->boolean,
             'quest' => $quest,
             'correct' => json_encode($correct),

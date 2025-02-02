@@ -3,6 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use Database\Seeders\Quest\BlankQuestSeeder;
+use Database\Seeders\Quest\ChoiceQuestSeeder;
+use Database\Seeders\Quest\RelationQuestSeeder;
+use Database\Seeders\Quest\FillQuestSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ChoiceQuestSeeder::class);
         $this->call(FillQuestSeeder::class);
         $this->call(RelationQuestSeeder::class);
+        $this->call(QuestSeeder::class);
 
         $this->call(TestSeeder::class);
         $this->call(QuestsTestSeeder::class);

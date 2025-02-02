@@ -44,9 +44,10 @@ class FillQuestFactory extends Factory
             }
             $options[] = $option;
         }
+        $countTopic = Topic::all()->count();
 
         return [
-            'topic_id' => Topic::inRandomOrder()->first()->id,
+            'topic_id' => $this->faker->numberBetween(3, $countTopic),
             'vis' => $this->faker->boolean,
             'quest' => $quest,
             'options' => json_encode($options),

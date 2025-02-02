@@ -35,9 +35,10 @@ class RelationQuestFactory extends Factory
         for ($i = 0; $i < $length; $i++) {
             $secondColumn[] = $this->faker->sentence(2, 4); // Строки из 2-4 слов
         }
+        $countTopic = Topic::all()->count();
 
         return [
-            'topic_id' => Topic::inRandomOrder()->first()->id,
+            'topic_id' => $this->faker->numberBetween(3, $countTopic),
             'vis' => $this->faker->boolean,
             'quest' => $quest,
             'first_column' => json_encode($firstColumn),

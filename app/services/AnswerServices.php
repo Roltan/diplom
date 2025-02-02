@@ -7,6 +7,7 @@ use App\Models\ChoiceQuest;
 use App\Models\FillQuest;
 use App\Models\QuestAnswer;
 use App\Models\RelationQuest;
+use Illuminate\Support\Str;
 
 class AnswerServices
 {
@@ -60,7 +61,7 @@ class AnswerServices
             'type' => 'blank',
             'quest' => $blankQuest->quest,
             'answer' => $answer,
-            'isCorrect' => in_array($answer, json_decode($blankQuest->correct))
+            'isCorrect' => in_array(Str::lower($answer), json_decode($blankQuest->correct))
         ];
     }
 

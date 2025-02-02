@@ -27,8 +27,10 @@ class BlankQuestFactory extends Factory
             $this->faker->numberBetween(2, 5) // от 2 до 5 элементов в массиве
         );
 
+        $countTopic = Topic::all()->count();
+
         return [
-            'topic_id' => Topic::inRandomOrder()->first()->id,
+            'topic_id' => $this->faker->numberBetween(3, $countTopic),
             'vis' => $this->faker->boolean,
             'quest' => $quest,
             'correct' => json_encode($correct),
