@@ -61,7 +61,8 @@ class AnswerServices
             'type' => 'blank',
             'quest' => $blankQuest->quest,
             'answer' => $answer,
-            'isCorrect' => in_array(Str::lower($answer), json_decode($blankQuest->correct))
+            'isCorrect' => in_array(Str::lower($answer), json_decode($blankQuest->correct)),
+            'correct' => json_decode($blankQuest->correct)
         ];
     }
 
