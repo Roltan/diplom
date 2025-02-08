@@ -5,9 +5,7 @@
 @endsection
 
 @section('mainContent')
-    @include('block.header')
-
-    <figure class="background"></figure>
+    @include('block/header')
 
     <main class="container">
         <div class="main--header__row">
@@ -36,7 +34,7 @@
         </div>
 
         @foreach ($answer as $item)
-            @include('/elements/quest/answer', $item)
+            @include('elements/quest/card/answer', $item)
         @endforeach
 
         <div class="test--button">
@@ -50,7 +48,7 @@
             >Назад</a>
         </div>
 
-        @include('elements.up')
+        @include('elements/up')
     </main>
 @endsection
 

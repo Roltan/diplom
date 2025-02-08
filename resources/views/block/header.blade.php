@@ -36,7 +36,7 @@
         </form>
     </div>
 
-    @include('elements.reset_password.request', [
+    @include('elements/reset_password/request', [
         'name'=>'forgot',
         'title' => 'Восстановление пароля',
         'massage' => 'Вам на почту отправлено письмо с ссылкой для восстановления пароля'

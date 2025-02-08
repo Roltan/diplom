@@ -9,8 +9,6 @@
 @section('mainContent')
     @include('/block/header_lk', ['active'=>1])
 
-    <figure class="background"></figure>
-
     <main class="container">
         @include('/block/navLK', ['active'=>1])
 

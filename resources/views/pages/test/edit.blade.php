@@ -9,10 +9,8 @@
 @section('mainContent')
     @include('block.header')
 
-    <figure class="background"></figure>
-
     <main class="container">
-        @include('/block/settings-test', [
+        @include('block/settings-test', [
             'title' => isset($title)? $title : '',
             'only_user' => $only_user,
             'max_time' => isset($max_time)? $max_time : ''
@@ -24,9 +22,38 @@
         </div>
 
         @foreach ($quest as $item)
-            @include('/elements/quest/correctQuest', $item)
+            @include('elements/quest/card/correctQuest', $item)
         @endforeach
 
         @include('elements.up')
     </main>
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

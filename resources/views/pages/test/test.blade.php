@@ -8,15 +8,13 @@
 @endsection
 
 @section('mainContent')
-    @include('block.header')
-
-    <figure class="background"></figure>
+    @include('block/header')
 
     <main class="container">
         <h1 class="main--header">{{$title}}</h1>
 
         @foreach ($quest as $item)
-            @include('/elements/quest/solve', $item)
+            @include('elements/quest/card/solve', $item)
         @endforeach
 
         <div class="test--button">

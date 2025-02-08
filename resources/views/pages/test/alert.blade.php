@@ -33,15 +33,13 @@
 @section('mainContent')
     @include('block.header')
 
-    <figure class="background"></figure>
-
     <main class="container settings">
         <h1 class="settings--left">
             На решение теста "{{ $title }}" отводится
             @if ($hours != 0)
                 {{ $hours }} {{ pluralForm($hours, 'час', 'часа', 'часов') }}
             @endif
-            {{ $min }} {{ pluralForm($min, 'минута', 'минуты', 'минут') }}.
+                {{ $min }} {{ pluralForm($min, 'минута', 'минуты', 'минут') }}.
             <br>
             Вы готовы начать решение?
         </h1>

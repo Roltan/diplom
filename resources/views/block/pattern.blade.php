@@ -14,6 +14,8 @@
             @include('/elements/error', ['error'=>session('error')])
         @endif
 
+        <figure class="background"></figure>
+
         @yield('mainContent')
     </body>
 </html>

@@ -2,13 +2,11 @@
 
 @section('links')
     <link rel="stylesheet" href="/css/index.css" />
-    <script src="/js/paginate.js" defer></script>
+    <script defer src="/js/paginate.js"></script>
 @endsection
 
 @section('mainContent')
     @include('block.header')
-
-    <figure class="background"></figure>
 
     @if(session('email'))
         @include('elements.reset_password.reset', [
@@ -66,14 +64,14 @@
 
         <div class="slogan">Рекомендуем вам решить эти тесты</div>
 
-        @include('/block/list_header', [
+        @include('block.list_header', [
             'topic' => $topics
         ])
 
         @if (count($cards) > 0)
             <div class="list" id="list">
                 @foreach($cards as $card)
-                    @include('/elements/card', $card)
+                    @include('elements.card', $card)
                 @endforeach
             </div>
             @include('elements.up', ['height'=>1000])

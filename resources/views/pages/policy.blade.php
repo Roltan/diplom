@@ -7,8 +7,6 @@
 @section('mainContent')
     @include('block.header')
 
-    <figure class="background"></figure>
-
     <main class="container index">
         <h1 class="slogan">Соглашение о персональных данных</h1>
 

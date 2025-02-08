@@ -1,6 +1,6 @@
 @switch($type)
     @case('choice')
-        @include('/elements/quest/type/choice', [
+        @include('elements/quest/type/choice', [
             'quest'=>$quest,
             'id'=>$id,
             'is_multiple'=> $is_multiple,
@@ -8,20 +8,20 @@
         ])
         @break
     @case('blank')
-        @include('/elements/quest/type/blank', [
+        @include('elements/quest/type/blank', [
             'id'=>$id,
             'quest'=>$quest
         ])
         @break
     @case('fill')
-        @include('/elements/quest/type/fill', [
+        @include('elements/quest/type/fill', [
             'id'=>$id,
             'quest'=>$quest,
             'options'=>$options
         ])
         @break
     @case('relation')
-        @include('/elements/quest/type/relation', [
+        @include('elements/quest/type/relation', [
             'quest' => $quest,
             'id'=>$id,
             'first_column'=>$first_column,

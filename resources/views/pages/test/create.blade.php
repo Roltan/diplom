@@ -15,8 +15,6 @@
 @section('mainContent')
     @include('block.header')
 
-    <figure class="background"></figure>
-
     <main class="container">
         @include('block/settings-test', [
             'title' => isset($title)? $title : '',
@@ -24,7 +22,7 @@
         ])
 
         @foreach ($quest as $item)
-            @include('/elements/quest/edit', $item)
+            @include('elements/quest/card/edit', $item)
         @endforeach
 
         <div class="test--button test--button__max" id="edit--footer">
