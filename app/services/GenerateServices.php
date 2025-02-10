@@ -21,6 +21,7 @@ class GenerateServices
             return response(['status' => false, 'error' => 'Тема не найдена'], 404);
 
         $countArr = $this->getQuestionCounts($request);
+        // dd($request);
         $questions = $this->generateRandomQuestions($countArr, $topic->id, $request->difficulty);
         if ($questions instanceof Response)
             return $questions;
@@ -31,7 +32,7 @@ class GenerateServices
 
     protected function getQuestionCounts(Request $request): array
     {
-        if (!$request->has('fillCount') && !$request->has('choiceCount') && !$request->has('blankCount') && !$request->has('relationCount'))
+        if (!$request->missing('fillCount') && !$request->missing('choiceCount') && !$request->missing('blankCount') && !$request->missing('relationCount'))
             return $this->divideQuestionsIntoParts($request->overCount, 4);
 
         return [

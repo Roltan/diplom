@@ -18,7 +18,8 @@
     <main class="container">
         @include('block/settings-test', [
             'title' => isset($title)? $title : '',
-            'topic' => $topic
+            'topic' => $topic,
+            'difficulty' => isset($difficulty)? $difficulty : null
         ])
 
         @foreach ($quest as $item)
@@ -26,7 +27,7 @@
         @endforeach
 
         <div class="test--button test--button__max" id="edit--footer">
-            <button class="test--add" id="add_quest">
+            <button class="test--add" id="add_quest" onclick="addQuestion()">
                 <div>
                     <img src="/img/edit/add.png" alt="" />
                 </div>

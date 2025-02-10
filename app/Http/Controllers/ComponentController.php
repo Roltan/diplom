@@ -28,7 +28,7 @@ class ComponentController extends Controller
         $quest = $response->original['quest'];
         $quest = $this->convertObjectsToArray($quest);
 
-        return view('elements/quest/edit', $quest);
+        return view('elements/quest/card/edit', $quest);
     }
 
     public function create(CreateQuestRequest $createQuestRequest): Response|View
@@ -39,7 +39,7 @@ class ComponentController extends Controller
         $quest = $response->original['quest'];
         $quest = $this->convertObjectsToArray($quest);
 
-        return view('elements/quest/edit', $quest);
+        return view('elements/quest/card/edit', $quest);
     }
 
     public function advise(Request $request): Response
@@ -49,7 +49,7 @@ class ComponentController extends Controller
         $tests = $this->convertObjectsToArray($tests);
         $response = [];
         foreach ($tests as $test) {
-            $response[] = view('/elements/card', $test)->render();
+            $response[] = view('elements/card', $test)->render();
         }
         return response(['tests' => $response], 200);
     }

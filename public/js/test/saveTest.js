@@ -73,7 +73,7 @@ function fetchData(url, method, data) {
 function saveTest() {
     const buttonIMG = document
         .querySelector("header")
-        ?.querySelector(".button__image");
+        .querySelector(".button__image");
 
     if (buttonIMG) {
         const title = document.getElementById("title").value;

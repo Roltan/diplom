@@ -39,7 +39,7 @@
 
         <div class="test--button">
             <a
-                @if (Auth::check())
+                @if (Auth::check() && url()->previous() !== url('/test/generate'))
                     href="{{ url()->previous() }}"
                 @else
                     href="/"
