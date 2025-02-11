@@ -2,20 +2,20 @@
 
 @section('links')
     <link rel="stylesheet" href="/css/profile.css" />
-    <script type="module" defer src="/js/auth/edit.js"></script>
+    <script defer type="module" src="/js/auth/edit.js"></script>
     <script defer type="module" src="/js/auth/password.js"></script>
 @endsection
 
 @section('mainContent')
-    @include('/block/header_lk', ['active'=>1])
+    @include('block/header_lk', ['active'=>1])
 
     <main class="container">
-        @include('/block/navLK', ['active'=>1])
+        @include('block/navLK', ['active'=>1])
 
         <div class="main">
             <form id="profile_data">
                 <div class="avatar">
-                    <img src="/img/lk/humen.png" alt="" />
+                    <img src="/img/lk/human.png" alt="" />
                     <button type="button" id="editProfile">
                         <img src="/img/lk/edit.png" alt="">
                     </button>

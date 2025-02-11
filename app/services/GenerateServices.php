@@ -32,8 +32,12 @@ class GenerateServices
 
     protected function getQuestionCounts(Request $request): array
     {
-        if (!$request->missing('fillCount') && !$request->missing('choiceCount') && !$request->missing('blankCount') && !$request->missing('relationCount'))
-            return $this->divideQuestionsIntoParts($request->overCount, 4);
+        if (
+            $request->missing('fillCount') and
+            $request->missing('choiceCount') and
+            $request->missing('blankCount') and
+            $request->missing('relationCount')
+        ) return $this->divideQuestionsIntoParts($request->overCount, 4);
 
         return [
             'fillCount' => $request->filled('fillCount') ? (int) $request->input('fillCount') : 0,

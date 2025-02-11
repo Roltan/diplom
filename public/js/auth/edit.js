@@ -36,7 +36,6 @@ document
                     window.location.reload();
                 } else {
                     // Обрабатываем ошибки валидации
-                    console.log(result);
                     errorModal(result.message);
                 }
             });
