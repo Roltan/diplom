@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\Card\AdviseCardResource;
 use App\Http\Resources\Card\SolvedResource;
 use App\Http\Resources\Card\StatisticResource;
 use App\Http\Resources\Card\TestCardResource;
@@ -23,7 +24,7 @@ class ViewServices
         return [
             'topics' => $topic,
             'difficulties' => $difficulties,
-            'cards' => TestCardResource::collection($tests)
+            'cards' => AdviseCardResource::collection($tests)
         ];
     }
 

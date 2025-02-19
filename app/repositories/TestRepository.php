@@ -53,11 +53,11 @@ class TestRepository
         return [$test, $allTests->get()->count()];
     }
 
-    public static function getAdviseGuest(int $page, int $limit, bool $only_user = true): Collection
+    public static function getAdviseQuest(int $page, int $limit, bool $only_user = true): Collection
     {
         $tests = Test::query();
-        if ($only_user)
-            $tests = $tests->where('only_user', 1);
+        if (!$only_user)
+            $tests = $tests->where('only_user', 0);
 
         return $tests
             ->where('is_public', 1)

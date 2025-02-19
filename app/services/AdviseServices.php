@@ -25,7 +25,7 @@ class AdviseServices
 
         return Auth::check() ?
             $this->AdviseUser($page, $limit) :
-            TestRepository::getAdviseGuest($page, $limit);
+            TestRepository::getAdviseQuest($page, $limit, false);
     }
 
     protected function AdviseUser(int $page, int $limit): Collection
@@ -52,7 +52,7 @@ class AdviseServices
         // Если все еще мало, добавляем резервные рекомендации
         if ($personalTests->count() < $limit) {
             $generalPage = max(1, $page - ceil($testsCount + $generalTestsCount / $limit));
-            $fallbackTests = TestRepository::getAdviseGuest($generalPage, $limit, false);
+            $fallbackTests = TestRepository::getAdviseQuest($generalPage, $limit);
             $personalTests = $personalTests->merge($fallbackTests);
         }
 

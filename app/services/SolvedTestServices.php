@@ -44,9 +44,8 @@ class SolvedTestServices
 
     public static function userHasSolvedTest(int $testId): bool
     {
-        if (!TestRepository::checkMulti($testId)) {
-            $studentId = Auth::check() ? Auth::user()->id : null;
-            if (SolvedTestRepository::userHasSolvedTest($studentId, $testId))
+        if (!TestRepository::checkMulti($testId) and Auth::check()) {
+            if (SolvedTestRepository::userHasSolvedTest(Auth::user()->id, $testId))
                 return true;
         }
         return false;
