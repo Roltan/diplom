@@ -76,7 +76,9 @@ function load() {
     var loader = document.getElementById("loader");
 
     if (loader == null) {
-        document.body.innerHTML += `
+        document.body.insertAdjacentHTML(
+            "beforeend",
+            `
             <div class="modalka modalka--wrapper load modalka-open" id="loader" style="display: flex">
                 <div>
                     <div class="spinner-border text-dark" role="status">
@@ -84,7 +86,8 @@ function load() {
                     </div>
                 </в>
             </div>
-        `;
+        `
+        );
     } else {
         loader.remove();
     }
