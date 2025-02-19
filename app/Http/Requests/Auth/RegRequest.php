@@ -15,8 +15,9 @@ class RegRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'filled', 'min:1'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'regex:/^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d).*$/', 'confirmed'],
+            'rule' => ['accepted']
         ];
     }
 
@@ -31,11 +32,16 @@ class RegRequest extends FormRequest
 
             'email.required' => 'Поле электронной почты обязательно для заполнения.',
             'email.email' => 'Поле электронной почты должно быть действительным адресом.',
+            'email.unique' => 'Такая почта уже занята',
 
             'password.required' => 'Поле пароля обязательно для заполнения.',
             'password.string' => 'Поле пароля должно быть строкой.',
             'password.regex' => 'Поле пароля должно содержать минимум 8 символов, включая буквы и цифры.',
             'password.confirmed' => 'Подтверждение пароля не совпадает.',
+
+            'rule.required' => '123',
+            'rule.boolean' => '123',
+            'rule.accepted' => 'Без согласия на обработку персональных данных, мы не можем вас зарегистрировать.',
         ];
     }
 }
