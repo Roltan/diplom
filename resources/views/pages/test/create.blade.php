@@ -22,6 +22,8 @@
             'difficulty' => isset($difficulty)? $difficulty : null
         ])
 
+        <h1 class="main--header">Вопросы теста</h1>
+
         @foreach ($quest as $item)
             @include('elements/quest/card/edit', $item)
         @endforeach
