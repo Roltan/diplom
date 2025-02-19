@@ -36,6 +36,7 @@ function login() {
         .querySelector(".header--buttons");
 
     document.querySelector("#modal1").style.display = "none";
+    document.querySelector("#modal2").style.display = "none";
     document.body.classList.remove("modalka-open");
 
     headerBtn.innerHTML = `
