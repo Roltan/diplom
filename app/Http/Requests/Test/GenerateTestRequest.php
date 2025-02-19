@@ -38,7 +38,7 @@ class GenerateTestRequest extends FormRequest
             $over = request()->input('overCount');
 
             if (($fill + $choice + $blank + $relation) != $over and ($fill + $choice + $blank + $relation) != 0)
-                $validator->errors()->add('general', 'the amount of fillCount, choiceCount, blankCount, relationCount must be equal to overCount');
+                $validator->errors()->add('general', 'Сумма полей количества вопросов по отдельным типам должна быть равна полю "Количество вопросов"');
         });
     }
 
@@ -69,8 +69,6 @@ class GenerateTestRequest extends FormRequest
 
             'relationCount.numeric' => 'Поле "relationCount" должно быть числом.',
             'relationCount.min' => 'Поле "relationCount" должно быть не менее 0.',
-
-            'general' => 'Сумма значений fillCount, choiceCount, blankCount, relationCount должна быть равна overCount.',
         ];
     }
 
