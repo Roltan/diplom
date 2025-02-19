@@ -48,11 +48,11 @@
             <h1>Регистрация</h1>
             <div class="input">
                 <label for="name">Имя</label>
-                <input type="text" name="name" id="name" class="input--field" />
+                <input type="text" name="name" id="name" class="input--field"/>
             </div>
             <div class="input">
                 <label for="email_reg">Почта</label>
-                <input type="email" name="email" id="email_reg" class="input--field" />
+                <input type="email" name="email" id="email_reg" class="input--field"/>
             </div>
             <div class="input">
                 <label for="password_reg">Пароль</label>
