@@ -24,7 +24,7 @@ class SolvedTestResource extends JsonResource
             'percent' => $this->percent,
             'date' => $this->created_at->format('d-m-Y'),
             'score' => $this->score,
-            'solved_time' => Carbon::createFromTimestamp($this->solved_time)->format('H:i:s'),
+            'solved_time' => gmdate('H:i:s', $this->solved_time),
             'isLeave' => $this->is_escapee,
             'answer' => SolvedQuestResource::collection($this->questAnswer),
         ];
