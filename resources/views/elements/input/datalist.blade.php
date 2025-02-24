@@ -51,27 +51,7 @@
     document.addEventListener('DOMContentLoaded', function () {
     const input = document.getElementById('{{$name}}');
     const optionsList = document.getElementById('selector-options');
-    const options = [
-        'Apple',
-        'Banana',
-        'Cherry',
-        'Date',
-        'Elderberry',
-        'Fig',
-        'Grape',
-        'Honeydew',
-        'Kiwi',
-        'Lemon',
-        'Mango',
-        'Nectarine',
-        'Orange',
-        'Papaya',
-        'Quince',
-        'Raspberry',
-        'Strawberry',
-        'Tangerine',
-        'Watermelon'
-    ]; // Массив вариантов
+    const options = @json($options);
 
     // Функция для отображения списка вариантов
     function showOptions(filteredOptions) {
