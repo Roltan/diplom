@@ -17,9 +17,13 @@
 
             <div class="window">
                 <div class="list">
-                    @foreach($cards as $card)
-                        @include('/elements/card', $card)
-                    @endforeach
+                    @if(count($cards) != 0)
+                        @foreach($cards as $card)
+                            @include('/elements/card', $card)
+                        @endforeach
+                    @else
+                        <h1 class="main--header">Список пуст</h1>
+                    @endif
                 </div>
             </div>
         </div>
