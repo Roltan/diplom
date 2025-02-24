@@ -15,7 +15,7 @@
     <div class="modalka" id="filter">
         <form class="filter form">
             @if(isset($tests))
-                @include('/elements/input/selector', [
+                @include('elements/input/selector', [
                     'name'=>'filter-test',
                     'label'=>'Тест',
                     'options'=>$tests,
@@ -24,7 +24,7 @@
                     'value'=>request('filter-test')
                 ])
             @elseif(isset($topic))
-                @include('/elements/input/selector', [
+                @include('elements/input/selector', [
                     'name'=>'filter-topic',
                     'label'=>'Тема',
                     'options'=>$topic,
@@ -34,7 +34,7 @@
                 ])
             @endif
 
-            @include('/elements/input/data_select', [
+            @include('elements/input/data_select', [
                 'name' => 'filter-date',
                 'value' => request('filter-date')
             ])

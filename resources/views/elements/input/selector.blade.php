@@ -1,16 +1,10 @@
-@php
-    // Проверяем количество вариантов
-    $useDatalist = count($options) > 20;
-@endphp
-
-@if ($useDatalist)
-    @include('/elements/input/datalist', [
+@if (count($options) > 20)
+    @include('elements/input/datalist', [
         'class' => isset($class)? $class : null,
         'name' => $name,
         'label' => $label,
         'options' => $options,
         'value' => isset($value)? $value : null,
-        'strValue' => isset($strValue)? $strValue : null,
         'required' => isset($required)? $required : null
     ])
 @else

@@ -5,14 +5,13 @@
         type="text"
         id="{{ $name }}"
         name="{{ $name }}"
-        list="{{ $name }}_list"
         @isset($value) value="{{ $value }}" @endisset
         class="input--field"
         placeholder="Начните вводить..."
         @if(!isset($required) or $required==true) required @endif
     />
     <!-- Список вариантов -->
-    <ul id="selector-options" class="options-list" style="display: none;"></ul>
+    <ul id="{{ $name }}-options" class="options-list" style="display: none;"></ul>
 </div>
 
 <style>
@@ -44,7 +43,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     const input = document.getElementById('{{$name}}');
-    const optionsList = document.getElementById('selector-options');
+    const optionsList = document.getElementById('{{$name}}-options');
     const options = @json($options);
 
     // Функция для отображения списка вариантов
