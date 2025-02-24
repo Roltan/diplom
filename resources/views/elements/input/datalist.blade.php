@@ -19,7 +19,6 @@
     .options-list {
         position: absolute;
         top: 100%;
-        left: 0;
         max-height: 150px;
         overflow-y: auto;
         background-color: #c9ddff;
