@@ -465,9 +465,1018 @@ class FillQuestSeeder extends Seeder
                     [["str" => "JavaScript", "correct" => true], ["str" => "HTML", "correct" => false], ["str" => "CSS", "correct" => false], ["str" => "PHP", "correct" => false]]
                 ]),
                 'difficulty' => 80,
+            ],
+
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Функция f(x) называется s?:0 в точке x₀, если существует s?:1, который является угловым коэффициентом s?:2 к графику функции.',
+                'options' => json_encode([
+                    [
+                        ["str" => "дифференцируемой", "correct" => true],
+                        ["str" => "непрерывной", "correct" => false],
+                        ["str" => "линейной", "correct" => false]
+                    ],
+                    [
+                        ["str" => "предел", "correct" => true],
+                        ["str" => "интеграл", "correct" => false],
+                        ["str" => "разрыв", "correct" => false]
+                    ],
+                    [
+                        ["str" => "касательной", "correct" => true],
+                        ["str" => "секущей", "correct" => false],
+                        ["str" => "асимптоты", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 70,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Для вычисления производной s?:0 функции f(g(x)) используется s?:1 правило, где производная внешней функции умножается на s?:2 внутренней.',
+                'options' => json_encode([
+                    [
+                        ["str" => "сложной", "correct" => true],
+                        ["str" => "обратной", "correct" => false],
+                        ["str" => "неявной", "correct" => false]
+                    ],
+                    [
+                        ["str" => "цепное", "correct" => true],
+                        ["str" => "произведения", "correct" => false],
+                        ["str" => "Лопиталя", "correct" => false]
+                    ],
+                    [
+                        ["str" => "производную", "correct" => true],
+                        ["str" => "интеграл", "correct" => false],
+                        ["str" => "предел", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 65,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Если функция имеет s?:0 в точке x₀, то её первая производная s?:1, а вторая производная s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "максимум", "correct" => true],
+                        ["str" => "минимум", "correct" => false],
+                        ["str" => "перегиб", "correct" => false]
+                    ],
+                    [
+                        ["str" => "равна нулю", "correct" => true],
+                        ["str" => "положительна", "correct" => false],
+                        ["str" => "отрицательна", "correct" => false]
+                    ],
+                    [
+                        ["str" => "отрицательна", "correct" => true],
+                        ["str" => "положительна", "correct" => false],
+                        ["str" => "равна нулю", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 60,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Предел функции f(x) в точке a существует, если s?:0 пределы s?:1 и s?:2 совпадают.',
+                'options' => json_encode([
+                    [
+                        ["str" => "левый", "correct" => false],
+                        ["str" => "правый", "correct" => false],
+                        ["str" => "левый и правый", "correct" => true]
+                    ],
+                    [
+                        ["str" => "слева", "correct" => true],
+                        ["str" => "справа", "correct" => false],
+                        ["str" => "на бесконечности", "correct" => false]
+                    ],
+                    [
+                        ["str" => "справа", "correct" => true],
+                        ["str" => "слева", "correct" => false],
+                        ["str" => "в окрестности", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 55,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Функция f(x) = x³ имеет s?:0 в точке x=0, где s?:1 производная равна s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "точку перегиба", "correct" => true],
+                        ["str" => "максимум", "correct" => false],
+                        ["str" => "минимум", "correct" => false]
+                    ],
+                    [
+                        ["str" => "вторая", "correct" => true],
+                        ["str" => "первая", "correct" => false],
+                        ["str" => "третья", "correct" => false]
+                    ],
+                    [
+                        ["str" => "0", "correct" => true],
+                        ["str" => "6", "correct" => false],
+                        ["str" => "3", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 70,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Производная s?:0 функции равна s?:1, а интеграл — s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "скорости", "correct" => true],
+                        ["str" => "ускорения", "correct" => false],
+                        ["str" => "пути", "correct" => false]
+                    ],
+                    [
+                        ["str" => "ускорению", "correct" => true],
+                        ["str" => "скорости", "correct" => false],
+                        ["str" => "силе", "correct" => false]
+                    ],
+                    [
+                        ["str" => "пути", "correct" => true],
+                        ["str" => "скорости", "correct" => false],
+                        ["str" => "массе", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 65,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Если s?:0 функции f(x) в точке x₀ равен s?:1, то касательная к графику в этой точке s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "предел", "correct" => false],
+                        ["str" => "производная", "correct" => true],
+                        ["str" => "интеграл", "correct" => false]
+                    ],
+                    [
+                        ["str" => "нулю", "correct" => true],
+                        ["str" => "бесконечности", "correct" => false],
+                        ["str" => "единице", "correct" => false]
+                    ],
+                    [
+                        ["str" => "горизонтальна", "correct" => true],
+                        ["str" => "вертикальна", "correct" => false],
+                        ["str" => "не существует", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 60,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Правило s?:0 используется для раскрытия неопределённостей вида s?:1, где и числитель, и знаменатель стремятся к s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "Лопиталя", "correct" => true],
+                        ["str" => "произведения", "correct" => false],
+                        ["str" => "цепное", "correct" => false]
+                    ],
+                    [
+                        ["str" => "0/0", "correct" => true],
+                        ["str" => "∞/∞", "correct" => false],
+                        ["str" => "1^∞", "correct" => false]
+                    ],
+                    [
+                        ["str" => "нулю", "correct" => true],
+                        ["str" => "бесконечности", "correct" => false],
+                        ["str" => "единице", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 70,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Функция f(x) = |x| не имеет s?:0 в точке x=0, так как график имеет s?:1, а производная s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "производной", "correct" => true],
+                        ["str" => "предела", "correct" => false],
+                        ["str" => "интеграла", "correct" => false]
+                    ],
+                    [
+                        ["str" => "излом", "correct" => true],
+                        ["str" => "разрыв", "correct" => false],
+                        ["str" => "асимптоту", "correct" => false]
+                    ],
+                    [
+                        ["str" => "не существует", "correct" => true],
+                        ["str" => "равна 0", "correct" => false],
+                        ["str" => "равна 1", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 65,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Для функции f(x) = e^x производная любого порядка s?:0, а для f(x) = ln(x) вторая производная s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "остаётся e^x", "correct" => true],
+                        ["str" => "увеличивается", "correct" => false],
+                        ["str" => "равна нулю", "correct" => false]
+                    ],
+                    [
+                        ["str" => "отрицательна", "correct" => true],
+                        ["str" => "положительна", "correct" => false],
+                        ["str" => "равна нулю", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 60,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Функция возрастает на интервале, если её s?:0 производная s?:1 нуля.',
+                'options' => json_encode([
+                    [
+                        ["str" => "первая", "correct" => true],
+                        ["str" => "вторая", "correct" => false],
+                        ["str" => "третья", "correct" => false]
+                    ],
+                    [
+                        ["str" => "больше", "correct" => true],
+                        ["str" => "меньше", "correct" => false],
+                        ["str" => "равна", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 65,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Производная частного u(x)/v(x) вычисляется по формуле: (u′v s?:0 u v′) / s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "−", "correct" => true],
+                        ["str" => "+", "correct" => false],
+                        ["str" => "×", "correct" => false]
+                    ],
+                    [
+                        ["str" => "v²", "correct" => true],
+                        ["str" => "u²", "correct" => false],
+                        ["str" => "uv", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 70,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Если вторая производная функции s?:0, то график функции s?:1 вниз.',
+                'options' => json_encode([
+                    [
+                        ["str" => "отрицательна", "correct" => true],
+                        ["str" => "положительна", "correct" => false],
+                        ["str" => "равна нулю", "correct" => false]
+                    ],
+                    [
+                        ["str" => "выпуклый", "correct" => true],
+                        ["str" => "вогнутый", "correct" => false],
+                        ["str" => "линейный", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 60,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Производная обратной функции y = f⁻¹(x) равна s?:0, где y′ = 1 / s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "dx/dy", "correct" => false],
+                        ["str" => "1/f′(y)", "correct" => true],
+                        ["str" => "f′(x)", "correct" => false]
+                    ],
+                    [
+                        ["str" => "f′(y)", "correct" => true],
+                        ["str" => "f(y)", "correct" => false],
+                        ["str" => "f′′(y)", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 75,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Для параметрической функции x(t), y(t) производная dy/dx вычисляется как s?:0 делённое на s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "dy/dt", "correct" => true],
+                        ["str" => "dx/dt", "correct" => false],
+                        ["str" => "d²y/dt²", "correct" => false]
+                    ],
+                    [
+                        ["str" => "dx/dt", "correct" => true],
+                        ["str" => "dy/dt", "correct" => false],
+                        ["str" => "dt/dx", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 70,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Уравнение касательной к графику в точке (x₀, f(x₀)): y = f(x₀) + s?:0 (x s?:1 x₀).',
+                'options' => json_encode([
+                    [
+                        ["str" => "f′(x₀)", "correct" => true],
+                        ["str" => "f(x₀)", "correct" => false],
+                        ["str" => "f′′(x₀)", "correct" => false]
+                    ],
+                    [
+                        ["str" => "−", "correct" => true],
+                        ["str" => "+", "correct" => false],
+                        ["str" => "×", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 65,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Если s(t) — закон движения, то первая производная s′(t) есть s?:0, а вторая s′′(t) — s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "скорость", "correct" => true],
+                        ["str" => "ускорение", "correct" => false],
+                        ["str" => "путь", "correct" => false]
+                    ],
+                    [
+                        ["str" => "ускорение", "correct" => true],
+                        ["str" => "скорость", "correct" => false],
+                        ["str" => "сила", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 60,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Производная третьего порядка функции f(x) = x⁴ будет s?:0, а четвёртого — s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "24x", "correct" => true],
+                        ["str" => "12x²", "correct" => false],
+                        ["str" => "4x³", "correct" => false]
+                    ],
+                    [
+                        ["str" => "24", "correct" => true],
+                        ["str" => "0", "correct" => false],
+                        ["str" => "24x", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 70,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Для неявной функции F(x,y) = 0 производная dy/dx равна s?:0, где F_x и F_y — частные производные по s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "−F_x/F_y", "correct" => true],
+                        ["str" => "F_x/F_y", "correct" => false],
+                        ["str" => "F_y/F_x", "correct" => false]
+                    ],
+                    [
+                        ["str" => "x и y", "correct" => true],
+                        ["str" => "y и x", "correct" => false],
+                        ["str" => "t и x", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 75,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Чтобы найти максимум функции, нужно: 1) найти s?:0 точки, 2) проверить знак s?:1 производной.',
+                'options' => json_encode([
+                    [
+                        ["str" => "критические", "correct" => true],
+                        ["str" => "перегиба", "correct" => false],
+                        ["str" => "разрыва", "correct" => false]
+                    ],
+                    [
+                        ["str" => "второй", "correct" => true],
+                        ["str" => "первой", "correct" => false],
+                        ["str" => "третьей", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 65,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Логарифмическое дифференцирование применяется для функций вида s?:0. После взятия s?:1 от обеих частей используется правило s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "y = u(x)^v(x)", "correct" => true],
+                        ["str" => "y = sin(ax)", "correct" => false],
+                        ["str" => "y = e^x", "correct" => false]
+                    ],
+                    [
+                        ["str" => "логарифма", "correct" => true],
+                        ["str" => "экспоненты", "correct" => false],
+                        ["str" => "интеграла", "correct" => false]
+                    ],
+                    [
+                        ["str" => "дифференцирования", "correct" => false],
+                        ["str" => "производной сложной функции", "correct" => true],
+                        ["str" => "Лопиталя", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 70,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Эластичность функции E(x) показывает s?:0 изменения спроса при s?:1 цены. Вычисляется как s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "процентное", "correct" => true],
+                        ["str" => "абсолютное", "correct" => false],
+                        ["str" => "линейное", "correct" => false]
+                    ],
+                    [
+                        ["str" => "1%", "correct" => true],
+                        ["str" => "10%", "correct" => false],
+                        ["str" => "единичном", "correct" => false]
+                    ],
+                    [
+                        ["str" => "x·f’(x)/f(x)", "correct" => true],
+                        ["str" => "f’(x)/x", "correct" => false],
+                        ["str" => "f(x)/x", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 65,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Производная arcsin(x) равна s?:0, а производная arctg(x) — s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "1/√(1−x²)", "correct" => true],
+                        ["str" => "−1/√(1−x²)", "correct" => false],
+                        ["str" => "1/(1+x²)", "correct" => false]
+                    ],
+                    [
+                        ["str" => "1/(1+x²)", "correct" => true],
+                        ["str" => "−1/(1+x²)", "correct" => false],
+                        ["str" => "1/√(1+x²)", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 75,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Приближённое значение функции в точке x₀+Δx: f(x₀+Δx) ≈ f(x₀) + s?:0·Δx. Это называется s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "f’(x₀)", "correct" => true],
+                        ["str" => "f(x₀)", "correct" => false],
+                        ["str" => "Δx²", "correct" => false]
+                    ],
+                    [
+                        ["str" => "линеаризация", "correct" => true],
+                        ["str" => "интегрирование", "correct" => false],
+                        ["str" => "оптимизация", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 60,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Для кусочно-заданной функции дифференцируемость в точке "склейки" требует: 1) s?:0 непрерывности, 2) равенства s?:1 производных.',
+                'options' => json_encode([
+                    [
+                        ["str" => "непрерывности", "correct" => true],
+                        ["str" => "разрыва", "correct" => false],
+                        ["str" => "периодичности", "correct" => false]
+                    ],
+                    [
+                        ["str" => "левой и правой", "correct" => true],
+                        ["str" => "вторых", "correct" => false],
+                        ["str" => "обратных", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 70,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'В полярных координатах производная dr/dθ вычисляется через s?:0 и s?:1 функции r(θ).',
+                'options' => json_encode([
+                    [
+                        ["str" => "r’(θ)", "correct" => true],
+                        ["str" => "r(θ)", "correct" => false],
+                        ["str" => "θ’(r)", "correct" => false]
+                    ],
+                    [
+                        ["str" => "угол θ", "correct" => false],
+                        ["str" => "исходную функцию", "correct" => true],
+                        ["str" => "интеграл", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 75,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'По методу Ньютона корень уравнения ищется итерационно: xₙ₊₁ = xₙ − s?:0/s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "f(xₙ)", "correct" => true],
+                        ["str" => "f’(xₙ)", "correct" => false],
+                        ["str" => "f’’(xₙ)", "correct" => false]
+                    ],
+                    [
+                        ["str" => "f’(xₙ)", "correct" => true],
+                        ["str" => "f(xₙ)", "correct" => false],
+                        ["str" => "xₙ²", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 70,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Производная гиперболического синуса sh(x) равна s?:0, а гиперболического косинуса ch(x) — s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "ch(x)", "correct" => true],
+                        ["str" => "sh(x)", "correct" => false],
+                        ["str" => "−sh(x)", "correct" => false]
+                    ],
+                    [
+                        ["str" => "sh(x)", "correct" => true],
+                        ["str" => "ch(x)", "correct" => false],
+                        ["str" => "−ch(x)", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 65,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Если f’’(x) > 0 на интервале, функция s?:0, а её график s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "вогнута вверх", "correct" => true],
+                        ["str" => "выпукла вниз", "correct" => false],
+                        ["str" => "линейна", "correct" => false]
+                    ],
+                    [
+                        ["str" => "имеет минимум", "correct" => false],
+                        ["str" => "выпуклый", "correct" => false],
+                        ["str" => "не имеет перегибов", "correct" => true]
+                    ]
+                ]),
+                'difficulty' => 60,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Согласно s?:0, если f’(x) меняет знак с + на − в x₀, то x₀ — точка s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "достаточному условию экстремума", "correct" => true],
+                        ["str" => "теореме Ролля", "correct" => false],
+                        ["str" => "правилу Лопиталя", "correct" => false]
+                    ],
+                    [
+                        ["str" => "максимума", "correct" => true],
+                        ["str" => "минимума", "correct" => false],
+                        ["str" => "перегиба", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 65,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Сумма производных равна производной s?:0. Например, d/dx (f + g) = s?:1 + s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "суммы", "correct" => true],
+                        ["str" => "произведения", "correct" => false],
+                        ["str" => "частного", "correct" => false]
+                    ],
+                    [
+                        ["str" => "f’", "correct" => true],
+                        ["str" => "f", "correct" => false],
+                        ["str" => "g’", "correct" => false]
+                    ],
+                    [
+                        ["str" => "g’", "correct" => true],
+                        ["str" => "g", "correct" => false],
+                        ["str" => "f’", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 60,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Функция убывает, если её первая производная s?:0, и возрастает, если производная s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "< 0", "correct" => true],
+                        ["str" => "> 0", "correct" => false],
+                        ["str" => "= 0", "correct" => false]
+                    ],
+                    [
+                        ["str" => "> 0", "correct" => true],
+                        ["str" => "< 0", "correct" => false],
+                        ["str" => "≠ 0", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 55,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Если тело движется по закону s(t) = 3t² - 2t, то его скорость в момент t=2 равна s?:0, а ускорение s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "10", "correct" => true],
+                        ["str" => "6", "correct" => false],
+                        ["str" => "8", "correct" => false]
+                    ],
+                    [
+                        ["str" => "6", "correct" => true],
+                        ["str" => "0", "correct" => false],
+                        ["str" => "12", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 65,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Третья производная координаты по времени называется s?:0, а интеграл ускорения даёт s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "рывок", "correct" => true],
+                        ["str" => "мощность", "correct" => false],
+                        ["str" => "импульс", "correct" => false]
+                    ],
+                    [
+                        ["str" => "скорость", "correct" => true],
+                        ["str" => "путь", "correct" => false],
+                        ["str" => "силу", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 70,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Чтобы максимизировать прибыль P(x), нужно найти точку, где s?:0 производная s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "первая", "correct" => true],
+                        ["str" => "вторая", "correct" => false],
+                        ["str" => "третья", "correct" => false]
+                    ],
+                    [
+                        ["str" => "= 0", "correct" => true],
+                        ["str" => "> 0", "correct" => false],
+                        ["str" => "< 0", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 60,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Для неявной функции x³ + y³ = 1 производная dy/dx равна s?:0, где числитель s?:1, а знаменатель s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "−x²/y²", "correct" => true],
+                        ["str" => "−y²/x²", "correct" => false],
+                        ["str" => "3x²", "correct" => false]
+                    ],
+                    [
+                        ["str" => "−3x²", "correct" => true],
+                        ["str" => "3y²", "correct" => false],
+                        ["str" => "−3y²", "correct" => false]
+                    ],
+                    [
+                        ["str" => "3y²", "correct" => true],
+                        ["str" => "3x²", "correct" => false],
+                        ["str" => "6x", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 75,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Оптимальный объём производства достигается, когда s?:0 доход равен s?:1 издержкам.',
+                'options' => json_encode([
+                    [
+                        ["str" => "предельный", "correct" => true],
+                        ["str" => "общий", "correct" => false],
+                        ["str" => "средний", "correct" => false]
+                    ],
+                    [
+                        ["str" => "предельным", "correct" => true],
+                        ["str" => "переменным", "correct" => false],
+                        ["str" => "постоянным", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 70,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Если z = f(x,y), то частная производная ∂z/∂x показывает скорость изменения по s?:0 при s?:1 y.',
+                'options' => json_encode([
+                    [
+                        ["str" => "x", "correct" => true],
+                        ["str" => "y", "correct" => false],
+                        ["str" => "t", "correct" => false]
+                    ],
+                    [
+                        ["str" => "фиксированном", "correct" => true],
+                        ["str" => "изменяющемся", "correct" => false],
+                        ["str" => "нулевом", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 65,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Уравнение касательной к кривой y = x³ в точке (1,1): y = s?:0(x - 1) + s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "3", "correct" => true],
+                        ["str" => "1", "correct" => false],
+                        ["str" => "0", "correct" => false]
+                    ],
+                    [
+                        ["str" => "1", "correct" => true],
+                        ["str" => "3", "correct" => false],
+                        ["str" => "−1", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 60,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Согласно основной теореме анализа, интеграл от производной функции на [a,b] равен s?:0 функции на s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "разности", "correct" => true],
+                        ["str" => "сумме", "correct" => false],
+                        ["str" => "произведению", "correct" => false]
+                    ],
+                    [
+                        ["str" => "концах интервала", "correct" => true],
+                        ["str" => "середине", "correct" => false],
+                        ["str" => "всей области", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 75,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Градиент функции f(x,y) — это вектор, состоящий из s?:0 и s?:1 производных. Он указывает направление s?:2 роста функции.',
+                'options' => json_encode([
+                    [
+                        ["str" => "частных", "correct" => true],
+                        ["str" => "полных", "correct" => false],
+                        ["str" => "обратных", "correct" => false]
+                    ],
+                    [
+                        ["str" => "частных", "correct" => true],
+                        ["str" => "интегральных", "correct" => false],
+                        ["str" => "вторых", "correct" => false]
+                    ],
+                    [
+                        ["str" => "наибольшего", "correct" => true],
+                        ["str" => "наименьшего", "correct" => false],
+                        ["str" => "нулевого", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 70,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Кривизна плоской кривой вычисляется как |s?:0| / (1 + (s?:1)²)^(3/2), где y′ — первая производная, а y′′ — s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "y′′", "correct" => true],
+                        ["str" => "y′", "correct" => false],
+                        ["str" => "x′", "correct" => false]
+                    ],
+                    [
+                        ["str" => "y′", "correct" => true],
+                        ["str" => "y′′", "correct" => false],
+                        ["str" => "x′′", "correct" => false]
+                    ],
+                    [
+                        ["str" => "вторая производная", "correct" => true],
+                        ["str" => "первая производная", "correct" => false],
+                        ["str" => "интеграл", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 75,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'В вариационном исчислении уравнение Эйлера-Лагранжа имеет вид: d/dt(∂L/∂s?:0) − ∂L/∂s?:1 = 0, где L — s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "q′", "correct" => true],
+                        ["str" => "q", "correct" => false],
+                        ["str" => "t", "correct" => false]
+                    ],
+                    [
+                        ["str" => "q", "correct" => true],
+                        ["str" => "t", "correct" => false],
+                        ["str" => "p", "correct" => false]
+                    ],
+                    [
+                        ["str" => "лагранжиан", "correct" => true],
+                        ["str" => "гамильтониан", "correct" => false],
+                        ["str" => "интеграл", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 80,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Ряд Тейлора функции f(x) около точки a: f(a) + f′(a)(x−a) + s?:0(x−a)² + ... Коэффициент при (x−a)² равен s?:1.',
+                'options' => json_encode([
+                    [
+                        ["str" => "f′′(a)/2!", "correct" => true],
+                        ["str" => "f′(a)/2", "correct" => false],
+                        ["str" => "f(a)/2", "correct" => false]
+                    ],
+                    [
+                        ["str" => "f′′(a)/2", "correct" => true],
+                        ["str" => "f′(a)/1!", "correct" => false],
+                        ["str" => "f(a)/0!", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 70,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Предельная полезность в экономике — это s?:0 от s?:1 полезности по количеству товара. Она s?:2 с увеличением потребления.',
+                'options' => json_encode([
+                    [
+                        ["str" => "производная", "correct" => true],
+                        ["str" => "интеграл", "correct" => false],
+                        ["str" => "предел", "correct" => false]
+                    ],
+                    [
+                        ["str" => "общей", "correct" => true],
+                        ["str" => "средней", "correct" => false],
+                        ["str" => "частичной", "correct" => false]
+                    ],
+                    [
+                        ["str" => "убывает", "correct" => true],
+                        ["str" => "возрастает", "correct" => false],
+                        ["str" => "не изменяется", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 65,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Для вектор-функции **r**(t) = ⟨x(t), y(t)⟩ производная **r′**(t) направлена по s?:0 к s?:1. Её модуль равен s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "касательной", "correct" => true],
+                        ["str" => "нормали", "correct" => false],
+                        ["str" => "секущей", "correct" => false]
+                    ],
+                    [
+                        ["str" => "траектории", "correct" => true],
+                        ["str" => "асимптоте", "correct" => false],
+                        ["str" => "оси", "correct" => false]
+                    ],
+                    [
+                        ["str" => "скорости", "correct" => true],
+                        ["str" => "ускорению", "correct" => false],
+                        ["str" => "кривизне", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 75,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Уравнение теплопроводности: ∂u/∂t = k·s?:0, где s?:1 — оператор s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "∇²u", "correct" => true],
+                        ["str" => "∂u/∂x", "correct" => false],
+                        ["str" => "∫u dt", "correct" => false]
+                    ],
+                    [
+                        ["str" => "∇²", "correct" => true],
+                        ["str" => "d/dt", "correct" => false],
+                        ["str" => "Δ", "correct" => false]
+                    ],
+                    [
+                        ["str" => "Лапласа", "correct" => true],
+                        ["str" => "Гамильтона", "correct" => false],
+                        ["str" => "Фурье", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 80,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Функция правдоподобия L(θ) в статистике максимизируется при s?:0 производной s?:1. Это основа метода s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "нулевой", "correct" => true],
+                        ["str" => "положительной", "correct" => false],
+                        ["str" => "отрицательной", "correct" => false]
+                    ],
+                    [
+                        ["str" => "логарифма L(θ)", "correct" => true],
+                        ["str" => "L(θ)", "correct" => false],
+                        ["str" => "интеграла L(θ)", "correct" => false]
+                    ],
+                    [
+                        ["str" => "максимального правдоподобия", "correct" => true],
+                        ["str" => "наименьших квадратов", "correct" => false],
+                        ["str" => "Байеса", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 75,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Поверхность, заданная параметрически **r**(u,v), имеет нормаль, вычисляемую через s?:0 произведение s?:1 производных s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "векторное", "correct" => true],
+                        ["str" => "скалярное", "correct" => false],
+                        ["str" => "тензорное", "correct" => false]
+                    ],
+                    [
+                        ["str" => "частные", "correct" => true],
+                        ["str" => "полные", "correct" => false],
+                        ["str" => "обратные", "correct" => false]
+                    ],
+                    [
+                        ["str" => "∂r/∂u и ∂r/∂v", "correct" => true],
+                        ["str" => "∂²r/∂u² и ∂²r/∂v²", "correct" => false],
+                        ["str" => "dr/du и dr/dv", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 80,
+            ],
+            [
+                'topic_id' => 2,
+                'vis' => 1,
+                'quest' => 'Дифференциальное уравнение y′ = ky описывает s?:0 рост, решение которого — s?:1. Здесь k — s?:2.',
+                'options' => json_encode([
+                    [
+                        ["str" => "экспоненциальный", "correct" => true],
+                        ["str" => "линейный", "correct" => false],
+                        ["str" => "логарифмический", "correct" => false]
+                    ],
+                    [
+                        ["str" => "y₀e^(kt)", "correct" => true],
+                        ["str" => "y₀ + kt", "correct" => false],
+                        ["str" => "ln(kt)", "correct" => false]
+                    ],
+                    [
+                        ["str" => "константа", "correct" => true],
+                        ["str" => "переменная", "correct" => false],
+                        ["str" => "функция", "correct" => false]
+                    ]
+                ]),
+                'difficulty' => 70,
             ]
-
-
         ]);
     }
 }
