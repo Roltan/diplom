@@ -12,7 +12,7 @@
         @if(!isset($required) or $required==true) required @endif
     />
     <!-- Список вариантов -->
-    <div id="{{ $name }}_list" class="datalist"></div>
+    <ul id="{{ $name }}_list" class="datalist"></ul>
 </div>
 
 <script>
@@ -34,7 +34,7 @@
                 if (filteredOptions.length > 0) {
                     datalist.style.display = 'block'; // Показываем список
                     filteredOptions.forEach(([optionValue, text]) => {
-                        const optionElement = document.createElement('div');
+                        const optionElement = document.createElement('li');
                         optionElement.textContent = text;
                         optionElement.dataset.value = optionValue; // Сохраняем значение
                         optionElement.addEventListener('click', function () {
