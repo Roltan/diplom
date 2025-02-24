@@ -13,27 +13,14 @@
     />
     <!-- Список вариантов -->
     <datalist id="{{ $name }}_list">
-        @foreach($options as $text)
-            <option value="{{ $text }}">{{ $text }}</option>
-        @endforeach
+        @if (!isset($strValue))
+            @foreach($options as $optionValue => $text)
+                <option value="{{ $text }}" data-value="{{ $optionValue }}">{{ $text }}</option>
+            @endforeach
+        @else
+            @foreach($options as $text)
+                <option value="{{ $text }}">{{ $text }}</option>
+            @endforeach
+        @endif
     </datalist>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const input = document.getElementById('{{ $name }}');
-
-    // Проверяем, является ли устройство мобильным
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    if (isMobile) {
-        input.addEventListener('input', function () {
-            // Если пользователь начал вводить текст, пытаемся показать список
-            if (input.value.trim().length > 0) {
-                input.focus(); // Фокусируем инпут
-                input.click(); // Программно кликаем по инпуту
-            }
-        });
-    }
-});
-</script>
