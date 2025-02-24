@@ -214,9 +214,6 @@ a {
             }
         }
     }
-    &__datalist {
-        position: relative;
-    }
 }
 
 input[type="text"],
@@ -411,19 +408,6 @@ input[type="checkbox"].toggle {
         box-shadow: 0px 4px 4px 0px #00000040 inset;
     }
 }
-.datalist {
-    display: none;
-    position: absolute;
-    top: 100%;
-    margin-top: 5px;
-    padding: 0;
-    list-style: none;
-    background-color: #c9ddff;
-    max-height: 150px;
-    overflow-y: auto;
-    width: 100%;
-    z-index: 1000;
-}
 
 .modalka {
     display: none;
@@ -461,6 +445,9 @@ input[type="checkbox"].toggle {
 }
 body.modalka-open {
     overflow: hidden; /* Блокируем прокрутку страницы */
+}
+datalist {
+    display: none;
 }
 
 .main--header {
