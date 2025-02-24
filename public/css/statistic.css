@@ -410,6 +410,18 @@ datalist {
   display: none;
 }
 
+.main--header {
+  color: #123a60;
+  font-size: 3rem;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+.main--header__row {
+  display: flex;
+  flex-direction: row;
+}
+
 .header {
   padding-top: 10px;
   padding-bottom: 10px;
