@@ -1,6 +1,6 @@
 <?php
 
-namespace app\services;
+namespace app\Services;
 
 use App\Http\Resources\Card\AdviseCardResource;
 use App\Http\Resources\Card\SolvedResource;
