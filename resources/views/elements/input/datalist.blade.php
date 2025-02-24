@@ -16,11 +16,14 @@
 </div>
 
 <style>
+    .input__datalist {
+        position: relative;
+    }
     .options-list {
         position: absolute;
         top: 100%;
-        max-height: 150px;
         width: 100%;
+        max-height: 150px;
         overflow-y: auto;
         background-color: #c9ddff;
         color: #2b76bc;
@@ -28,11 +31,13 @@
         margin: 0;
         padding: 0;
         z-index: 1000;
-        box-sizing: border-box;
     }
     .options-list li {
         cursor: pointer;
         padding: 8px;
+    }
+    .options-list li:hover {
+        background: #bdd5fd;
     }
 </style>
 

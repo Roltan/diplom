@@ -187,9 +187,6 @@ a:hover {
 .input__little select:hover, .input__little select:active, .input__little select:focus {
   background-position: right 10px center;
 }
-.input__datalist {
-  position: relative;
-}
 
 input[type=text]:-moz-placeholder,
 input[type=password]:-moz-placeholder,
