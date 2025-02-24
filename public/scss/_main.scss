@@ -214,6 +214,9 @@ a {
             }
         }
     }
+    &__datalist {
+        position: relative;
+    }
 }
 
 input[type="text"],
@@ -446,8 +449,26 @@ input[type="checkbox"].toggle {
 body.modalka-open {
     overflow: hidden; /* Блокируем прокрутку страницы */
 }
-datalist {
-    display: none;
+
+.options-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #c9ddff;
+    color: #2b76bc;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 10;
+    box-sizing: border-box;
+
+    li {
+        cursor: pointer;
+        padding: 8px;
+    }
 }
 
 .main--header {

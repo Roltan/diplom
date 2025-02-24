@@ -15,38 +15,6 @@
     <ul id="selector-options" class="options-list" style="display: none;"></ul>
 </div>
 
-<style>
-    .input__datalist {
-        position: relative;
-    }
-
-    .options-list {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        max-height: 200px;
-        overflow-y: auto;
-        background-color: white;
-        border: 1px solid #ccc;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        z-index: 10;
-        box-sizing: border-box;
-    }
-
-    .options-list li {
-        padding: 8px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    .options-list li:hover {
-        background-color: #f0f0f0;
-    }
-</style>
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     const input = document.getElementById('{{$name}}');
