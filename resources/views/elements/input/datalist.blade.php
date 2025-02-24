@@ -27,7 +27,7 @@
         overflow-y: auto;
         background-color: #c9ddff;
         color: #2b76bc;
-        list-style: none;
+        list-style: scroll;
         margin: 0;
         padding: 0;
         z-index: 1000;
