@@ -1,12 +1,11 @@
 <?php
 
-namespace app\Services;
+namespace App\Services;
 
 use App\Http\Resources\Card\AdviseCardResource;
 use App\Http\Resources\Card\SolvedResource;
 use App\Http\Resources\Card\StatisticResource;
 use App\Http\Resources\Card\TestCardResource;
-use App\Services\AdviseServices;
 use App\Models\SolvedTest;
 use App\Models\Test;
 use App\Models\Topic;

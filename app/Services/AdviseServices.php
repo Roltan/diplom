@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Services;
+namespace App\Services;
 
 use App\Http\Resources\Card\TestCardResource;
 use App\Models\SolvedTest;
