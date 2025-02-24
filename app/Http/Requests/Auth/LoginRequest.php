@@ -15,7 +15,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'email' => ['required', 'email'],
-            'password' => ['required', 'string', 'regex:/^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d).*$/'],
+            'password' => ['required', 'string'],
         ];
     }
 
@@ -27,7 +27,6 @@ class LoginRequest extends FormRequest
             'email.email' => 'Поле электронной почты должно быть действительным адресом.',
             'password.required' => 'Поле пароля обязательно для заполнения.',
             'password.string' => 'Поле пароля должно быть строкой.',
-            'password.regex' => 'Поле пароля должно содержать минимум 8 символов, включая буквы и цифры.',
         ];
     }
 }
