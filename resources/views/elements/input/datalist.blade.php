@@ -20,6 +20,7 @@
         position: absolute;
         top: 100%;
         max-height: 150px;
+        width: 100%;
         overflow-y: auto;
         background-color: #c9ddff;
         color: #2b76bc;
