@@ -423,6 +423,16 @@ input[type="checkbox"].toggle {
     overflow-y: auto;
     width: 100%;
     z-index: 1000;
+
+    /* Устраняем конфликты со стилями браузера */
+    -webkit-appearance: none; /* Отключаем стандартный стиль для iOS */
+    appearance: none;
+    box-sizing: border-box; /* Корректное вычисление размеров */
+
+    li {
+        cursor: pointer;
+        padding: 8px;
+    }
 }
 
 .modalka {
