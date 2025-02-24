@@ -21,7 +21,7 @@
             @include('elements/quest/type/fill', [
                 'id'=>$id,
                 'quest'=>$quest,
-                'disabled'=>'disabled',
+                'readonly'=>'readonly',
                 'options'=>$options
             ])
             @break

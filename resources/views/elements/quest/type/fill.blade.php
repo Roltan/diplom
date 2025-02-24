@@ -31,13 +31,14 @@
                     id="quest{{ $id }}selector{{ $index }}"
                     class="input--field {{isset($answer) ? ($answer[$index] ? 'true' : '') : ''}}"
                     {{ $disabled ?? '' }}
+                    @if(isset($readonly) and ($readonly == true or $readonly == 'readonly')) onchange="handleReadOnly(this)" @endif
                 >
                     @if (!isset($answer))
                         <option value="" disabled selected hidden>-</option>
                         @foreach ($optionsForSelector as $option)
                             <option
                                 value="{{ $option['str'] }}"
-                                {{ $option['str'] === $selectedOption ? 'selected' : (($option['correct'] and isset($disabled)) ? 'selected' : '') }}
+                                {{ $option['str'] === $selectedOption ? 'selected' : (($option['correct'] and (isset($disabled) or isset($readonly))) ? 'selected' : '') }}
                             >
                                 {{ $option['str'] }}
                             </option>
@@ -53,3 +54,18 @@
         @endif
     @endforeach
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Сохраняем начальные значения всех селекторов
+        const selects = document.querySelectorAll('select[onchange*="handleReadOnly"]');
+        selects.forEach((select) => {
+            select.dataset.initialValue = select.value; // Сохраняем начальное значение
+        });
+    });
+
+    function handleReadOnly(selectElement) {
+        // Возвращаем сохраненное начальное значение
+        selectElement.value = selectElement.dataset.initialValue;
+    }
+</script>
