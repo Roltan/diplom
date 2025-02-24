@@ -13,14 +13,8 @@
     />
     <!-- Список вариантов -->
     <datalist id="{{ $name }}_list">
-        @if (!isset($strValue))
-            @foreach($options as $optionValue => $text)
-                <option value="{{ $text }}" data-value="{{ $optionValue }}">{{ $text }}</option>
-            @endforeach
-        @else
-            @foreach($options as $text)
-                <option value="{{ $text }}">{{ $text }}</option>
-            @endforeach
-        @endif
+        @foreach($options as $text)
+            <option value="{{ $text }}">{{ $text }}</option>
+        @endforeach
     </datalist>
 </div>
