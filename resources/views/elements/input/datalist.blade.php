@@ -20,7 +20,6 @@
         position: absolute;
         top: 100%;
         left: 0;
-        width: 100%;
         max-height: 150px;
         overflow-y: auto;
         background-color: #c9ddff;
@@ -28,7 +27,7 @@
         list-style: none;
         margin: 0;
         padding: 0;
-        z-index: 10;
+        z-index: 1000;
         box-sizing: border-box;
     }
     .options-list li {
