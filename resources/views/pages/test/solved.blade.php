@@ -8,10 +8,7 @@
     @include('block/header')
 
     <main class="container">
-        <div class="main--header__row">
-            <h1 class="main--header">{{$title}}</h1>
-            <h1 class="main--header">{{$topic}}</h1>
-        </div>
+        <h1 class="main--header">{{$title}}</h1>
 
         <div class="settings">
             <h1>Имя тестируемого: {{$student}}</h1>
