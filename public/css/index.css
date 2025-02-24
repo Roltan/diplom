@@ -388,15 +388,6 @@ input[type=checkbox].toggle:hover:not(:disabled) + label::after {
   overflow-y: auto;
   width: 100%;
   z-index: 1000;
-  /* Устраняем конфликты со стилями браузера */
-  -webkit-appearance: none; /* Отключаем стандартный стиль для iOS */
-  -moz-appearance: none;
-       appearance: none;
-  box-sizing: border-box; /* Корректное вычисление размеров */
-}
-.datalist li {
-  cursor: pointer;
-  padding: 8px;
 }
 
 .modalka {
