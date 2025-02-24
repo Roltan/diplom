@@ -1,6 +1,6 @@
 <div class="statistic--header">
     <div class="input input__img">
-        <label for="search"><img src="/img/lens.png" alt="" /></label>
+        <label for="search"><img src="/img/lens.png" alt="" style="height: 2.8rem"/></label>
         <input
             type="text"
             placeholder="поиск"
