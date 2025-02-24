@@ -11,8 +11,8 @@ function bindModalEvents() {
 
     // Закрытие модального окна по нажатию вне его области
     modals.forEach((modal) => {
-        modal.removeEventListener("click", closeModalHandler); // Удаляем старые обработчики
-        modal.addEventListener("click", closeModalHandler); // Добавляем новые обработчики
+        modal.removeEventListener("mousedown", closeModalHandler); // Удаляем старые обработчики
+        modal.addEventListener("mousedown", closeModalHandler); // Добавляем новые обработчики
     });
 }
 
