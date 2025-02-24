@@ -1,10 +1,10 @@
 <div class="input">
     <label for="questEdit1Quest">Задание</label>
-    <input type="text" name="questEdit{{$id}}Quest" id="questEdit{{$id}}Quest" class="input--field" value="{{$quest}}"/>
+    <textarea name="questEdit{{$id}}Quest" id="questEdit{{$id}}Quest" class="input--field">{{$quest}}</textarea>
 </div>
 <div class="answer">
     @foreach ($answers as $key => $answer)
-        @include('/elements/input/toggle', [
+        @include('elements/input/toggle', [
             'is_multiple' => $is_multiple,
             'name' => 'questEdit'.$id.'choice'.$key,
             'checked' => $answer['checked'],

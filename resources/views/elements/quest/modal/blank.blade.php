@@ -1,6 +1,6 @@
 <div class="input">
     <label for="questEdit{{$id}}Quest">Задание</label>
-    <input type="text" name="questEdit{{$id}}Quest" id="questEdit{{$id}}Quest" class="input--field" value="{{$quest}}"/>
+    <textarea name="questEdit{{$id}}Quest" id="questEdit{{$id}}Quest" class="input--field">{{$quest}}</textarea>
 </div>
 <div class="answer answer__blank">
     @for ($i=0; $i<count($answer); $i++)
