@@ -8,7 +8,9 @@ function getAlias() {
 }
 
 function createModal(testUrl) {
-    document.body.innerHTML += `
+    document.body.insertAdjacentHTML(
+        "beforeend",
+        `
         <div class="modalka modalka--wrapper modalka-open" id="modal200" style="display: flex">
             <div class="form">
                 <h1>Ссылка на ваш тест: <span id="testLink">${location.protocol}//${location.host}/test/${testUrl}</span></h1>
@@ -22,7 +24,8 @@ function createModal(testUrl) {
                 </div>
             </div>
         </div>
-    `;
+    `
+    );
 
     // копирование ссылки при нажатии
     document
