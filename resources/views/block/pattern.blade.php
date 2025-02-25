@@ -9,10 +9,12 @@
         <script defer type="module" src="/js/auth/modal.js"></script>
 		@yield('links')
 	</head>
-	<body>
-        @if(session('error'))
-            @include('/elements/error', ['error'=>session('error')])
-        @endif
+    @if(session('error'))
+	    <body class="modalka-open">
+        @include('/elements/error', ['error'=>session('error')])
+    @else
+        <body>
+    @endif
 
         <figure class="background"></figure>
 
