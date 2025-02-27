@@ -608,6 +608,7 @@ body.modalka-open {
     gap: 10px;
   }
   .test--button .button {
+    font-size: 1.5rem !important;
     text-align: center;
   }
 }
@@ -670,6 +671,18 @@ body.modalka-open {
   background: none;
   border: none;
 }
+.quest__edit > .buttons > button img {
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 768px) {
+  .quest__edit > .buttons > button {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+  }
+}
 
 .test--add {
   display: flex;
@@ -689,9 +702,7 @@ body.modalka-open {
   background-color: #123a60;
   border-radius: 100%;
   width: 60px;
-  min-width: 60px;
   height: 60px;
-  min-height: 60px;
 }
 .test--add > div > img {
   width: 70%;
@@ -699,6 +710,17 @@ body.modalka-open {
 }
 .test--add__light {
   color: #e0eafa;
+}
+@media (max-width: 768px) {
+  .test--add {
+    font-size: 1.5rem;
+  }
+  .test--add > div {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+  }
 }
 
 #testLink {
