@@ -21,7 +21,6 @@ class GenerateServices
             return response(['status' => false, 'error' => 'Тема не найдена'], 404);
 
         $countArr = $this->getQuestionCounts($request);
-        // dd($countArr);
         $questions = $this->generateRandomQuestions($countArr, $topic->id, $request->difficulty);
         if ($questions instanceof Response)
             return $questions;
@@ -32,38 +31,71 @@ class GenerateServices
 
     protected function getQuestionCounts(Request $request): array
     {
+        $counts = [
+            'fillCount' => $request->input('fillCount', null),
+            'choiceCount' => $request->input('choiceCount', null),
+            'blankCount' => $request->input('blankCount', null),
+            'relationCount' => $request->input('relationCount', null)
+        ];
+
         if (
             !$request->filled('fillCount') and
             !$request->filled('choiceCount') and
             !$request->filled('blankCount') and
             !$request->filled('relationCount')
-        ) return $this->divideQuestionsIntoParts($request->overCount, 4);
+        ) return $this->divideQuestionsIntoParts($request->overCount);
 
-        return [
-            'fillCount' => $request->filled('fillCount') ? (int) $request->input('fillCount') : 0,
-            'choiceCount' => $request->filled('choiceCount') ? (int) $request->input('choiceCount') : 0,
-            'blankCount' => $request->filled('blankCount') ? (int) $request->input('blankCount') : 0,
-            'relationCount' => $request->filled('relationCount') ? (int) $request->input('relationCount') : 0
-        ];
+        // Находим поля с нулевыми значениями и поля с null
+        $zeroFields = [];
+        $nullFields = [];
+
+        foreach ($counts as $key => $value) {
+            if ($value === '0') {
+                $zeroFields[] = $key;
+            } elseif ($value === null) {
+                $nullFields[] = $key;
+            }
+        }
+
+        if (!empty($nullFields) and count($zeroFields) + count($nullFields) == 4)
+            return $this->divideQuestionsIntoParts($request->overCount, $nullFields);
+
+        return array_map(function ($value) {
+            return (int) $value ?? 0;
+        }, $counts);
     }
 
-    protected function divideQuestionsIntoParts(int $totalQuestions, int $parts): array
+    protected function divideQuestionsIntoParts(int $totalQuestions, array $fieldsToDistribute = null): array
     {
+        // Список всех возможных полей
+        $allFields = ['fillCount', 'choiceCount', 'blankCount', 'relationCount'];
+
+        // Если fieldsToDistribute не указан, используем все поля
+        if (is_null($fieldsToDistribute) or empty($fieldsToDistribute)) {
+            $fieldsToDistribute = $allFields;
+        }
+
+        // Количество полей для распределения
+        $parts = count($fieldsToDistribute);
+
+        // Расчет базовой части и остатка
         $basePart = intdiv($totalQuestions, $parts);
         $remainder = $totalQuestions % $parts;
 
-        $counts = array_fill(0, $parts, $basePart);
-        for ($i = 0; $i < $remainder; $i++) {
-            $randomIndex = rand(0, $parts - 1);
-            $counts[$randomIndex]++;
+        // Инициализируем все поля как 0
+        $counts = array_fill_keys($allFields, 0);
+
+        // Распределяем базовую часть
+        foreach ($fieldsToDistribute as $field) {
+            $counts[$field] = $basePart;
         }
 
-        return [
-            'fillCount' => $counts[0],
-            'choiceCount' => $counts[1],
-            'blankCount' => $counts[2],
-            'relationCount' => $counts[3],
-        ];
+        // Распределяем остаток
+        for ($i = 0; $i < $remainder; $i++) {
+            $field = $fieldsToDistribute[$i % $parts];
+            $counts[$field]++;
+        }
+        return $counts;
     }
 
     protected function generateRandomQuestions(array $countArr, int $topicId, ?string $difficulty): Collection|Response
