@@ -75,7 +75,10 @@ class TestPageController extends Controller
     {
         $response = $this->generateServices->generateTest($request);
         if ($response->status() != 200)
-            return redirect(url()->previous())->with('error', $response->original['error']);
+            return redirect()
+                ->back()
+                ->withInput($request->all())
+                ->with('error', $response->original['error']);
         $response = $response->original;
 
         return view('pages.test.create', $this->convertObjectsToArray($response));

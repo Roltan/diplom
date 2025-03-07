@@ -39,22 +39,24 @@
             <div class="line"></div>
             <form class="form" action='/test/generate' method="POST">
                 <div>
-                    <div class="input">
-                        <label for="overCount">Количество вопросов</label>
-                        <input type="number" name="overCount" id="overCount" class="input--field" required/>
-                    </div>
                     @include('/elements/input/selector', [
                         'name'=>'topic',
                         'label'=>'Выберете тему',
                         'options'=>$topics,
-                        'strValue' => true
+                        'strValue' => true,
+                        'value' => old('topic')
                     ])
+                    <div class="input">
+                        <label for="overCount">Количество вопросов</label>
+                        <input type="number" name="overCount" id="overCount" class="input--field" required value="{{old('overCount')}}" />
+                    </div>
                     @include('/elements/input/selector', [
                         'name'=>'difficulty',
                         'label'=>'Выберете сложность',
                         'options'=>$difficulties,
                         'strValue' => true,
-                        'required' => false
+                        'required' => false,
+                        'value' => old('difficulty')
                     ])
                 </div>
 
