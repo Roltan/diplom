@@ -96,15 +96,12 @@ class ViewServices
         if ($user === null)
             return 'У вас нет прав посещать эту страницу';
 
-        // Получаем тесты пользователя
         $tests = Test::query()->where('user_id', $user->id);
         $testsAll = $tests->get();
 
         // Фильтрация по названию теста, если параметр передан
         if ($request->has('filter-test'))
             $tests->where('title', $request->input('filter-test'));
-
-        // Получаем ID тестов пользователя
         $testIds = $tests->pluck('id');
 
         // Запрашиваем решения (SolvedTest) для этих тестов

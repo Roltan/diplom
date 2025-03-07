@@ -35,15 +35,11 @@ class AuthServices
 
         return response(['status' => true], 200);
     }
-
     public function logout(): RedirectResponse
     {
-        // if (Auth::user() == null)
-        // return response(['status' => false, 'error' => 'You are not logged in']);
         Auth::logout();
         return redirect('/');
     }
-
     public function register(RegRequest $request): Response
     {
         $user = user::create([

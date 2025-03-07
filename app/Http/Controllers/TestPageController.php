@@ -64,7 +64,7 @@ class TestPageController extends Controller
         if ($user === null)
             return redirect('/')->with('error', 'У вас нет прав посещать ту страницу');
 
-        $test = $this->testServices->getTest($alias);
+        $test = $this->testServices->getTest($alias, $user->id);
         if ($test instanceof Response)
             return redirect('/')->with('error', $test->original['error']);
 

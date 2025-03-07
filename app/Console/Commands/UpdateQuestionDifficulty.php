@@ -25,10 +25,12 @@ class UpdateQuestionDifficulty extends Command
             foreach ($quests as $quest) {
                 try {
                     $answers = QuestRepository::getAnswers($quest);
+                    $count = $answers->count();
+                    if($count <= 20) continue;
+
                     $maxScore = $quest->maxScore();
                     $totalScore = $answers->sum(fn($answer) => $answer->countCorrect());
 
-                    $count = $answers->count();
                     $percentage = ($maxScore > 0 and $count > 0) ? ($totalScore / ($maxScore * $count)) * 100 : 100;
                     $quest->update(['difficulty' => $percentage]);
                 } catch (\Exception $e) {

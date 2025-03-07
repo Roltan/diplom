@@ -20,14 +20,14 @@ use Illuminate\Support\Str;
 
 class TestServices
 {
-    public function getTest(string $alias): Response|TestResource
+    public function getTest(string $alias, $teacher = null): Response|TestResource
     {
         $test = Test::query()
             ->where('url', $alias)
             ->first();
         if ($test == null) return response(['status' => false, 'error' => 'Тест не найден'], 404);
 
-        if ($test->only_user == true and !Auth::check())
+        if (($test->only_user == true and !Auth::check()) or ($teacher!=null and $test->user_id!=$teacher))
             return response(['status' => false, 'error' => 'У вас нет прав посещать ту страницу'], 403);
 
         return new TestResource($test);
@@ -57,7 +57,9 @@ class TestServices
     {
         $test = TestRepository::findByAlias($request->alias);
         if ($test == null)
-            return response(['error' => 'test not found'], 404);
+            return response(['status'=>false, 'error' => 'Тест не найден'], 404);
+        if($test->user_id != Auth::id())
+            return response(['status'=>false, 'error' => 'У вас нет прав редактировать этот тест'], 404);
 
         $data = $request->only([
             'title',

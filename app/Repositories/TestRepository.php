@@ -75,7 +75,7 @@ class TestRepository
             ->whereIn('difficulty_id', $difficulties)
             ->where('user_id', '!=', $userId)
             ->where('is_public', 1);
-        // ->with('topic', 'difficulty');
+
         $personalTests = $tests
             ->skip(($page - 1) * $limit)
             ->take($limit)

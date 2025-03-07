@@ -75,7 +75,7 @@ class SolvedTestServices
         ]);
     }
 
-    public function getSolvedTest(int $testId, int $userId = null): Response|SolvedTestResource
+    public function getSolvedTest(int $testId, $userId = null): Response|SolvedTestResource
     {
         $solvedTest = $userId !== null
             ? $this->getSolvedTestByUser($testId, $userId)
