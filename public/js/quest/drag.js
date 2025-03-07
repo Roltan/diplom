@@ -12,24 +12,33 @@ class GridDraggable {
     initDragAndDrop() {
         this.interactiveElements.forEach((element) => {
             element.addEventListener("dragstart", (event) =>
-                this.handleDragStart(event)
+                this.handleStart(event)
             );
             element.addEventListener("dragend", (event) =>
-                this.handleDragEnd(event)
+                this.handleEnd(event)
             );
             element.addEventListener("dragover", (event) =>
-                this.handleDragOver(event)
+                event.preventDefault()
             );
             element.addEventListener("dragenter", (event) =>
-                this.handleDragEnter(event)
+                this.handleEnter(event)
             );
-            element.addEventListener(
-                "mousedown",
-                (event) => this.preventTextSelection(true) // Запрещаем выделение текста при клике
+
+            element.addEventListener("touchstart", (event) =>
+                this.handleStart(event)
             );
-            element.addEventListener(
-                "mouseup",
-                (event) => this.preventTextSelection(false) // Разрешаем выделение текста после клика
+            element.addEventListener("touchmove", (event) =>
+                this.handleEnter(event)
+            );
+            element.addEventListener("touchend", (event) =>
+                this.handleEnd(event)
+            );
+
+            element.addEventListener("mousedown", () =>
+                this.preventTextSelection(true)
+            );
+            element.addEventListener("mouseup", () =>
+                this.preventTextSelection(false)
             );
         });
     }
@@ -48,31 +57,40 @@ class GridDraggable {
         });
     }
 
-    handleDragStart(event) {
-        this.draggedElement = event.target;
-        event.target.classList.add("dragging");
+    getHoveredElement(event) {
+        // Для touch-событий
+        if (event.touches && event.touches.length > 0) {
+            const touch = event.touches[0];
+            return document.elementFromPoint(touch.clientX, touch.clientY);
+        }
+        // Для drag-событий
+        return event.target;
     }
 
-    handleDragEnd(event) {
-        event.target.classList.remove("dragging");
+    handleStart(event) {
+        this.draggedElement = this.getHoveredElement(event);
+        this.draggedElement.classList.add("dragging");
+        // event.preventDefault();
+    }
+
+    handleEnd(event) {
+        const targetElement = this.getHoveredElement(event);
+        targetElement.classList.remove("dragging");
         this.updateOrder();
     }
 
-    handleDragOver(event) {
+    handleEnter(event) {
         event.preventDefault();
-    }
-
-    handleDragEnter(event) {
-        event.preventDefault();
+        const targetElement = this.getHoveredElement(event);
         if (
-            event.target !== this.draggedElement &&
-            event.target.classList.contains("interactive")
+            targetElement !== this.draggedElement &&
+            targetElement.classList.contains("interactive")
         ) {
             const draggedRow = parseInt(
                 window.getComputedStyle(this.draggedElement).gridRow
             );
             const targetRow = parseInt(
-                window.getComputedStyle(event.target).gridRow
+                window.getComputedStyle(targetElement).gridRow
             );
 
             if (draggedRow !== targetRow) {
@@ -80,7 +98,7 @@ class GridDraggable {
                 this.draggedElement.style.gridRow = targetRow;
 
                 // Меняем grid-row у целевого элемента
-                event.target.style.gridRow = draggedRow;
+                targetElement.style.gridRow = draggedRow;
 
                 this.updateOrder();
             }
