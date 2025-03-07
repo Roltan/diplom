@@ -29,7 +29,7 @@ class TestResource extends JsonResource
         $quest = collect($quest)->shuffle();
 
         $formattedTime = $this->max_time != null
-            ? Carbon::createFromTimestamp($this->max_time)->format('H:i')
+            ? gmdate('H:i', $this->max_time)
             : null;
 
         return [
