@@ -62,16 +62,15 @@ function errorModal(error) {
     document.body.insertAdjacentHTML(
         "beforeend",
         `
-            <div class="modalka modalka--wrapper modalka-open" id="modal99" style="display: flex">
-                <form class="form">
-                    <h1>${error}</h1>
-                </form>
-            </div>
-        `
+                <div class="modalka modalka--wrapper modalka-open" id="modal99" style="display: flex">
+                    <form class="form">
+                        <h1>${error}</h1>
+                    </form>
+                </div>
+            `
     );
     bindModalEvents();
 }
-
 function load() {
     var loader = document.getElementById("loader");
 
