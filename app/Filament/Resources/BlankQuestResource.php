@@ -35,7 +35,6 @@ class BlankQuestResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-
             ->schema([
                 Grid::make([
                     'lg' => 1,
@@ -70,7 +69,7 @@ class BlankQuestResource extends Resource
                                             ->required(),
                                     ])
                                     ->columnSpan(2)
-                                    ->defaultItems(1), // По умолчанию будет одно поле для ответа
+                                    ->defaultItems(1),
                             ])
                     ])
                 ])

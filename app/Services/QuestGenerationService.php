@@ -8,11 +8,7 @@ use App\Http\Resources\Quest\ChoiceResource;
 use App\Http\Resources\Quest\FillResource;
 use App\Http\Resources\Quest\RelationResource;
 use Illuminate\Http\Response;
-use App\Repositories\FillQuestRepository;
-use App\Repositories\BlankQuestRepository;
-use App\Repositories\ChoiceQuestRepository;
 use App\Repositories\QuestRepository;
-use App\Repositories\RelationQuestRepository;
 use App\Repositories\TopicRepository;
 
 class QuestGenerationService

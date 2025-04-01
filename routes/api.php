@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/updateDifficulty', [UpdateQuestionDifficulty::class, 'handle']);
+// Route::post('/updateDifficulty', [UpdateQuestionDifficulty::class, 'handle']);
 
 Route::group(['prefix' => '/test'], function () {
     Route::put('/create', [TestController::class, 'create']);
