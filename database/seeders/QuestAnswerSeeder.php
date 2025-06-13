@@ -71,26 +71,23 @@ class QuestAnswerSeeder extends Seeder
 
     protected function generateChoiceAnswer(ChoiceQuest $quest): array
     {
-        $correctAnswers = json_decode($quest->correct);
-        $answer = [];
+        $answer = json_decode($quest->correct) + json_decode($quest->uncorrect);
 
         // Определяем, сколько правильных ответов нужно выбрать
-        $maxCorrect = count($correctAnswers);
-        $correctToSelect = rand(0, $maxCorrect - 1); // Случайное количество правильных ответов
+        $maxCorrect = count($answer);
+        $correctToSelect = rand(1, $maxCorrect - 1); // Случайное количество правильных ответов
 
         // Выбираем случайные правильные ответы
         $selectedCorrect = [];
         if ($correctToSelect > 0) {
-            $selectedCorrect = array_rand(array_flip($correctAnswers), $correctToSelect);
-            if (!is_array($selectedCorrect)) {
+            $selectedCorrect = array_rand(array_flip($answer), $correctToSelect);
+            if (!is_array($selectedCorrect))
                 $selectedCorrect = [$selectedCorrect];
-            }
         }
 
         // Если вопрос не multiple, возвращаем только один ответ
-        if (!$quest->is_multiple and count($selectedCorrect)) {
-            $answer = [$selectedCorrect[array_rand($selectedCorrect)]];
-        }
+        if (!$quest->is_multiple and count($selectedCorrect) >= 2)
+            return [$selectedCorrect[array_rand($selectedCorrect)]];
 
         return $answer;
     }
